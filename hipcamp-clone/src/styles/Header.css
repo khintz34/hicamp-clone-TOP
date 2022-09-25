@@ -1,0 +1,64 @@
+#headerDiv {
+  height: 10vh;
+  width: 100%;
+  background-color: var(--main-background);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0px;
+  z-index: 9999;
+}
+
+#logo-div {
+  width: 50vw;
+  display: flex;
+  justify-content: start;
+}
+
+.logo {
+  padding-left: 2vw;
+  height: 40px;
+  cursor: pointer;
+}
+
+#header-btns {
+  padding-right: 2vw;
+  width: 50vw;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  font-size: 21px;
+  gap: 25px;
+}
+
+.header-btn {
+  border-bottom: 2px solid transparent;
+  border-top: 2px solid transparent;
+  transition: border-bottom 0.25s ease 0s;
+  cursor: pointer;
+}
+
+.header-btn:hover {
+  border-bottom: 2px solid var(--green-color);
+}
+
+#signUp-btn {
+  background-color: var(--green-color);
+  color: white;
+  height: 40px;
+  width: 110px;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 6px 16px 8px;
+  transition: background 0.2s ease 0s;
+}
+
+#signUp-btn:hover {
+  background-color: white;
+  color: var(--green-color);
+  border: 2px solid var(--green-color);
+}

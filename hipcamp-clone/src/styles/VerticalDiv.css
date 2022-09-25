@@ -1,0 +1,44 @@
+.vertDivContainer {
+  margin-top: 10vh;
+}
+
+.vertImage {
+  width: 25vw;
+  border-radius: 20px;
+}
+
+.vertDivContainer {
+  position: relative;
+  transition: top ease 0.5s;
+}
+
+.vertDivContainer:hover {
+  top: -10px;
+  cursor: pointer;
+}
+
+.vertDivBottom {
+  height: 17vh;
+  width: 25vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0px;
+  bottom: 0;
+  z-index: 1000;
+  border-radius: 0 0 15px 15px;
+}
+
+.vertDivWriting {
+  color: white;
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3vh;
+
+  text-align: left;
+}

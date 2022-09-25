@@ -1,0 +1,46 @@
+.squareImage {
+  width: 25vw;
+  height: 25vw;
+  border-radius: 20px;
+}
+
+.squareDivContainer {
+  position: relative;
+  transition: top ease 0.5s;
+}
+
+.squareDivContainer:hover {
+  top: -10px;
+}
+
+.squareDivBottom {
+  height: 17vh;
+  width: 25vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: absolute;
+  left: 0px;
+  bottom: 0;
+  z-index: 1000;
+  border-radius: 0 0 15px 15px;
+}
+
+.squareButtonContainer {
+  width: 20vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2vw;
+}
+
+.squareBtn {
+  height: 8vh;
+  width: 20vw;
+  margin-right: 2vw;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  color: white;
+}

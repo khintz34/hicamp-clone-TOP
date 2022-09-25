@@ -1,0 +1,23 @@
+:root {
+  --terms: #eae8e4;
+  --main-background: #f3f2ef;
+  --green-color: #01c585;
+  --forest-color: #28400c;
+  --orange-color: #e05028;
+  --camo: #9a9d68;
+  --tent: #77732c;
+  --butterfly: #819a69;
+  --cabin: #e4bd9e;
+  --pool: #17807d;
+}
+
+.App {
+  text-align: center;
+  background-color: var(--main-background);
+}
+
+.centerCenterFlex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

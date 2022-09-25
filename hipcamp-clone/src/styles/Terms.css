@@ -1,0 +1,11 @@
+#termsDiv {
+  background-color: var(--terms);
+  height: 6vh;
+  font-weight: bold;
+}
+
+.underline-dashed {
+  margin-left: 0.5ch;
+  text-decoration: underline;
+  text-decoration-color: grey;
+}

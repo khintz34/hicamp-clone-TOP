@@ -1,0 +1,61 @@
+.fullDivContainer {
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.fullImage {
+  width: 80vw;
+  border-radius: 20px;
+}
+
+.fullDivBottom {
+  height: 40vh;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 12vw;
+  bottom: 2vh;
+  z-index: 1000;
+  border-radius: 15px;
+  gap: 2vh;
+}
+
+.fullDivWriting {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3vh;
+  padding: 1vw;
+  text-align: center;
+}
+
+.fullButtonContainer {
+  width: 18vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2vw;
+}
+
+.fullBtn {
+  height: 8vh;
+  width: 10vw;
+  margin-right: 2vw;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+}
+
+.fullBtn:hover {
+  cursor: pointer;
+}

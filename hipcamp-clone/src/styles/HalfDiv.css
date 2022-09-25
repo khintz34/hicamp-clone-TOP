@@ -1,0 +1,56 @@
+.halfImage {
+  width: 39vw;
+  border-radius: 20px;
+}
+
+.halfDivContainer {
+  position: relative;
+  transition: top ease 0.5s;
+}
+
+.halfDivContainer:hover {
+  top: -10px;
+}
+
+.halfDivBottom {
+  height: 17vh;
+  width: 39vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: absolute;
+  left: 0px;
+  bottom: 0;
+  z-index: 1000;
+  border-radius: 0 0 15px 15px;
+}
+
+.halfDivWriting {
+  color: white;
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3vh;
+  padding-left: 2vw;
+  text-align: left;
+}
+
+.halfButtonContainer {
+  width: 18vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2vw;
+}
+
+.halfBtn {
+  height: 8vh;
+  width: 10vw;
+  margin-right: 2vw;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+}

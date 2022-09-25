@@ -1,0 +1,19 @@
+#taglineDiv {
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--forest-color);
+}
+
+.mainTag {
+  font-size: 80px;
+  font-weight: 800;
+}
+
+.smallTag {
+  line-height: 1.5;
+  font-size: 30px;
+  font-weight: 600;
+}
