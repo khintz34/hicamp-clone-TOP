@@ -1,17 +1,18 @@
 import "../src/styles/App.css";
-import Header from "./components/Header";
-import Main from "./components/Main";
-import Tagline from "./components/Tagline";
-import Terms from "./components/Terms";
+import Home from "./components/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Sites from "./components/Sites";
 
 function App() {
   return (
-    <div className="App">
-      <Terms />
-      <Header />
-      <Tagline />
-      <Main />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/sites" element={<Sites />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

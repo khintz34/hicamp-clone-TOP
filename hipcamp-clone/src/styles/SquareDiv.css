@@ -7,9 +7,11 @@
 .squareDivContainer {
   position: relative;
   transition: top ease 0.5s;
+  border-radius: 20px;
 }
 
 .squareDivContainer:hover {
+  cursor: pointer;
   top: -10px;
 }
 
@@ -43,4 +45,35 @@
   border: none;
   border-radius: 25px;
   color: white;
+}
+
+.squareDivWriting {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 1vh;
+  gap: 0.6vh;
+}
+
+.squareDivTitle {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.squareDivComment {
+  font-size: 20px;
+}
+
+.hoverMove {
+  position: relative;
+  transition: top ease 0.5s;
+}
+
+.hoverMove:hover {
+  cursor: pointer;
+  top: -10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }

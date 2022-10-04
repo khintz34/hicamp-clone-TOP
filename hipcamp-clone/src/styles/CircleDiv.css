@@ -1,11 +1,29 @@
 .circleDivContainer {
-  width: 25vw;
+  width: 22vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 2vh;
 }
 
 .circleImage {
   height: 40vh;
   width: 40vh;
+}
+
+.circleDivWriting {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2vh;
+}
+
+.circleDivTitle {
+  font-size: 30px;
+  height: 8vh;
+}
+
+.circleDivComment {
+  font-size: 20px;
 }

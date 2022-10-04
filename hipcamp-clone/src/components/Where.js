@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/Where.css";
 import mtnCamp from "../images/mtn-camping.jpeg";
+import { Link } from "react-router-dom";
 
 const Where = () => {
   function showWhereTo() {
@@ -106,7 +107,9 @@ const Where = () => {
             </div>
           </div>
 
-          <button id="circleSearchBtn">Search</button>
+          <button id="circleSearchBtn">
+            <Link to="/sites">Search</Link>
+          </button>
         </div>
       </div>
       <img src={mtnCamp} alt="" className="eightyWidth" />

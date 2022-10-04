@@ -20,7 +20,7 @@
   margin-top: 6vh;
 }
 
-#squareDivsContainer {
+.squareDivsContainer {
   margin-top: 3vh;
   margin-left: 9.5vw;
   width: 80vw;
@@ -40,10 +40,41 @@
   align-items: center;
   margin-left: 9.5vw;
   border-radius: 20px;
+  gap: 5vh;
 }
 #circleDivsContainer {
   width: 80vw;
   display: flex;
-  flex: row;
+  flex-direction: row;
+  justify-content: center;
   gap: 3vw;
+}
+
+.largeText {
+  font-size: 50px;
+  font-weight: bolder;
+  color: rgb(91, 91, 91);
+}
+
+.lTHolder {
+  width: 40vw;
+}
+
+#placesToGoMainDiv {
+  margin-top: 10vh;
+}
+
+#safetyDivMain {
+  margin-top: 8vh;
+  height: 80vh;
+  width: 80vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3vw;
+}
+
+#safetyDivHolder {
+  display: flex;
+  justify-content: center;
 }

@@ -21,6 +21,17 @@ import CircleDiv from "./circleDiv";
 import circleBridge from "../images/circleBridge.jpeg";
 import circleLlama from "../images/circleLlama.jpeg";
 import circleBarrell from "../images/circleBarrell.jpeg";
+import bryceCanyon from "../images/bryceCanyon.webp";
+import joshuaTree from "../images/joshuaTree.webp";
+import shenandoah from "../images/shenandoah.jpeg";
+import smoky from "../images/smoky.jpeg";
+import yellowStone from "../images/yellowStone.jpeg";
+import yosemite from "../images/yosemite.jpeg";
+import SquareDivWTag from "./squareDivWTag";
+import recreate from "../images/recreateResp.png";
+import leaveNoTrace from "../images/leaveNoTrace.png";
+import nationalWeather from "../images/national_weather.png";
+import SafetyDiv from "./SafetyDiv";
 
 const Main = () => {
   const orangeColor = {
@@ -55,6 +66,15 @@ const Main = () => {
   };
   const borderThree = {
     borderRadius: "1000px 500px 190px 400px",
+  };
+  const showNone = {
+    display: "none",
+  };
+  const noStyle = {
+    listStyleType: "none",
+  };
+  const stretchImage = {
+    width: "20vh",
   };
 
   return (
@@ -108,7 +128,7 @@ const Main = () => {
       <div id="discoverDiv">
         <h2>Discover top spots near you</h2>
       </div>
-      <div id="squareDivsContainer">
+      <div className="squareDivsContainer">
         <SquareDiv
           image={stringLights}
           title="Available Tonight"
@@ -133,8 +153,10 @@ const Main = () => {
         <SquareDiv image={rv} title="RV sites near me" style={cabinColor} />
       </div>
       <div id="mainCircleDiv">
-        <div>
-          <h1>Hipcamp is the simplest way to find yourself outside.</h1>
+        <div className="lTHolder">
+          <div className="largeText">
+            Hipcamp is the simplest way to find yourself outside.
+          </div>
         </div>
         <div id="circleDivsContainer">
           <CircleDiv
@@ -154,6 +176,69 @@ const Main = () => {
             title="Protect our wild places."
             comment="By booking with Hipcamp, you're funding the protection of open spaces and supporting the people who support the land."
             border={borderThree}
+          />
+        </div>
+      </div>
+      <div id="placesToGoMainDiv" className="squareDivsContainer">
+        <SquareDivWTag
+          image={bryceCanyon}
+          title="Bryce Canyon"
+          comment="Utah"
+        />
+        <SquareDivWTag
+          image={joshuaTree}
+          title="Joshua Tree"
+          comment="California"
+        />
+        <SquareDivWTag
+          image={shenandoah}
+          title="Shenandoah"
+          comment="Virginia"
+        />
+        <SquareDivWTag
+          image={smoky}
+          title="Great Smoky Mountains"
+          comment="Tennessee"
+        />
+        <SquareDivWTag
+          image={yellowStone}
+          title="Yellowstone"
+          comment="Wyoming"
+        />
+        <SquareDivWTag image={yosemite} title="Yosemite" comment="California" />
+      </div>
+      <div id="safetyDivHolder">
+        <div id="safetyDivMain">
+          <SafetyDiv
+            image={recreate}
+            title="Recreate Responsibility"
+            li1="Know before you go"
+            li2="Practice physical distancing"
+            li3="Plan ahead"
+            li4="Explore locally"
+            li5="Play it safe"
+            li6="Leave no trace"
+            li7="Build an inclusive outdoors"
+          />
+          <SafetyDiv
+            image={leaveNoTrace}
+            title="Leave No Trace"
+            li1="Plan ahead and prepare"
+            li2="Tavel and camp on durable surfaces"
+            li3="Dispose of waste properly"
+            li4="Leave what you find"
+            li5="Minimize fire impacts"
+            li6="Respect wildlife"
+            li7="Be considerate of others"
+            stretch={stretchImage}
+          />
+
+          <SafetyDiv
+            image={nationalWeather}
+            title="National Weather Service"
+            comment="We integrate with the National Weather Service to provice valuable fire advisories to Hosts and Hipcampers. Real-time Red Flag Warnings help keep our community safe."
+            show={showNone}
+            type={noStyle}
           />
         </div>
       </div>

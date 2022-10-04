@@ -12,8 +12,8 @@ const CircleDiv = (props) => {
       />
       <div className="circleDivBottom">
         <div className="circleDivWriting">
-          <div style={{ fontSize: "28px" }}>{props.title}</div>
-          <div style={{ fontSize: "20px" }}>{props.comment}</div>
+          <div className="circleDivTitle">{props.title}</div>
+          <div className="circleDivComment">{props.comment}</div>
         </div>
       </div>
     </div>

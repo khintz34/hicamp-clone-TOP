@@ -1,0 +1,74 @@
+.footerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#footerMain {
+  width: 80vw;
+  display: flex;
+  flex-direction: row;
+  height: 40vh;
+  justify-content: flex-start;
+  text-align: left;
+  margin-top: 5vh;
+  padding-top: 3vh;
+  border-top: 1px solid rgb(129, 129, 129);
+}
+
+#footerImageContainer {
+  width: 80vw;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.footerImage {
+  height: 4vh;
+}
+
+#footerParas {
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#footerFooter {
+  display: flex;
+  flex-direction: row;
+  color: rgb(129, 129, 129);
+  gap: 5vw;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  width: 80vw;
+  border-top: 1px solid rgb(129, 129, 129);
+}
+
+#footerBottom {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 8vh;
+  background-color: black;
+  width: 100%;
+  color: white;
+  padding-left: 20vw;
+}
+
+.linkListContainer {
+  width: 20vw;
+  line-height: 2;
+}
+
+.linkTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: #28400c;
+}
+
+.linkName {
+  color: rgb(129, 129, 129);
+  font-size: 20px;
+}

@@ -1,0 +1,59 @@
+.safetyDivContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--limeGreen);
+  color: #28400c;
+  height: 70vh;
+  width: 27vw;
+  border-radius: 20px;
+}
+
+.safetyImage {
+  width: 10vh;
+  height: 10vh;
+  margin-left: 2vw;
+  margin-top: 5vh;
+}
+
+.safetyDivBottom {
+  height: 43vh;
+  display: flex;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  margin-top: 3vh;
+  text-align: left;
+  width: 75%;
+}
+
+.safetyOL {
+  font-size: 20px;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.safetyCommentDiv {
+  line-height: 1.7;
+  font-size: 20px;
+}
+
+.safetyBtnContainer {
+  display: flex;
+  justify-content: center;
+  /* position: relative; */
+}
+
+.safetyBtn {
+  width: 85%;
+  height: 6vh;
+  border-radius: 50px;
+  border: 1px solid #28400c;
+  background-color: var(--limeGreen);
+  font-size: 20px;
+}
+
+.safetyBtn:hover {
+  border: none;
+  background-color: #28400c;
+  color: white;
+  cursor: pointer;
+}
