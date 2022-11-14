@@ -57,7 +57,7 @@
 }
 
 .lTHolder {
-  width: 40vw;
+  width: 60vw;
 }
 
 #placesToGoMainDiv {
@@ -77,4 +77,9 @@
 #safetyDivHolder {
   display: flex;
   justify-content: center;
+}
+
+.noUnderline {
+  text-decoration: none;
+  color: black;
 }

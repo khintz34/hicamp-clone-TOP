@@ -1,9 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
+import { SiteContext } from "../contexts/SiteContext";
 import "../styles/HalfDiv.css";
 
 const HalfDiv = (props) => {
+  const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
+  const FullList = props.list;
+
+  function createList() {
+    let item;
+    if (props.title === "Cozy Fall Stays") {
+      item = "Minnesota";
+    } else {
+      item = "Montana";
+    }
+
+    let newArray = [];
+
+    FullList.map((value, key) => {
+      if (value.state === item) {
+        newArray.push(value);
+      }
+    });
+    setCurrentSiteList(newArray);
+  }
+
   return (
-    <div className="halfDivContainer">
+    <div
+      className="halfDivContainer"
+      onClick={() => {
+        createList();
+      }}
+    >
       <img src={props.image} alt="" className="halfImage" />
       <div className="halfDivBottom" style={props.style}>
         <div className="halfDivWriting">

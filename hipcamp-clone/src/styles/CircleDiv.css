@@ -7,8 +7,10 @@
 }
 
 .circleImage {
-  height: 40vh;
-  width: 40vh;
+  height: 35vh;
+  width: 35vh;
+  /* height: 90%;
+  width: 90%; */
 }
 
 .circleDivWriting {
@@ -20,7 +22,8 @@
 }
 
 .circleDivTitle {
-  font-size: 30px;
+  /* font-size: 30px; */
+  font-size: 150%;
   height: 8vh;
 }
 

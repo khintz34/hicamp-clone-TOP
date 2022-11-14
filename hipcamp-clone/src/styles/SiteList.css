@@ -1,0 +1,33 @@
+.siteListContainer {
+  width: 100%;
+  width: 100%;
+}
+
+#siteListHeader {
+  background-color: rgb(182, 184, 186);
+  height: 8vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 2vw;
+  gap: 2vw;
+}
+
+.siteBtn {
+  height: 5vh;
+  min-width: 5vw;
+  font-size: 17px;
+  max-width: 80px;
+}
+
+#siteListMainContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#siteListMain {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

@@ -2,8 +2,16 @@ import React from "react";
 import "../styles/SafetyDiv.css";
 
 const SafetyDiv = (props) => {
+  function openURL() {
+    window.open(props.url);
+  }
   return (
-    <div className="safetyDivContainer">
+    <div
+      className="safetyDivContainer"
+      onClick={() => {
+        openURL();
+      }}
+    >
       <img
         src={props.image}
         alt=""

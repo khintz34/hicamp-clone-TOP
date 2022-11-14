@@ -1,0 +1,44 @@
+.miniSiteContainer {
+  height: 40vh;
+  width: 30vw;
+  overflow: hidden;
+  border: 1px solid black;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.5;
+  margin: 2vh;
+  position: relative;
+  transition: top ease 0.5s;
+}
+
+.miniImgContainer {
+  width: 30vw;
+  height: 25vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#siteNameMini {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.miniDeetsSide {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.miniSiteContainer:hover {
+  top: -10px;
+}
+
+#siteType {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+}

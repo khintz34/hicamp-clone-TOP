@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../styles/Main.css";
 import HalfDiv from "./HalfDiv";
 import Where from "./Where";
@@ -32,6 +32,10 @@ import recreate from "../images/recreateResp.png";
 import leaveNoTrace from "../images/leaveNoTrace.png";
 import nationalWeather from "../images/national_weather.png";
 import SafetyDiv from "./SafetyDiv";
+import { SiteContext } from "../contexts/SiteContext";
+import { db } from "../utils/firebase";
+import { ref, set, push, onValue, child } from "firebase/database";
+import { Link } from "react-router-dom";
 
 const Main = () => {
   const orangeColor = {
@@ -77,26 +81,90 @@ const Main = () => {
     width: "20vh",
   };
 
+  const [fullSiteList, setFullSiteList] = useState([]);
+  const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
+
+  function getUserData() {
+    const boardRef = ref(db, "SiteList/");
+    let displayArray = [];
+    onValue(
+      boardRef,
+      (snapshot) => {
+        snapshot.forEach((childSnapShot) => {
+          const childKey = childSnapShot.key;
+          const childData = childSnapShot.val();
+          let obj = {
+            name: childData.name,
+            guests: childData.guests,
+            type: childData.type,
+            city: childData.city,
+            state: childData.state,
+            acres: childData.acres,
+            special: childData.special,
+            available: childData.available,
+            activities: childData.activities,
+            features: childData.features,
+            park: childData.park,
+            pets: childData.pets,
+            fires: childData.fires,
+            lake: childData.lake,
+            rating: childData.rating,
+            reviewNum: childData.reviewNum,
+            price: childData.price,
+            info: childData.info,
+          };
+          addData(obj);
+        });
+      },
+      {
+        onlyOnce: false,
+      }
+    );
+
+    function addData(obj) {
+      displayArray.push(obj);
+      sortArray();
+    }
+
+    function sortArray() {
+      displayArray.sort((a, b) => {
+        return a.time - b.time;
+      });
+      setFullSiteList(displayArray);
+    }
+  }
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
   return (
     <div id="mainDiv">
-      <Where />
+      <Where list={fullSiteList} />
       <div className="sideBySide">
-        <HalfDiv
-          image={fallCozy}
-          title="Cozy Fall Stays"
-          comment="Find yourself outside at a cozy Hipcamp this autumn."
-          style={orangeColor}
-          font={orangeFont}
-        />
-        <HalfDiv
-          image={outdoorStairs}
-          title="Get outside this weekend"
-          comment="Pitch your tent, roll up in your can or find a glamping stay."
-          style={greenColor}
-          font={greenFont}
-        />
+        <Link to={"/siteList"}>
+          <HalfDiv
+            image={fallCozy}
+            title="Cozy Fall Stays"
+            comment="Find yourself in MN at a cozy Hipcamp this autumn."
+            style={orangeColor}
+            font={orangeFont}
+            list={fullSiteList}
+          />
+        </Link>
+        <Link to={"/siteList"}>
+          <HalfDiv
+            image={outdoorStairs}
+            title="Get outside in MT this weekend"
+            comment="Pitch your tent, roll up in your can or find a glamping stay."
+            style={greenColor}
+            font={greenFont}
+            list={fullSiteList}
+          />
+        </Link>
       </div>
       <div>
+        {/* // todo create page to add a site */}
         <FullDiv
           image={hillside}
           title="Own Land? Earn money from Hipcamp"
@@ -106,51 +174,95 @@ const Main = () => {
         />
       </div>
       <div id="verticalDivsContainer">
-        <VerticalDiv
-          image={tent}
-          style={tentColor}
-          title="Hidden gems"
-          comment="Sites on the rise"
-        />
-        <VerticalDiv
-          image={butterfly}
-          style={butterflyColor}
-          title="Project Monarch"
-          comment="Hosts protecting Monarch Butterflies"
-        />
-        <VerticalDiv
-          image={cabin}
-          style={cabinColor}
-          title="Cottage Stays"
-          comment="Our top picks"
-        />
+        <Link to={"/siteList"}>
+          <VerticalDiv
+            image={tent}
+            style={tentColor}
+            title="Hidden gems"
+            comment="Sites on the rise"
+            list={fullSiteList}
+            special="hidden"
+          />
+        </Link>
+        <Link to={"/siteList"}>
+          <VerticalDiv
+            image={butterfly}
+            style={butterflyColor}
+            title="Project Monarch"
+            comment="Hosts protecting Monarch Butterflies"
+            list={fullSiteList}
+            special="monarchs"
+          />
+        </Link>
+        <Link to={"/siteList"}>
+          <VerticalDiv
+            image={cabin}
+            style={cabinColor}
+            title="Cottage Stays"
+            comment="Our top picks"
+            list={fullSiteList}
+            special="cottage"
+          />
+        </Link>
       </div>
       <div id="discoverDiv">
         <h2>Discover top spots near you</h2>
       </div>
       <div className="squareDivsContainer">
-        <SquareDiv
-          image={stringLights}
-          title="Available Tonight"
-          style={greenColor}
-        />
-        <SquareDiv
-          image={pool}
-          title="Available this weekend"
-          style={poolColor}
-        />
-        <SquareDiv
-          image={redTent}
-          title="Available next weekend"
-          style={orangeColor}
-        />
-        <SquareDiv image={car} title="Camping near me" style={tentColor} />
-        <SquareDiv
-          image={glamping}
-          title="Glamping near me"
-          style={butterflyColor}
-        />
-        <SquareDiv image={rv} title="RV sites near me" style={cabinColor} />
+        <Link to="/SiteList" className="noUnderline">
+          <SquareDiv
+            image={stringLights}
+            title="Pet friendly"
+            style={greenColor}
+            list={fullSiteList}
+            item="pets"
+          />
+        </Link>
+        <Link to="/SiteList" className="noUnderline">
+          <SquareDiv
+            image={pool}
+            title="Lake access"
+            style={poolColor}
+            item="lake"
+            list={fullSiteList}
+          />
+        </Link>
+        <Link to="/SiteList" className="noUnderline">
+          <SquareDiv
+            image={redTent}
+            title="Camp fires allowed"
+            style={orangeColor}
+            item="fires"
+            list={fullSiteList}
+          />
+        </Link>
+        <Link to="/SiteList" className="noUnderline">
+          <SquareDiv
+            image={car}
+            title="Tent camping"
+            style={tentColor}
+            item="Tent"
+            list={fullSiteList}
+          />
+        </Link>
+        <Link to="/SiteList" className="noUnderline">
+          <SquareDiv
+            image={glamping}
+            title="Lodging"
+            style={butterflyColor}
+            item="Lodging"
+            list={fullSiteList}
+          />
+        </Link>
+        <Link to="/SiteList" className="noUnderline">
+          <SquareDiv
+            image={rv}
+            title="RV sites"
+            style={cabinColor}
+            item="RV"
+            list={fullSiteList}
+          />
+        </Link>
       </div>
       <div id="mainCircleDiv">
         <div className="lTHolder">
@@ -180,32 +292,60 @@ const Main = () => {
         </div>
       </div>
       <div id="placesToGoMainDiv" className="squareDivsContainer">
-        <SquareDivWTag
-          image={bryceCanyon}
-          title="Bryce Canyon"
-          comment="Utah"
-        />
-        <SquareDivWTag
-          image={joshuaTree}
-          title="Joshua Tree"
-          comment="California"
-        />
-        <SquareDivWTag
-          image={shenandoah}
-          title="Shenandoah"
-          comment="Virginia"
-        />
-        <SquareDivWTag
-          image={smoky}
-          title="Great Smoky Mountains"
-          comment="Tennessee"
-        />
-        <SquareDivWTag
-          image={yellowStone}
-          title="Yellowstone"
-          comment="Wyoming"
-        />
-        <SquareDivWTag image={yosemite} title="Yosemite" comment="California" />
+        <Link to="/SiteList" className="noUnderline">
+          <SquareDivWTag
+            image={bryceCanyon}
+            title="Bryce Canyon"
+            comment="Utah"
+            list={fullSiteList}
+            park="Bryce Canyon National Park"
+          />
+        </Link>
+        <Link to="/SiteList" className="noUnderline">
+          <SquareDivWTag
+            image={joshuaTree}
+            title="Joshua Tree"
+            comment="California"
+            list={fullSiteList}
+            park="Joshua Tree National Park"
+          />
+        </Link>
+        <Link to="/SiteList" className="noUnderline">
+          <SquareDivWTag
+            image={shenandoah}
+            title="Shenandoah"
+            comment="Virginia"
+            list={fullSiteList}
+            park="Shenandoah National Park"
+          />
+        </Link>
+        <Link to="/SiteList" className="noUnderline">
+          <SquareDivWTag
+            image={smoky}
+            title="Great Smoky Mountains"
+            comment="Tennessee"
+            list={fullSiteList}
+            park="Great Smoky Mountains National Park"
+          />
+        </Link>
+        <Link to="/SiteList" className="noUnderline">
+          <SquareDivWTag
+            image={yellowStone}
+            title="Yellowstone"
+            comment="Wyoming"
+            list={fullSiteList}
+            park="Yellowstone National Park"
+          />
+        </Link>
+        <Link to="/SiteList" className="noUnderline">
+          <SquareDivWTag
+            image={yosemite}
+            title="Yosemite"
+            comment="California"
+            list={fullSiteList}
+            park="Yosemite National Park"
+          />
+        </Link>
       </div>
       <div id="safetyDivHolder">
         <div id="safetyDivMain">
@@ -219,6 +359,7 @@ const Main = () => {
             li5="Play it safe"
             li6="Leave no trace"
             li7="Build an inclusive outdoors"
+            url="https://www.recreateresponsibly.org/"
           />
           <SafetyDiv
             image={leaveNoTrace}
@@ -231,6 +372,7 @@ const Main = () => {
             li6="Respect wildlife"
             li7="Be considerate of others"
             stretch={stretchImage}
+            url="https://lnt.org/why/7-principles/"
           />
 
           <SafetyDiv
@@ -239,6 +381,7 @@ const Main = () => {
             comment="We integrate with the National Weather Service to provice valuable fire advisories to Hosts and Hipcampers. Real-time Red Flag Warnings help keep our community safe."
             show={showNone}
             type={noStyle}
+            url="https://www.weather.gov/"
           />
         </div>
       </div>

@@ -1,0 +1,103 @@
+#ownerImage {
+  width: 100%;
+  height: 90vh;
+}
+
+form {
+  padding-bottom: 20px;
+}
+
+.InputLandContainer {
+  background-color: var(--main-background);
+  padding-bottom: 20px;
+  height: 200vh;
+}
+
+#inputFormContainer {
+  background-color: var(--main-background);
+  position: absolute;
+  top: 12vh;
+  left: 10vw;
+  width: 50vw;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid gray;
+}
+
+.radioDivHold {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
+.radioContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#infoTextArea {
+  width: 40ch;
+  height: 30ch;
+}
+
+.radioVerticalHold {
+  display: flex;
+  flex-direction: column;
+}
+.largeCountRadio {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
+.leftAlign {
+  width: 100%;
+  display: flex;
+  gap: 0px;
+}
+
+.labelLeft {
+  width: 30%;
+  text-align: left;
+}
+
+.inputRight {
+  width: 40ch;
+}
+
+.numberInput {
+  width: 7ch;
+}
+
+.multiContainer {
+  background-color: white;
+  padding: 10px;
+  padding-bottom: 20px;
+  border-radius: 20px;
+  border: 1px solid black;
+}
+
+.radioHoldP {
+  margin-top: 5px;
+}
+
+.submitBtnContainer {
+  width: 100%;
+  padding-top: 20px;
+}
+
+.subBtn {
+  width: 30ch;
+  height: 35px;
+  font-size: large;
+  background-color: var(--green-color);
+  color: white;
+  border: none;
+  border-radius: 20px;
+}

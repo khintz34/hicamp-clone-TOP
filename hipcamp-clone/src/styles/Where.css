@@ -61,6 +61,7 @@
   top: 110px;
   background-color: white;
   border-radius: 15px;
+  cursor: pointer;
 }
 
 .hide {
@@ -78,6 +79,10 @@
   gap: 2vw;
 }
 
+/* .whereToList:hover {
+  background-color: black;
+} */
+
 .bottomUnderline {
   border-bottom: 1px solid lightgray;
   width: 20vw;
@@ -87,12 +92,20 @@
   align-items: center;
 }
 
+.bottomUnderline:hover {
+  border-bottom: 3px solid red;
+}
+
 #guestsPopUp {
   width: 20.5vw;
   position: absolute;
   top: 110px;
   background-color: white;
   border-radius: 15px;
+}
+
+.stack {
+  width: 40%;
 }
 
 .guestList {

@@ -1,12 +1,15 @@
 import React from "react";
 import "../styles/Header.css";
 import logo from "../images/logo.png";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <div id="headerDiv">
       <div id="logo-div">
-        <img src={logo} alt="" className="logo" />
+        <Link to="/">
+          <img src={logo} alt="" className="logo" />
+        </Link>
       </div>
       <div id="header-btns">
         <div className="header-btn">Near Me</div>
