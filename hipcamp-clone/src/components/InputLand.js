@@ -7,9 +7,10 @@ import { db } from "../utils/firebase.js";
 import LeftAlignInput from "./leftAlignInput";
 import YesNoRadio from "./YesNoRadio";
 import RadioDivHold from "./RadioDivHold";
-
-//todo divide inputs into components
-//todo add submitted info or some confirmation
+import Checkbox from "./Checkbox";
+import Select from "./Select";
+import SelectPark from "./SelectPark";
+import { Link } from "react-router-dom";
 
 const InputLand = (props) => {
   const [tentRadio, setTentRadio] = useState(false);
@@ -237,7 +238,7 @@ const InputLand = (props) => {
     const reference = ref(db, "SiteList/");
 
     const newItem = push(reference);
-    console.log(newItem);
+    // console.log(newItem);
 
     set(newItem, {
       name: name,
@@ -287,17 +288,6 @@ const InputLand = (props) => {
   }
 
   useEffect(() => {
-    // console.log(siteName);
-    // console.log(siteGuests);
-    // console.log(siteAcres);
-    // console.log(siteState);
-    // console.log(siteCity);
-    // console.log(sitePrice);
-    // console.log(sitePets);
-    // console.log(siteFire);
-    // console.log(siteLake);
-    // console.log(siteOverview);
-
     if (
       siteName === "" ||
       siteGuests === "0" ||
@@ -310,10 +300,8 @@ const InputLand = (props) => {
       siteLake === "" ||
       siteOverview === ""
     ) {
-      //   console.group("true");
       setDisabledBtn(true);
     } else {
-      //   console.log("false");
       setDisabledBtn(false);
     }
   }, [
@@ -330,8 +318,8 @@ const InputLand = (props) => {
   ]);
 
   function writeAllData(e) {
-    e.preventDefault();
-    console.log("here");
+    // e.preventDefault();
+
     if (disabledBtn) {
       e.preventDefault();
       return;
@@ -389,45 +377,33 @@ const InputLand = (props) => {
             <br />
             <div className="radioDivHold leftAlign">
               <p className="labelLeft">Type of Camping: </p>
-              <div className="radioContainer">
-                <input
-                  type="checkbox"
-                  id="tent"
-                  value="Tent"
-                  name="tentCamping"
-                  checked={tentRadio}
-                  onChange={(e) => {
-                    checkRadioStatus(e, tentRadio, setTentRadio);
-                  }}
-                />
-                <label htmlFor="tent">Tent Camping</label>
-              </div>
-              <div className="radioContainer">
-                <input
-                  type="checkbox"
-                  id="rv"
-                  value="RV"
-                  name="rvCamping"
-                  checked={rvRadio}
-                  onChange={(e) => {
-                    checkRadioStatus(e, rvRadio, setRVRadio);
-                  }}
-                />
-                <label htmlFor="rv">RV Camping</label>
-              </div>
-              <div className="radioContainer">
-                <input
-                  type="checkbox"
-                  id="lodging"
-                  value="Lodging"
-                  name="lodgingCamping"
-                  checked={lodgingRadio}
-                  onChange={(e) => {
-                    checkRadioStatus(e, lodgingRadio, setLodgingRadio);
-                  }}
-                />
-                <label htmlFor="lodging">Lodging</label>
-              </div>
+              <Checkbox
+                id="tent"
+                value="Tent"
+                name="tentCamping"
+                state={tentRadio}
+                setState={setTentRadio}
+                checkRadioStatus={checkRadioStatus}
+                title="Tent Camping"
+              />
+              <Checkbox
+                id="rv"
+                value="RV"
+                name="rvCamping"
+                state={rvRadio}
+                setState={setRVRadio}
+                checkRadioStatus={checkRadioStatus}
+                title="RV Camping"
+              />
+              <Checkbox
+                id="lodging"
+                value="Lodging"
+                name="lodingCamping"
+                state={lodgingRadio}
+                setState={setLodgingRadio}
+                checkRadioStatus={checkRadioStatus}
+                title="Lodging"
+              />
             </div>
             <br />
             <LeftAlignInput
@@ -455,407 +431,235 @@ const InputLand = (props) => {
               min={0}
             />
             <br />
-            <div className="leftAlign">
-              <label htmlFor="special" className="labelLeft">
-                Special ID:{" "}
-              </label>
-              <select
-                name="special"
-                id="special"
-                style={{ width: "30ch" }}
-                required
-                value={siteSpecial}
-                onChange={(e) => setSiteSpecial(e.target.value)}
-              >
-                <option value="none">None</option>
-                <option value="monarchs">Project Monarch</option>
-                <option value="cottage">Cottage Stays</option>
-                <option value="hidden">Hidden Gems</option>
-              </select>
-            </div>
+            <Select state={siteSpecial} setState={setSiteSpecial} />
             <br />
-            <div className="leftAlign">
-              <label htmlFor="special" className="labelLeft">
-                State/National Park nearby:{" "}
-              </label>
-              <select
-                name="special"
-                id="special"
-                style={{ width: "30ch" }}
-                required
-                value={siteParkNearby}
-                onChange={(e) => changeParkStatus(e)}
-              >
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>
-            </div>
+            <SelectPark
+              state={siteParkNearby}
+              setState={setSiteParkName}
+              changeParkStatus={changeParkStatus}
+              style={parkDiv}
+            />
             <br />
-            <div className="leftAlign" style={parkDiv}>
-              <label htmlFor="special" className="labelLeft">
-                Park name:{" "}
-              </label>
-              <input
-                type="text"
-                onChange={(e) => setSiteParkName(e.target.value)}
-              />
-            </div>
-            <br />
-            {/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&? */}
             <div className="radioVerticalHold multiContainer">
               <p className="radioHoldP">Activities (select all that apply): </p>
 
               <div className="largeCountRadio">
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="climbingID"
-                    value="Climbing"
-                    name="climbingActivity"
-                    checked={climbingRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, climbingRadio, setClimbingRadio);
-                    }}
-                  />
-                  <label htmlFor="climbingID">Climbing</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="hikingID"
-                    value="Hiking"
-                    name="hikingActivity"
-                    checked={hikingRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, hikingRadio, setHikingRadio);
-                    }}
-                  />
-                  <label htmlFor="bikingID">Hiking</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="bikingID"
-                    value="Biking"
-                    name="bikingActivity"
-                    checked={bikingRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, bikingRadio, setBikingRadio);
-                    }}
-                  />
-                  <label htmlFor="bikingID">Biking</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="fishingID"
-                    value="Fishing"
-                    name="fishingActivity"
-                    checked={fishingRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, fishingRadio, setFishingRadio);
-                    }}
-                  />
-                  <label htmlFor="fishingID">Fishing</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="wildlifeID"
-                    value="Wildlife watching"
-                    name="wildlifeActivity"
-                    checked={wildlifeRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, wildlifeRadio, setWildlifeRadio);
-                    }}
-                  />
-                  <label htmlFor="wildlifeID">Wildlife watching</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="paddlingID"
-                    value="Paddling"
-                    name="paddlingAct"
-                    checked={paddlingRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, paddlingRadio, setPaddlingRadio);
-                    }}
-                  />
-                  <label htmlFor="paddlingID">Paddling</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="swimmingID"
-                    value="Swimming"
-                    name="swimmingAct"
-                    checked={swimmingRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, swimmingRadio, setSwimmingRadio);
-                    }}
-                  />
-                  <label htmlFor="swimmingID">Swimming</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="windID"
-                    value="Wind sports"
-                    name="windAct"
-                    checked={windRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, windRadio, setWindRadio);
-                    }}
-                  />
-                  <label htmlFor="windID">Wind sports</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="yardID"
-                    value="Yard Games"
-                    name="yardAct"
-                    checked={yardRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, yardRadio, setYardRadio);
-                    }}
-                  />
-                  <label htmlFor="yardID">Yard games</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="boatingID"
-                    value="Boating"
-                    name="boatAct"
-                    checked={boatingRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, boatingRadio, setBoatingRadio);
-                    }}
-                  />
-                  <label htmlFor="boatingID">Boating</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="snowID"
-                    value="Snow sports"
-                    name="snowAct"
-                    checked={snowRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, snowRadio, setSnowRadio);
-                    }}
-                  />
-                  <label htmlFor="snowID">Snow sports</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="offID"
-                    value="Off-roading"
-                    name="offAct"
-                    checked={offRoadRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, offRoadRadio, setOffroadRadio);
-                    }}
-                  />
-                  <label htmlFor="offID">Off-roading</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="whiteID"
-                    value="Whitewater paddling"
-                    name="whiteAct"
-                    checked={whitewaterRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, whitewaterRadio, setWhitewaterRadio);
-                    }}
-                  />
-                  <label htmlFor="whiteID">Whitewater paddling</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="horseID"
-                    value="Horseback riding"
-                    name="horseAct"
-                    checked={horseRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, horseRadio, setHorseRadio);
-                    }}
-                  />
-                  <label htmlFor="horseID">Horseback riding</label>
-                </div>
+                <Checkbox
+                  id="bikingID"
+                  value="Biking"
+                  name="bikingActivity"
+                  state={bikingRadio}
+                  setState={setBikingRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="boatingID"
+                  value="Boating"
+                  name="boatActivity"
+                  state={boatingRadio}
+                  setState={setBoatingRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="climbingID"
+                  value="Climbing"
+                  name="climbingActivity"
+                  state={climbingRadio}
+                  setState={setClimbingRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="fishingID"
+                  value="Fishing"
+                  name="fishingActivity"
+                  state={fishingRadio}
+                  setState={setFishingRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="hikingID"
+                  value="Hiking"
+                  name="hikingActivity"
+                  state={hikingRadio}
+                  setState={setHikingRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="horseID"
+                  value="Horseback riding"
+                  name="horseAct"
+                  state={horseRadio}
+                  setState={setHorseRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+
+                <Checkbox
+                  id="offID"
+                  value="Off-roading"
+                  name="offRoadActivity"
+                  state={offRoadRadio}
+                  setState={setOffroadRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="paddlingID"
+                  value="Padding"
+                  name="paddlingActivity"
+                  state={paddlingRadio}
+                  setState={setPaddlingRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="snowID"
+                  value="Snow sports"
+                  name="snowActivity"
+                  state={snowRadio}
+                  setState={setSnowRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="swimmingID"
+                  value="Swimming"
+                  name="swimmingActivity"
+                  state={swimmingRadio}
+                  setState={setSwimmingRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="whiteID"
+                  value="Whitewater Paddling"
+                  name="whiteAct"
+                  state={whitewaterRadio}
+                  setState={setWhitewaterRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="wildlifeID"
+                  value="Wilidlife watching"
+                  name="wildlifeActivity"
+                  state={wildlifeRadio}
+                  setState={setWildlifeRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="windID"
+                  value="Wind sports"
+                  name="windActivity"
+                  state={windRadio}
+                  setState={setWindRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="yardID"
+                  value="Yard games"
+                  name="yardActivity"
+                  state={yardRadio}
+                  setState={setYardRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
               </div>
             </div>
-            {/* ! break between act and feat */}
             <br />
             <div className="radioVerticalHold multiContainer">
               <p className="radioHoldP">Features (select all that apply): </p>
 
               <div className="largeCountRadio">
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="ForestID"
-                    value="Forest"
-                    name="climbingFeat"
-                    checked={forestRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, forestRadio, setForestRadio);
-                    }}
-                  />
-                  <label htmlFor="ForestID">Forest</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="farmID"
-                    value="Farm"
-                    name="farmFeat"
-                    checked={farmRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, farmRadio, setFarmRadio);
-                    }}
-                  />
-                  <label htmlFor="farmID">Farm</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="fieldID"
-                    value="Field"
-                    name="fieldFeat"
-                    checked={fieldRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, fieldRadio, setFieldRadio);
-                    }}
-                  />
-                  <label htmlFor="fieldID">Field</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="mountainsID"
-                    value="Mountains"
-                    name="mountainsFeat"
-                    checked={mountainsRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, mountainsRadio, setMountainsRadio);
-                    }}
-                  />
-                  <label htmlFor="mountainsID">Mountains</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="desertID"
-                    value="Desert"
-                    name="desertFeat"
-                    checked={desertRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, desertRadio, setDesertRadio);
-                    }}
-                  />
-                  <label htmlFor="desertID">Desert</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="drivewayID"
-                    value="Driveway"
-                    name="drivewayFeat"
-                    checked={drivewayRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, drivewayRadio, setDrivewayRadio);
-                    }}
-                  />
-                  <label htmlFor="drivewayID">Driveway</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="lakeID"
-                    value="Lake"
-                    name="lakeFeat"
-                    checked={lakeRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, lakeRadio, setLakeRadio);
-                    }}
-                  />
-                  <label htmlFor="lakeID">Lake</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="riverID"
-                    value="River/stream"
-                    name="riverFeat"
-                    checked={riverRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, riverRadio, setRiverRadio);
-                    }}
-                  />
-                  <label htmlFor="riverID">River/stream</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="swimmingHoleID"
-                    value="Swimming hole"
-                    name="swimFeat"
-                    checked={swimmingHoleRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(
-                        e,
-                        swimmingHoleRadio,
-                        setSwimmingHoleRadio
-                      );
-                    }}
-                  />
-                  <label htmlFor="swimmingHoleID">Swimming hole</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="waterfallID"
-                    value="Waterfall"
-                    name="waterfallFeat"
-                    checked={waterfallRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, waterfallRadio, setWaterfallRadio);
-                    }}
-                  />
-                  <label htmlFor="waterfallID">Waterfall</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="canyonID"
-                    value="Canyon"
-                    name="cayonFeat"
-                    checked={canyonRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, canyonRadio, setCanyonRadio);
-                    }}
-                  />
-                  <label htmlFor="canyonID">Canyon</label>
-                </div>
-                <div className="radioContainer">
-                  <input
-                    type="checkbox"
-                    id="ranchID"
-                    value="Ranch"
-                    name="ranchFeat"
-                    checked={ranchRadio}
-                    onChange={(e) => {
-                      checkRadioStatus(e, ranchRadio, setRanchRadio);
-                    }}
-                  />
-                  <label htmlFor="ranchID">Ranch</label>
-                </div>
+                <Checkbox
+                  id="canyonID"
+                  value="Canyon"
+                  name="canyonFeat"
+                  state={canyonRadio}
+                  setState={setCanyonRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="desertID"
+                  value="Desert"
+                  name="desertFeat"
+                  state={desertRadio}
+                  setState={setDesertRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="drivewayID"
+                  value="Driveway"
+                  name="drivewayFeat"
+                  state={drivewayRadio}
+                  setState={setDrivewayRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="farmID"
+                  value="Farm"
+                  name="farmFeat"
+                  state={farmRadio}
+                  setState={setFarmRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="fieldID"
+                  value="Field"
+                  name="fieldFeat"
+                  state={fieldRadio}
+                  setState={setFieldRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="forestID"
+                  value="Forest"
+                  name="forestFeat"
+                  state={forestRadio}
+                  setState={setForestRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="lakeID"
+                  value="Lake"
+                  name="lakeFeat"
+                  state={lakeRadio}
+                  setState={setLakeRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="mountainsID"
+                  value="Mountains"
+                  name="mountainsFeat"
+                  state={mountainsRadio}
+                  setState={setMountainsRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="ranchID"
+                  value="Ranch"
+                  name="ranchFeat"
+                  state={ranchRadio}
+                  setState={setRanchRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="riverID"
+                  value="River"
+                  name="riverFeat"
+                  state={riverRadio}
+                  setState={setRiverRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="swimmingHoleID"
+                  value="Swimming Hole"
+                  name="swimFeat"
+                  state={swimmingHoleRadio}
+                  setState={setSwimmingHoleRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
+                <Checkbox
+                  id="waterfallID"
+                  value="Waterfall"
+                  name="waterfallFeat"
+                  state={waterfallRadio}
+                  setState={setWaterfallRadio}
+                  checkRadioStatus={checkRadioStatus}
+                />
               </div>
             </div>
 
@@ -899,7 +703,6 @@ const InputLand = (props) => {
                 title="No"
               />
             </div>
-            <br />
             <div className="radioDivHold leftAlign">
               <p className="labelLeft">Lake Nearby: </p>
               <YesNoRadio
@@ -938,14 +741,16 @@ const InputLand = (props) => {
               ></textarea>
             </div>
             <div className="submitBtnContainer">
-              <button
-                type="submit"
-                className="subBtn"
-                onClick={(e) => writeAllData(e)}
-                disabled={disabledBtn}
-              >
-                Start Hosting
-              </button>
+              <Link to="/confirmation">
+                <button
+                  type="submit"
+                  className="subBtn"
+                  onClick={(e) => writeAllData(e)}
+                  disabled={disabledBtn}
+                >
+                  Start Hosting
+                </button>
+              </Link>
             </div>
           </form>
         </div>

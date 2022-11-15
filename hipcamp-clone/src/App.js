@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { SiteContext } from "./contexts/SiteContext.js";
 import { CurrentSiteContext } from "./contexts/CurrentSiteContext.js";
 import InputLand from "./components/InputLand";
+import Confirmation from "./components/Confirmation";
 
 function App() {
   const [currentSiteList, setCurrentSiteList] = useState([]);
@@ -102,6 +103,7 @@ function App() {
               <Route path="/sites" element={<Sites />} />
               <Route path="/siteList" element={<SiteList />} />
               <Route path="/owners" element={<InputLand />} />
+              <Route path="/confirmation" element={<Confirmation />} />
             </Routes>
           </CurrentSiteContext.Provider>
         </SiteContext.Provider>
