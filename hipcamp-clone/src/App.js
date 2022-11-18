@@ -12,6 +12,8 @@ import { CurrentSiteContext } from "./contexts/CurrentSiteContext.js";
 import InputLand from "./components/InputLand";
 import Confirmation from "./components/Confirmation";
 
+//todo compenent folder structure
+
 function App() {
   const [currentSiteList, setCurrentSiteList] = useState([]);
   const [currentSite, setCurrentSite] = useState([]);

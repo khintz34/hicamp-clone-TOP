@@ -8,6 +8,8 @@ import { SiteContext } from "../contexts/SiteContext";
 import { Link } from "react-router-dom";
 import { CurrentSiteContext } from "../contexts/CurrentSiteContext";
 
+//todo Link query parameters -> pass an id or some param for search terms
+
 const SiteList = (props) => {
   const [siteArray, setSiteArray] = useState([]);
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);

@@ -9,27 +9,18 @@ const MiniSite = (props) => {
   //todo use url to download image
   const { currentSite, setCurrentSite } = useContext(CurrentSiteContext);
   const [urlState, setURLState] = useState("");
-  // useEffect(() => {
-  //   setURLState(props.url);
-  // }, []);
-  const newRef = props.url;
-  console.log(newRef);
   const storage = getStorage();
   const storageRef = ref(storage);
+  const specRef = ref(storage, props.url);
 
-  // ! update second parm with url
-  const specRef = ref(storage, urlState);
-
-  getDownloadURL(specRef).then((url) => {
-    const xhr = new XMLHttpRequest();
-    xhr.responseType = "blob";
-    xhr.onload = (event) => {
-      const blob = xhr.response;
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getDownloadURL(specRef);
+      setURLState(result);
     };
-    xhr.open("GET", url);
-    xhr.send();
-    setURLState(url);
-  });
+
+    fetchData();
+  }, []);
 
   return (
     <div
