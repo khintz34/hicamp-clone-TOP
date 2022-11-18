@@ -190,6 +190,7 @@ const SiteList = (props) => {
                   rating={value.rating}
                   reviewNum={value.reviewNum}
                   fullSite={value}
+                  url={value.url}
                   key={`key-${value.name}`}
                 />
               </Link>

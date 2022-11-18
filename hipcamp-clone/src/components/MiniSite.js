@@ -1,13 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../styles/MiniSite.css";
-import hillside from "../images/hillside.jpeg";
 import { CurrentSiteContext } from "../contexts/CurrentSiteContext";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 const MiniSite = (props) => {
+  //todo add each image to google storage
+  //todo add URL key to each site
+  //todo use url to download image
   const { currentSite, setCurrentSite } = useContext(CurrentSiteContext);
+  const [urlState, setURLState] = useState("");
+  // useEffect(() => {
+  //   setURLState(props.url);
+  // }, []);
+  const newRef = props.url;
+  console.log(newRef);
+  const storage = getStorage();
+  const storageRef = ref(storage);
 
-  // todo onClick set props to currentSite.
-  // todo in Sites.js use props to populate
+  // ! update second parm with url
+  const specRef = ref(storage, urlState);
+
+  getDownloadURL(specRef).then((url) => {
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = "blob";
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+    };
+    xhr.open("GET", url);
+    xhr.send();
+    setURLState(url);
+  });
 
   return (
     <div
@@ -15,7 +37,7 @@ const MiniSite = (props) => {
       onClick={() => setCurrentSite(props.fullSite)}
     >
       <div className="miniImgContainer">
-        <img src={hillside} alt="" />
+        <img src={urlState} alt="" />
       </div>
       <div id="siteReviews">
         <div id="siteRating">{props.rating}% Rating</div>
@@ -27,13 +49,13 @@ const MiniSite = (props) => {
         {props.type.map((value, key) => {
           if (key !== props.type.length - 1) {
             return (
-              <div>
+              <div key={value}>
                 {value}
                 {","}
               </div>
             );
           } else {
-            return value;
+            return <div key={value}>value</div>;
           }
         })}
       </div>

@@ -1,0 +1,15 @@
+#confirmHolder {
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#confirmMsg {
+  width: 50%;
+  line-height: 2;
+  border: 2px solid var(--green-color);
+  padding: 5vh;
+  border-radius: 20px;
+}

@@ -112,6 +112,7 @@ const Main = () => {
             reviewNum: childData.reviewNum,
             price: childData.price,
             info: childData.info,
+            url: childData.url,
           };
           addData(obj);
         });
@@ -164,7 +165,6 @@ const Main = () => {
         </Link>
       </div>
       <div>
-        {/* // todo create page to add a site */}
         <FullDiv
           image={hillside}
           title="Own Land? Earn money from Hipcamp"

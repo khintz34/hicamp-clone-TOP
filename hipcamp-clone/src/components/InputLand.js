@@ -130,6 +130,7 @@ const InputLand = (props) => {
   const [siteOverview, setSiteOverview] = useState("");
   const [siteParkNearby, setSiteParkNearby] = useState("false");
   const [siteParkName, setSiteParkName] = useState("");
+  const [siteURL, setSiteURL] = useState("");
   ////////////////////////
 
   const [disabledBtn, setDisabledBtn] = useState(true);
@@ -233,7 +234,8 @@ const InputLand = (props) => {
     rating,
     reviewNum,
     price,
-    info
+    info,
+    url
   ) {
     const reference = ref(db, "SiteList/");
 
@@ -259,6 +261,7 @@ const InputLand = (props) => {
       reviewNum: reviewNum,
       price: price,
       info: info,
+      url: url,
     });
   }
 
@@ -342,7 +345,8 @@ const InputLand = (props) => {
         "100%",
         20,
         sitePrice,
-        siteOverview
+        siteOverview,
+        siteURL
       );
     }
   }
@@ -727,6 +731,14 @@ const InputLand = (props) => {
               value={sitePrice}
               setVal={setSitePrice}
               class="numberInput"
+            />
+            <br />
+            <LeftAlignInput
+              id="siteURL"
+              title="URL:"
+              value={siteURL}
+              setVal={setSiteURL}
+              class="textInput"
             />
             <br />
             <div className="leftAlign">

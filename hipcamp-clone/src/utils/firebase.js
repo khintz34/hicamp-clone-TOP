@@ -1,6 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-import { ref, set, push, onValue } from "firebase/database";
+import { set, push, onValue } from "firebase/database";
+import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import bike from "../images/bike.jpeg";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,18 +23,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase();
 
-//writing to Google Firebase
-function writeUserData(state, name, guests, acres) {
-  const reference = ref(db, state + "/");
+const storage = getStorage();
+const storageRef = ref(storage);
+export const specRef = ref(storage, "test2.jpeg");
 
-  const newItem = push(reference);
-
-  set(newItem, {
-    state: state,
-    name: name,
-    guests: guests,
-    acres: acres,
-  });
-}
-
-// writeUserData("Minnesota", "Test Site", 4, 20);
+uploadBytes(specRef, { bike }).then((snapshot) => {
+  console.log("okay");
+});

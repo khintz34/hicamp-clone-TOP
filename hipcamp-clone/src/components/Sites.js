@@ -55,13 +55,17 @@ const Sites = (props) => {
                 {currentSite.type.map((value, key) => {
                   if (key !== currentSite.type.length - 1) {
                     return (
-                      <div style={{ marginLeft: "3px" }}>
+                      <div style={{ marginLeft: "3px" }} key={value.id}>
                         {value}
                         {","}
                       </div>
                     );
                   } else {
-                    return <div style={{ marginLeft: "3px" }}>{value}</div>;
+                    return (
+                      <div style={{ marginLeft: "3px" }} key={value.id}>
+                        {value}
+                      </div>
+                    );
                   }
                 })}
               </div>
@@ -71,7 +75,11 @@ const Sites = (props) => {
               <h2>Activities</h2>
               {currentSite.activities.map((value, key) => {
                 if (key !== currentSite.activities.length - 1) {
-                  return <div style={{ marginLeft: "3px" }}>{value}</div>;
+                  return (
+                    <div style={{ marginLeft: "3px" }} key={value.id}>
+                      {value}
+                    </div>
+                  );
                 }
               })}
             </div>
@@ -79,7 +87,11 @@ const Sites = (props) => {
               <h2>Natural Features</h2>
               {currentSite.features.map((value, key) => {
                 if (key !== currentSite.features.length - 1) {
-                  return <div style={{ marginLeft: "3px" }}>{value}</div>;
+                  return (
+                    <div style={{ marginLeft: "3px" }} key={value.id}>
+                      {value}
+                    </div>
+                  );
                 }
               })}
             </div>
