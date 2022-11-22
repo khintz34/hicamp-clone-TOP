@@ -22,10 +22,22 @@ const Where = (props) => {
     setMainWhere("location");
   }
 
+  function hideWhereTo() {
+    //todo remove query selector
+    const popUp = document.querySelector("#whereToPopUp");
+    popUp.classList.add("hide");
+  }
+
   function showGuests() {
     //todo remove query selector
     const popUp = document.querySelector("#guestsPopUp");
     popUp.classList.remove("hide");
+  }
+
+  function hideGuests() {
+    //todo remove query selector
+    const popUp = document.querySelector("#guestsPopUp");
+    popUp.classList.add("hide");
   }
 
   function addGuests() {
@@ -149,8 +161,7 @@ const Where = (props) => {
     setCurrentSiteList(newArray);
   }
 
-  // todo be able to search cities, national parks, or states.
-  // how to not have to exact match??
+  // todo how to not have to exact match??
 
   return (
     <div id="whereDiv">
@@ -186,6 +197,9 @@ const Where = (props) => {
                 <div className="bottomUnderline" onClick={() => decideLoding()}>
                   <div>Lodging</div>
                 </div>
+              </div>
+              <div className="exitPopUp" onClick={hideWhereTo}>
+                X
               </div>
             </div>
           </div>
@@ -233,6 +247,9 @@ const Where = (props) => {
                     Y
                   </button>
                 </div>
+              </div>
+              <div className="exitPopUp" onClick={hideGuests}>
+                X
               </div>
             </div>
           </div>

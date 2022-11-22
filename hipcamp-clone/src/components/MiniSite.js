@@ -4,9 +4,6 @@ import { CurrentSiteContext } from "../contexts/CurrentSiteContext";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 const MiniSite = (props) => {
-  //todo add each image to google storage
-  //todo add URL key to each site
-  //todo use url to download image
   const { currentSite, setCurrentSite } = useContext(CurrentSiteContext);
   const [urlState, setURLState] = useState("");
   const storage = getStorage();
@@ -46,7 +43,7 @@ const MiniSite = (props) => {
               </div>
             );
           } else {
-            return <div key={value}>value</div>;
+            return <div key={value}>{value}</div>;
           }
         })}
       </div>

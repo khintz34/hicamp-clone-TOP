@@ -3,19 +3,30 @@ import "../styles/Sites.css";
 import Header from "./Header";
 import hillside from "../images/hillside.jpeg";
 import { CurrentSiteContext } from "../contexts/CurrentSiteContext";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { current } from "@reduxjs/toolkit";
 
 const Sites = (props) => {
   const { currentSite, setCurrentSite } = useContext(CurrentSiteContext);
-
+  const [urlState, setURLState] = useState("");
+  const storage = getStorage();
+  const storageRef = ref(storage);
+  const specRef = ref(storage, currentSite.url);
   const [petStatus, setPetStatus] = useState();
 
   useEffect(() => {
-    if (currentSite.pets === true) {
+    if (currentSite.pets === "true") {
       setPetStatus("Yes");
     } else {
       setPetStatus("No");
     }
+
+    const fetchData = async () => {
+      const result = await getDownloadURL(specRef);
+      setURLState(result);
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -38,7 +49,7 @@ const Sites = (props) => {
           </div>
           <div id="siteInfoMain">
             <div id="siteImageHolder" className="siteImageDiv">
-              <img src={hillside} alt="" className="siteImg" />
+              <img src={urlState} alt="" className="siteImg" />
             </div>
             <div id="siteInfoHolder">
               <h2>Site Info</h2>
@@ -74,25 +85,21 @@ const Sites = (props) => {
             <div id="activitySpecs" className="specDivSmall">
               <h2>Activities</h2>
               {currentSite.activities.map((value, key) => {
-                if (key !== currentSite.activities.length - 1) {
-                  return (
-                    <div style={{ marginLeft: "3px" }} key={value.id}>
-                      {value}
-                    </div>
-                  );
-                }
+                return (
+                  <div style={{ marginLeft: "3px" }} key={value.id}>
+                    {value}
+                  </div>
+                );
               })}
             </div>
             <div id="featureSpecs" className="specDivSmall">
               <h2>Natural Features</h2>
               {currentSite.features.map((value, key) => {
-                if (key !== currentSite.features.length - 1) {
-                  return (
-                    <div style={{ marginLeft: "3px" }} key={value.id}>
-                      {value}
-                    </div>
-                  );
-                }
+                return (
+                  <div style={{ marginLeft: "3px" }} key={value.id}>
+                    {value}
+                  </div>
+                );
               })}
             </div>
           </div>

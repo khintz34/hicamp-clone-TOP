@@ -11,6 +11,8 @@ import Checkbox from "./Checkbox";
 import Select from "./Select";
 import SelectPark from "./SelectPark";
 import { Link } from "react-router-dom";
+import { ref as ref2, uploadBytes } from "firebase/storage";
+import { storage } from "../utils/firebase.js";
 
 const InputLand = (props) => {
   const [tentRadio, setTentRadio] = useState(false);
@@ -18,6 +20,7 @@ const InputLand = (props) => {
   const [lodgingRadio, setLodgingRadio] = useState(false);
   const typeArray = [tentRadio, rvRadio, lodgingRadio];
   const [typeFinal, setTypeFinal] = useState([]);
+  const storageRef = ref2(storage);
   ////////////////////////
   const [climbingRadio, setClimbingRadio] = useState(false);
   const [hikingRadio, setHikingRadio] = useState(false);
@@ -131,6 +134,7 @@ const InputLand = (props) => {
   const [siteParkNearby, setSiteParkNearby] = useState("false");
   const [siteParkName, setSiteParkName] = useState("");
   const [siteURL, setSiteURL] = useState("");
+  const [siteImage, setSiteImage] = useState(null);
   ////////////////////////
 
   const [disabledBtn, setDisabledBtn] = useState(true);
@@ -140,6 +144,24 @@ const InputLand = (props) => {
   };
   const seenDiv = {
     display: "flex",
+  };
+
+  const handleImage = (e) => {
+    if (e.target.files[0]) {
+      setSiteImage(e.target.files[0]);
+      setSiteURL(e.target.files[0]["name"]);
+    }
+  };
+
+  const uploadImage = () => {
+    const imageRef = ref2(storage, siteURL);
+    uploadBytes(imageRef, siteImage)
+      .then(() => {
+        console.log(imageRef);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const YesNoPetArray = [
@@ -234,13 +256,12 @@ const InputLand = (props) => {
     rating,
     reviewNum,
     price,
-    info,
-    url
+    url,
+    info
   ) {
     const reference = ref(db, "SiteList/");
 
     const newItem = push(reference);
-    // console.log(newItem);
 
     set(newItem, {
       name: name,
@@ -260,9 +281,11 @@ const InputLand = (props) => {
       rating: rating,
       reviewNum: reviewNum,
       price: price,
-      info: info,
       url: url,
+      info: info,
     });
+
+    uploadImage();
   }
 
   function createArrays() {
@@ -345,8 +368,8 @@ const InputLand = (props) => {
         "100%",
         20,
         sitePrice,
-        siteOverview,
-        siteURL
+        siteURL,
+        siteOverview
       );
     }
   }
@@ -733,13 +756,13 @@ const InputLand = (props) => {
               class="numberInput"
             />
             <br />
-            <LeftAlignInput
-              id="siteURL"
-              title="URL:"
-              value={siteURL}
-              setVal={setSiteURL}
-              class="textInput"
-            />
+            <div className="leftAlign">
+              <label htmlFor="siteImg" className="labelLeft">
+                Picture of Site:
+              </label>
+              <input type="file" onChange={handleImage} />
+            </div>
+            {/* <button onClick={uploadImage}>TEST</button> */}
             <br />
             <div className="leftAlign">
               <label htmlFor="siteInfo" className="labelLeft">

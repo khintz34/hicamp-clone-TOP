@@ -53,7 +53,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  gap: 8vw;
+  gap: 6vw;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
@@ -67,13 +67,18 @@
   border-radius: 10px;
 }
 
+.siteImg {
+  height: 100%;
+  width: 100%;
+}
+
 #siteInfoHolder {
   display: flex;
   flex-direction: column;
   width: 40vw;
   align-items: center;
   border-radius: 20px;
-  padding: 10px;
+  padding: 1vw;
 }
 
 #siteSpecsMain {

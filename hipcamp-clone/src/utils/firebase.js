@@ -4,7 +4,6 @@ import { set, push, onValue } from "firebase/database";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import bike from "../images/bike.jpeg";
 
-// TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
@@ -23,10 +22,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase();
 
-const storage = getStorage();
-const storageRef = ref(storage);
-export const specRef = ref(storage, "test2.jpeg");
-
-uploadBytes(specRef, { bike }).then((snapshot) => {
-  console.log("okay");
-});
+export const storage = getStorage();
