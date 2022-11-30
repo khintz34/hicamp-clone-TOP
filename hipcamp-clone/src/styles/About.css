@@ -1,0 +1,56 @@
+#aboutDivMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutHeading {
+  font-size: 50px;
+  font-weight: 600;
+  color: var(--forest-color);
+}
+
+.aboutMidPara {
+  font-size: 27px;
+  padding-bottom: 10vh;
+}
+
+.aboutPara {
+  font-size: 20px;
+}
+
+#aboutInfoDiv {
+  margin: 10vh 0vh 6vh 0vh;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  gap: 4vh;
+}
+
+.aboutDivComponent {
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+  padding: 3vh 0vh 3vh 0vh;
+}
+
+.aboutHeaderProp {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.aboutMainProp {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.aboutParaProp {
+  font-size: 19px;
+  line-height: 2;
+}
+
+.aboutSection {
+  border-top: 0.5px solid lightgray;
+  border-bottom: 0.5px solid lightgray;
+}

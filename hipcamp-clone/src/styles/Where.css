@@ -55,7 +55,6 @@
 }
 
 #whereToPopUp {
-  /* height: 25vh; */
   width: 26vw;
   position: absolute;
   top: 85%;
@@ -78,10 +77,6 @@
   padding-left: 2vw;
   gap: 2vw;
 }
-
-/* .whereToList:hover {
-  background-color: black;
-} */
 
 .bottomUnderline {
   border-bottom: 1px solid lightgray;
@@ -166,4 +161,8 @@
 
 .exitPopUp:hover {
   cursor: pointer;
+}
+
+.petChoice {
+  background-color: var(--green-color);
 }

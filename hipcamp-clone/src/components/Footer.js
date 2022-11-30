@@ -47,10 +47,10 @@ const Footer = (props) => {
       </div>
       <div id="footerFooter">
         <div>© 2022 Hipcamp, Inc. All rights reserved</div>
-        <div>Terms of Service</div>
-        <div>Privacy Policy</div>
-        <div>Sitemap</div>
-        <div>Social Media Links</div>
+        <div className="smallLink">Terms of Service</div>
+        <div className="smallLink">Privacy Policy</div>
+        <div className="smallLink">Sitemap</div>
+        <div className="smallLink">Social Media Links</div>
       </div>
       <div id="footerBottom">
         Hipcamp is created with ❤️ and hope for our future.

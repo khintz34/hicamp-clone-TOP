@@ -31,3 +31,26 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
+
+#noDataContainer {
+  width: 100%;
+  height: 82vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#noDataMsg {
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.noDataLink {
+  color: var(--green-color);
+  font-size: larger;
+}

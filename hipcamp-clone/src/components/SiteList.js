@@ -7,13 +7,17 @@ import MiniSite from "./MiniSite";
 import { SiteContext } from "../contexts/SiteContext";
 import { Link } from "react-router-dom";
 import { CurrentSiteContext } from "../contexts/CurrentSiteContext";
+import { SearchContext } from "../contexts/SearchContext";
+import { PetContext } from "../contexts/PetContext copy";
 
-//todo Link query parameters -> pass an id or some param for search terms
+//todo update guest counter if search is the max then display none
 
 const SiteList = (props) => {
   const [siteArray, setSiteArray] = useState([]);
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
   const { currentSite, setCurrentSite } = useContext(CurrentSiteContext);
+  const { searchItem, setSearchItem } = useContext(SearchContext);
+  const { petSearch, setPetSearch } = useContext(PetContext);
   const [maxVal, setMaxVal] = useState(0);
   const [minVal, setMinVal] = useState(0);
   const [currentVal, setCurrentVal] = useState(maxVal);
@@ -21,6 +25,18 @@ const SiteList = (props) => {
   const [minAcres, setMinAcres] = useState(0);
   const [currentAcres, setCurrentAcres] = useState(maxAcres);
   const [currentSiteHolder, setCurrentSiteHolder] = useState([]);
+
+  const [petSearchTranslate, setPetSearchTranslate] = useState("");
+
+  useEffect(() => {
+    if (petSearch === true) {
+      setPetSearchTranslate("Yes");
+    } else if (petSearch === false) {
+      setPetSearchTranslate("No");
+    } else {
+      setPetSearchTranslate("");
+    }
+  }, [petSearchTranslate]);
 
   function getUserData() {
     const boardRef = ref(db, "SiteList/");
@@ -176,28 +192,59 @@ const SiteList = (props) => {
           />
           <label htmlFor="acres">Max Acres ({currentAcres})</label>
         </div>
+        {searchItem !== "" ? (
+          <div>
+            <p>Search: {searchItem}</p>
+          </div>
+        ) : (
+          <div style={{ display: "none" }}></div>
+        )}
+        {petSearchTranslate !== "" ? (
+          <div>
+            <p>Pets Allowed: {petSearchTranslate}</p>
+          </div>
+        ) : (
+          <div style={{ display: "none" }}></div>
+        )}
       </div>
       <div id="siteListMainContainer">
         <div id="siteListMain">
-          {currentSiteList.map((value, key) => {
-            return (
-              <Link to={"/sites"} className="noUnderline" key={`link-${key}`}>
-                <MiniSite
-                  name={value.name}
-                  type={value.type}
-                  acres={value.acres}
-                  city={value.city}
-                  state={value.state}
-                  price={value.price}
-                  rating={value.rating}
-                  reviewNum={value.reviewNum}
-                  fullSite={value}
-                  url={value.url}
-                  key={`key-${value.name}`}
-                />
-              </Link>
-            );
-          })}
+          {currentSiteList.length === 0 ? (
+            <div id="noDataContainer">
+              <div id="noDataMsg">
+                <p> No sites meet your search criteria. </p>
+                <p>
+                  {" "}
+                  Please return to the{" "}
+                  <Link to="/" className="noDataLink">
+                    {" "}
+                    main menu{" "}
+                  </Link>{" "}
+                  and try again.
+                </p>
+              </div>
+            </div>
+          ) : (
+            currentSiteList.map((value, key) => {
+              return (
+                <Link to={"/sites"} className="noUnderline" key={`link-${key}`}>
+                  <MiniSite
+                    name={value.name}
+                    type={value.type}
+                    acres={value.acres}
+                    city={value.city}
+                    state={value.state}
+                    price={value.price}
+                    rating={value.rating}
+                    reviewNum={value.reviewNum}
+                    fullSite={value}
+                    url={value.url}
+                    key={`key-${value.name}`}
+                  />
+                </Link>
+              );
+            })
+          )}
         </div>
       </div>
     </div>

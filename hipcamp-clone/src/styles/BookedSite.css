@@ -1,0 +1,48 @@
+.bookedSiteContainer {
+  background-color: var(--main-background);
+  height: 100vh;
+}
+
+#bookedSiteMain {
+  margin-left: 10vw;
+  margin-top: 10vh;
+  border: 3px solid var(--green-color);
+  height: 60vh;
+  width: 80vw;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+#sidewaysFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+h1,
+h2 {
+  margin-bottom: 0px;
+}
+
+h2 {
+  text-decoration: underline;
+}
+
+h3 {
+  color: var(--green-color);
+}
+
+.bookedPara {
+  text-decoration: rgb(4, 4, 163) wavy underline;
+  margin-left: 3px;
+}
+
+.bookedSpan {
+  color: var(--orange-color);
+}
+
+.bookedSpan2 {
+  color: var(--orange-color);
+}

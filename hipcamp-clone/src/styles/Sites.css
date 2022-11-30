@@ -127,3 +127,26 @@
   flex-direction: row;
   justify-content: center;
 }
+
+#bookBtnContainer {
+  position: absolute;
+  top: 15vh;
+  right: 5vw;
+}
+
+#bookBtn {
+  width: 15vw;
+  height: 7vh;
+  font-size: 25px;
+  border-radius: 20px;
+  border: none;
+  background-color: var(--green-color);
+  color: white;
+}
+
+#bookBtn:hover {
+  cursor: pointer;
+  background-color: white;
+  color: var(--green-color);
+  border: 2px solid var(--green-color);
+}

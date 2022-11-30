@@ -34,7 +34,7 @@ import nationalWeather from "../images/national_weather.png";
 import SafetyDiv from "./SafetyDiv";
 import { SiteContext } from "../contexts/SiteContext";
 import { db } from "../utils/firebase";
-import { ref, set, push, onValue, child } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 import { Link } from "react-router-dom";
 
 const Main = () => {

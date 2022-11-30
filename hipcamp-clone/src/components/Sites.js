@@ -1,21 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../styles/Sites.css";
 import Header from "./Header";
-import hillside from "../images/hillside.jpeg";
 import { CurrentSiteContext } from "../contexts/CurrentSiteContext";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
-import { current } from "@reduxjs/toolkit";
+import { Link } from "react-router-dom";
 
 const Sites = (props) => {
   const { currentSite, setCurrentSite } = useContext(CurrentSiteContext);
   const [urlState, setURLState] = useState("");
   const storage = getStorage();
-  const storageRef = ref(storage);
   const specRef = ref(storage, currentSite.url);
   const [petStatus, setPetStatus] = useState();
 
   useEffect(() => {
-    if (currentSite.pets === "true") {
+    if (currentSite.pets) {
       setPetStatus("Yes");
     } else {
       setPetStatus("No");
@@ -40,7 +38,14 @@ const Sites = (props) => {
               <div>&gt;</div>
               <div id="locationState">{currentSite.state}</div>
             </div>
-            <div id="siteName">{currentSite.name}</div>
+            <div>
+              <div id="siteName">{currentSite.name}</div>
+              <div id="bookBtnContainer">
+                <Link to="/booking" className="noUnderline">
+                  <button id="bookBtn">Book Now</button>
+                </Link>
+              </div>
+            </div>
             <div id="siteReviews">
               <div id="siteRating">{currentSite.rating}% Rating</div>
               <div>&gt;</div>
@@ -86,7 +91,7 @@ const Sites = (props) => {
               <h2>Activities</h2>
               {currentSite.activities.map((value, key) => {
                 return (
-                  <div style={{ marginLeft: "3px" }} key={value.id}>
+                  <div style={{ marginLeft: "3px" }} key={`${value}-activity`}>
                     {value}
                   </div>
                 );
@@ -96,7 +101,7 @@ const Sites = (props) => {
               <h2>Natural Features</h2>
               {currentSite.features.map((value, key) => {
                 return (
-                  <div style={{ marginLeft: "3px" }} key={value.id}>
+                  <div style={{ marginLeft: "3px" }} key={`${value}-feature`}>
                     {value}
                   </div>
                 );

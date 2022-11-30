@@ -14,6 +14,8 @@ import { Link } from "react-router-dom";
 import { ref as ref2, uploadBytes } from "firebase/storage";
 import { storage } from "../utils/firebase.js";
 
+//todo clean up into more components
+
 const InputLand = (props) => {
   const [tentRadio, setTentRadio] = useState(false);
   const [rvRadio, setRVRadio] = useState(false);
@@ -132,7 +134,7 @@ const InputLand = (props) => {
   const [sitePrice, setSitePrice] = useState(0);
   const [siteOverview, setSiteOverview] = useState("");
   const [siteParkNearby, setSiteParkNearby] = useState("false");
-  const [siteParkName, setSiteParkName] = useState("");
+  const [siteParkName, setSiteParkName] = useState("false");
   const [siteURL, setSiteURL] = useState("");
   const [siteImage, setSiteImage] = useState(null);
   ////////////////////////
@@ -344,8 +346,6 @@ const InputLand = (props) => {
   ]);
 
   function writeAllData(e) {
-    // e.preventDefault();
-
     if (disabledBtn) {
       e.preventDefault();
       return;
@@ -762,7 +762,6 @@ const InputLand = (props) => {
               </label>
               <input type="file" onChange={handleImage} />
             </div>
-            {/* <button onClick={uploadImage}>TEST</button> */}
             <br />
             <div className="leftAlign">
               <label htmlFor="siteInfo" className="labelLeft">

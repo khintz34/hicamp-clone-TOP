@@ -3,41 +3,44 @@ import { SiteContext } from "../contexts/SiteContext";
 import "../styles/Where.css";
 import mtnCamp from "../images/mtn-camping.jpeg";
 import { Link } from "react-router-dom";
+import { SearchContext } from "../contexts/SearchContext";
+import { PetContext } from "../contexts/PetContext copy";
 
 const Where = (props) => {
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
+  const { searchItem, setSearchItem } = useContext(SearchContext);
+  const { petSearch, setPetSearch } = useContext(PetContext);
   const [guestNum, setGuestNum] = useState(0);
   const [petAllowed, setPetAllowed] = useState();
   const [firesAllowed, setFiresAllowed] = useState();
   const [lakeNearby, setLakeNearby] = useState();
   const [lodgingState, setLodgingState] = useState();
   const [location, setLocation] = useState("");
-  const [mainWhere, setMainWhere] = useState("location");
+  const [mainWhere, setMainWhere] = useState("");
   const FullList = props.list;
 
+  const removeHiddenClass = "";
+  const hiddenClass = "hide";
+  const [wherePopUp, setWherePopUp] = useState(hiddenClass);
+  const [guestPopUp, setGuestPopUp] = useState(hiddenClass);
+  const [petYes, setPetYes] = useState("circleBtn");
+  const [petNo, setPetNo] = useState("circleBtn");
+
   function showWhereTo() {
-    //todo remove query selector
-    const popUp = document.querySelector("#whereToPopUp");
-    popUp.classList.remove("hide");
+    setWherePopUp(removeHiddenClass);
     setMainWhere("location");
   }
 
   function hideWhereTo() {
-    //todo remove query selector
-    const popUp = document.querySelector("#whereToPopUp");
-    popUp.classList.add("hide");
+    setWherePopUp(hiddenClass);
   }
 
   function showGuests() {
-    //todo remove query selector
-    const popUp = document.querySelector("#guestsPopUp");
-    popUp.classList.remove("hide");
+    setGuestPopUp(removeHiddenClass);
   }
 
   function hideGuests() {
-    //todo remove query selector
-    const popUp = document.querySelector("#guestsPopUp");
-    popUp.classList.add("hide");
+    setGuestPopUp(hiddenClass);
   }
 
   function addGuests() {
@@ -54,10 +57,14 @@ const Where = (props) => {
 
   function allowPet() {
     setPetAllowed(true);
+    setPetYes("circleBtn petChoice");
+    setPetNo("circleBtn");
   }
 
   function allowNoPet() {
     setPetAllowed(false);
+    setPetYes("circleBtn");
+    setPetNo("circleBtn petChoice");
   }
 
   function allowFires() {
@@ -68,6 +75,7 @@ const Where = (props) => {
     }
     setMainWhere("fires");
     setLocation("Fires Allowed");
+    setSearchItem("Fires Allowed");
   }
 
   function decideLoding() {
@@ -78,6 +86,7 @@ const Where = (props) => {
     }
     setMainWhere("lodging");
     setLocation("Lodging Available");
+    setSearchItem("Lodging Available");
   }
 
   function decideLake() {
@@ -88,19 +97,57 @@ const Where = (props) => {
     }
     setMainWhere("lakes");
     setLocation("Lakes Nearby");
+    setSearchItem("Lake Nearby");
   }
 
   function createList() {
     let newArray = [];
 
-    if (mainWhere === "location") {
+    setSearchItem(location);
+    if (mainWhere === "location" && location !== "") {
+      let locationArray = location.match(/\w+/g);
       FullList.map((value, key) => {
-        if (value.state === location) {
+        if (value.state.toLowerCase() === location) {
           newArray.push(value);
-        } else if (value.park === location) {
+        } else if (value.park.toString().toLowerCase() === location) {
           newArray.push(value);
-        } else if (value.city === location) {
+        } else if (value.city.toLowerCase() === location) {
           newArray.push(value);
+        } else if (value.name.toLowerCase() === location) {
+          newArray.push(value);
+        } else {
+          let newLength = locationArray.length;
+          let parkWords = value.park.toString().toLowerCase().match(/\w+/g);
+          let cityWords = value.city.toString().toLowerCase().match(/\w+/g);
+          let nameWords = value.name.toString().toLowerCase().match(/\w+/g);
+          let matchArray = Array.from(Array(newLength).keys());
+          parkWords.map((word) => {
+            matchArray.shift();
+            matchArray.push(word);
+            if (
+              matchArray.every((val, index) => val === locationArray[index])
+            ) {
+              newArray.push(value);
+            }
+          });
+          cityWords.map((word) => {
+            matchArray.shift();
+            matchArray.push(word);
+            if (
+              matchArray.every((val, index) => val === locationArray[index])
+            ) {
+              newArray.push(value);
+            }
+          });
+          nameWords.map((word) => {
+            matchArray.shift();
+            matchArray.push(word);
+            if (
+              matchArray.every((val, index) => val === locationArray[index])
+            ) {
+              newArray.push(value);
+            }
+          });
         }
       });
     } else if (mainWhere === "fires") {
@@ -133,7 +180,8 @@ const Where = (props) => {
         }
       });
       newArray = arrayTwo;
-    } else {
+    } else if (guestNum !== 0) {
+      console.log(guestNum);
       FullList.map((value, key) => {
         if (value.guests >= guestNum) {
           newArray.push(value);
@@ -142,6 +190,7 @@ const Where = (props) => {
     }
 
     if (petAllowed !== undefined) {
+      setPetSearch(petAllowed);
       if (newArray.length > 0) {
         let arrayTwo = [];
         newArray.map((value, key) => {
@@ -151,17 +200,18 @@ const Where = (props) => {
         });
         newArray = arrayTwo;
       } else {
+        setPetSearch(petAllowed);
         FullList.map((value, key) => {
           if (value.pets === petAllowed) {
             newArray.push(value);
           }
         });
       }
+    } else {
+      setPetSearch(petAllowed);
     }
     setCurrentSiteList(newArray);
   }
-
-  // todo how to not have to exact match??
 
   return (
     <div id="whereDiv">
@@ -176,25 +226,25 @@ const Where = (props) => {
               onClick={showWhereTo}
               value={location}
               onChange={(e) => {
-                setLocation(e.target.value);
+                setLocation(e.target.value.toString().toLowerCase());
               }}
             />
-            <div id="whereToPopUp" className="hide">
+            <div id="whereToPopUp" className={wherePopUp}>
               <div className="whereToList">
                 <div>X</div>
-                <div className="bottomUnderline" onClick={() => allowFires()}>
+                <div className="bottomUnderline" onClick={allowFires}>
                   <div>Fires Allowed</div>
                 </div>
               </div>
               <div className="whereToList">
                 <div>X</div>
-                <div className="bottomUnderline" onClick={() => decideLake()}>
+                <div className="bottomUnderline" onClick={decideLake}>
                   <div>Lake Nearby</div>
                 </div>
               </div>
               <div className="whereToList">
                 <div>X</div>
-                <div className="bottomUnderline" onClick={() => decideLoding()}>
+                <div className="bottomUnderline" onClick={decideLoding}>
                   <div>Lodging</div>
                 </div>
               </div>
@@ -219,17 +269,17 @@ const Where = (props) => {
                 setGuestNum(e.target.value);
               }}
             />
-            <div id="guestsPopUp" className="hide">
+            <div id="guestsPopUp" className={guestPopUp}>
               <div className="guestList">
                 <div className="stack">
                   <div>Guests</div>
                 </div>
                 <div className="addSub">
-                  <button className="circleBtn" onClick={() => subGuests()}>
+                  <button className="circleBtn" onClick={subGuests}>
                     -
                   </button>
                   <div>{guestNum}</div>
-                  <button className="circleBtn" onClick={() => addGuests()}>
+                  <button className="circleBtn" onClick={addGuests}>
                     +
                   </button>
                 </div>
@@ -239,11 +289,11 @@ const Where = (props) => {
                   <div>Any pets?</div>
                 </div>
                 <div className="addSub">
-                  <button className="circleBtn" onClick={() => allowNoPet()}>
+                  <button className={petNo} onClick={allowNoPet}>
                     N
                   </button>
                   <div> </div>
-                  <button className="circleBtn" onClick={() => allowPet()}>
+                  <button className={petYes} onClick={allowPet}>
                     Y
                   </button>
                 </div>
@@ -253,9 +303,8 @@ const Where = (props) => {
               </div>
             </div>
           </div>
-          {/* // todo onClick setCurrentSiteList with values from search bar */}
           <Link to="/siteList">
-            <button id="circleSearchBtn" onClick={() => createList()}>
+            <button id="circleSearchBtn" onClick={createList}>
               Search
             </button>
           </Link>
