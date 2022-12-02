@@ -36,6 +36,8 @@ import { SiteContext } from "../contexts/SiteContext";
 import { db } from "../utils/firebase";
 import { ref, onValue } from "firebase/database";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const Main = () => {
   const orangeColor = {
@@ -80,6 +82,7 @@ const Main = () => {
   const stretchImage = {
     width: "20vh",
   };
+  const { currentAuth, setCurrentAuth } = useContext(AuthContext);
 
   const [fullSiteList, setFullSiteList] = useState([]);
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);

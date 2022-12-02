@@ -5,10 +5,58 @@ import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import { db } from "../utils/firebase";
 import { ref, onValue } from "firebase/database";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Header = () => {
   const [fullSiteList, setFullSiteList] = useState([]);
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
+  const { currentAuth, setCurrentAuth } = useContext(AuthContext);
+  const [signInLingo, setSignInLingo] = useState("Sign In");
+
+  const signUserIn = () => {
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth();
+    if (!currentAuth) {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential.accessToken;
+          // The signed-in user info.
+          const user = result.user;
+          setCurrentAuth(true);
+          // console.log(user);
+          setSignInLingo("Sign Out");
+          // ...
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // The email of the user's account used.
+          const email = error.customData.email;
+          // The AuthCredential type that was used.
+          const credential = GoogleAuthProvider.credentialFromError(error);
+          // ...
+        });
+    } else {
+      auth.signOut().then(
+        function () {
+          setCurrentAuth(false);
+          setSignInLingo("Sign In");
+        },
+        function (error) {
+          console.error("Sign Out Error", error);
+        }
+      );
+    }
+  };
 
   function getUserData() {
     const boardRef = ref(db, "SiteList/");
@@ -99,8 +147,9 @@ const Header = () => {
             Start hosting{" "}
           </Link>
         </div>
-        <div className="header-btn">Log in</div>
-        <button id="signUp-btn">Sign up</button>
+        <button id="signUp-btn" onClick={signUserIn}>
+          {signInLingo}
+        </button>
       </div>
     </div>
   );

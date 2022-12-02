@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "../styles/InputLand.css";
 import Header from "./Header";
 import OwnerImg from "../images/owners.jpeg";
@@ -13,10 +13,14 @@ import SelectPark from "./SelectPark";
 import { Link } from "react-router-dom";
 import { ref as ref2, uploadBytes } from "firebase/storage";
 import { storage } from "../utils/firebase.js";
+import { AuthContext } from "../contexts/AuthContext";
+
+//todo if not authenticated, dont allow push to server.
 
 //todo clean up into more components
 
 const InputLand = (props) => {
+  const { currentAuth, setCurrentAuth } = useContext(AuthContext);
   const [tentRadio, setTentRadio] = useState(false);
   const [rvRadio, setRVRadio] = useState(false);
   const [lodgingRadio, setLodgingRadio] = useState(false);

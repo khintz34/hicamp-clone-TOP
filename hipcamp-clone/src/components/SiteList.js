@@ -8,9 +8,7 @@ import { SiteContext } from "../contexts/SiteContext";
 import { Link } from "react-router-dom";
 import { CurrentSiteContext } from "../contexts/CurrentSiteContext";
 import { SearchContext } from "../contexts/SearchContext";
-import { PetContext } from "../contexts/PetContext copy";
-
-//todo update guest counter if search is the max then display none
+import { PetContext } from "../contexts/PetContext";
 
 const SiteList = (props) => {
   const [siteArray, setSiteArray] = useState([]);
@@ -23,10 +21,11 @@ const SiteList = (props) => {
   const [currentVal, setCurrentVal] = useState(maxVal);
   const [maxAcres, setMaxAcres] = useState(0);
   const [minAcres, setMinAcres] = useState(0);
+  const [currentAcreVal, setCurrentAcreVal] = useState(maxAcres);
   const [currentAcres, setCurrentAcres] = useState(maxAcres);
   const [currentSiteHolder, setCurrentSiteHolder] = useState([]);
-
   const [petSearchTranslate, setPetSearchTranslate] = useState("");
+  const [maxMinEQ, setMaxMinEQ] = useState(false);
 
   useEffect(() => {
     if (petSearch === true) {
@@ -113,8 +112,18 @@ const SiteList = (props) => {
     setMaxVal(numMax);
     setMinVal(numMin);
     setCurrentVal(numMax);
+    setMinAcres(acresMin);
+    setMaxAcres(acresMax);
     setCurrentAcres(acresMax);
   }
+
+  useEffect(() => {
+    if (maxVal === minVal) {
+      setMaxMinEQ(true);
+    } else {
+      setMaxMinEQ(false);
+    }
+  });
 
   function handleGuestsChange(e) {
     setCurrentVal(e.target.value);
@@ -128,7 +137,14 @@ const SiteList = (props) => {
       }
     });
 
-    setCurrentSiteList(newArray);
+    let newerArray = [];
+    newArray.map((value) => {
+      if (value.acres <= currentAcres) {
+        newerArray.push(value);
+      }
+    });
+
+    setCurrentSiteList(newerArray);
   }
 
   function handleAcresChange(e) {
@@ -143,7 +159,14 @@ const SiteList = (props) => {
       }
     });
 
-    setCurrentSiteList(newArray);
+    let newerArray = [];
+    newArray.map((value) => {
+      if (value.guests <= currentVal) {
+        newerArray.push(value);
+      }
+    });
+
+    setCurrentSiteList(newerArray);
   }
 
   useEffect(() => {
@@ -164,27 +187,33 @@ const SiteList = (props) => {
         <button className="siteBtn" onClick={() => showType("RV")}>
           RVs
         </button>
-        <div>
-          <input
-            type="range"
-            id="guestSlider"
-            name="guests"
-            min={minVal}
-            max={maxVal}
-            step="1"
-            onChange={(e) => {
-              handleGuestsChange(e);
-            }}
-            value={currentVal}
-          />
-          <label htmlFor="guestSlider">Max Guests ({currentVal})</label>
-        </div>
+        {maxMinEQ ? (
+          <div style={{ display: "none" }}>equal</div>
+        ) : (
+          <div>
+            <input
+              type="range"
+              id="guestSlider"
+              name="guests"
+              min={minVal}
+              max={maxVal}
+              step="1"
+              onChange={(e) => {
+                handleGuestsChange(e);
+              }}
+              value={currentVal}
+            />
+            <label htmlFor="guestSlider">Max Guests ({currentVal})</label>
+          </div>
+        )}
         <div>
           <input
             type="range"
             id="acres"
             name="acres"
             step="10"
+            min={minAcres}
+            max={maxAcres}
             onChange={(e) => {
               handleAcresChange(e);
             }}
@@ -202,6 +231,13 @@ const SiteList = (props) => {
         {petSearchTranslate !== "" ? (
           <div>
             <p>Pets Allowed: {petSearchTranslate}</p>
+          </div>
+        ) : (
+          <div style={{ display: "none" }}></div>
+        )}
+        {maxMinEQ ? (
+          <div>
+            <p>Number of Guests: {maxVal}</p>
           </div>
         ) : (
           <div style={{ display: "none" }}></div>
