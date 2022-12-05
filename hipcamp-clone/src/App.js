@@ -16,7 +16,6 @@ import { AuthContext } from "./contexts/AuthContext";
 import { CheckInContext } from "./contexts/CheckInContext";
 import { CheckOutContext } from "./contexts/CheckOutContext";
 
-//todo authentication on InputLand
 //todo pass dates to other pages. Currently only in Where.js
 //todo css for screen sizes
 //todo compenent folder structure
@@ -29,8 +28,8 @@ function App() {
   const [petSearch, setPetSearch] = useState("");
   // let targetDate = new Date();
   // targetDate.setDate(targetDate.getDate() + 5);
-  const [checkInDate, setCheckInDate] = useState();
-  const [checkOutDate, setCheckOutDate] = useState();
+  const [checkInDate, setCheckInDate] = useState("test");
+  const [checkOutDate, setCheckOutDate] = useState("");
   const [currentAuth, setCurrentAuth] = useState(false);
 
   return (

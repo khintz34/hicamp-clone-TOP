@@ -37,7 +37,7 @@ import { db } from "../utils/firebase";
 import { ref, onValue } from "firebase/database";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { CheckInContext } from "../contexts/CheckInContext";
 
 const Main = () => {
   const orangeColor = {
@@ -83,6 +83,8 @@ const Main = () => {
     width: "20vh",
   };
   const { currentAuth, setCurrentAuth } = useContext(AuthContext);
+  const { checkInDate, setCheckInDate } = useContext(CheckInContext);
+  console.log(checkInDate);
 
   const [fullSiteList, setFullSiteList] = useState([]);
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);

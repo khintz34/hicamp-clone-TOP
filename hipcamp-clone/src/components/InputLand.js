@@ -15,8 +15,6 @@ import { ref as ref2, uploadBytes } from "firebase/storage";
 import { storage } from "../utils/firebase.js";
 import { AuthContext } from "../contexts/AuthContext";
 
-//todo if not authenticated, dont allow push to server.
-
 //todo clean up into more components
 
 const InputLand = (props) => {
@@ -74,6 +72,7 @@ const InputLand = (props) => {
   const [waterfallRadio, setWaterfallRadio] = useState(false);
   const [canyonRadio, setCanyonRadio] = useState(false);
   const [ranchRadio, setRanchRadio] = useState(false);
+  const [subClass, setSubClass] = useState("disableBtn");
 
   useEffect(() => {
     createArrays();
@@ -243,6 +242,7 @@ const InputLand = (props) => {
       setSiteParkName(false);
     }
   }
+
   /////////////////////////////
   function writeUserData(
     name,
@@ -330,11 +330,14 @@ const InputLand = (props) => {
       sitePets === "" ||
       siteFire === "" ||
       siteLake === "" ||
-      siteOverview === ""
+      siteOverview === "" ||
+      !currentAuth
     ) {
       setDisabledBtn(true);
+      setSubClass("disableBtn");
     } else {
       setDisabledBtn(false);
+      setSubClass("subBtn");
     }
   }, [
     siteName,
@@ -347,6 +350,7 @@ const InputLand = (props) => {
     siteFire,
     siteLake,
     siteOverview,
+    currentAuth,
   ]);
 
   function writeAllData(e) {
@@ -778,11 +782,18 @@ const InputLand = (props) => {
                 required
               ></textarea>
             </div>
+            {currentAuth ? (
+              <div style={{ display: "none" }}></div>
+            ) : (
+              <div style={{ marginTop: "10px" }}>
+                Please sign in to submit your hosting site
+              </div>
+            )}
             <div className="submitBtnContainer">
               <Link to="/confirmation">
                 <button
                   type="submit"
-                  className="subBtn"
+                  className={subClass}
                   onClick={(e) => writeAllData(e)}
                   disabled={disabledBtn}
                 >

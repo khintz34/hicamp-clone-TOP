@@ -19,6 +19,15 @@ const Header = () => {
   const { currentAuth, setCurrentAuth } = useContext(AuthContext);
   const [signInLingo, setSignInLingo] = useState("Sign In");
 
+  useEffect(() => {
+    if (!currentAuth) {
+      setCurrentAuth(false);
+      setSignInLingo("Sign In");
+    } else {
+      setSignInLingo("Sign Out");
+    }
+  });
+
   const signUserIn = () => {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();

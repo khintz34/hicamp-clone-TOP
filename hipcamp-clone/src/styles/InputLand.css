@@ -101,3 +101,13 @@ form {
   border: none;
   border-radius: 20px;
 }
+
+.disableBtn {
+  width: 30ch;
+  height: 35px;
+  font-size: large;
+  background-color: lightgray;
+  color: white;
+  border: none;
+  border-radius: 20px;
+}
