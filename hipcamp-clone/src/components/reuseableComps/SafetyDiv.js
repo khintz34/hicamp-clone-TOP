@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/SafetyDiv.css";
+import "../../styles/SafetyDiv.css";
 
 const SafetyDiv = (props) => {
   function openURL() {

@@ -1,12 +1,12 @@
 import React from "react";
-import "../styles/About.css";
+import "../../styles/About.css";
 import Header from "./Header";
-import Tagline from "./Tagline";
-import VerticalDiv from "./VerticalDiv";
-import image1 from "../images/canada-tent.jpeg";
-import image2 from "../images/canada-sheep.jpeg";
-import image3 from "../images/canada-au.jpeg";
-import AboutDivs from "./AboutDivs";
+import Tagline from "../reuseableComps/Tagline";
+import VerticalDiv from "../reuseableComps/VerticalDiv";
+import image1 from "../../images/canada-tent.jpeg";
+import image2 from "../../images/canada-sheep.jpeg";
+import image3 from "../../images/canada-au.jpeg";
+import AboutDivs from "../reuseableComps/AboutDivs";
 import Footer from "./Footer";
 
 const About = (props) => {

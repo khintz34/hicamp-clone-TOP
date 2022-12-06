@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
-import "../styles/Confirmation.css";
-import bike from "../images/bike.jpeg";
+import "../../styles/Confirmation.css";
+import bike from "../../images/bike.jpeg";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 const Confirmation = (props) => {

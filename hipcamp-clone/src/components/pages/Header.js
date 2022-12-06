@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
-import { SiteContext } from "../contexts/SiteContext";
-import "../styles/Header.css";
-import logo from "../images/logo.png";
+import { SiteContext } from "../../contexts/SiteContext";
+import "../../styles/Header.css";
+import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
-import { db } from "../utils/firebase";
+import { db } from "../../utils/firebase";
 import { ref, onValue } from "firebase/database";
 import {
   getAuth,
@@ -11,7 +11,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Header = () => {
   const [fullSiteList, setFullSiteList] = useState([]);

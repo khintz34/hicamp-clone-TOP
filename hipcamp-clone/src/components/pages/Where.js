@@ -1,23 +1,24 @@
 import React, { useState, useContext, useEffect } from "react";
-import { SiteContext } from "../contexts/SiteContext";
-import "../styles/Where.css";
-import mtnCamp from "../images/mtn-camping.jpeg";
+import { SiteContext } from "../../contexts/SiteContext";
+import "../../styles/Where.css";
+import mtnCamp from "../../images/mtn-camping.jpeg";
 import { Link } from "react-router-dom";
-import { SearchContext } from "../contexts/SearchContext";
-import { PetContext } from "../contexts/PetContext";
+import { SearchContext } from "../../contexts/SearchContext";
+import { PetContext } from "../../contexts/PetContext";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { TextField } from "@mui/material";
-import { AuthContext } from "../contexts/AuthContext";
-import { CheckInContext } from "../contexts/CheckInContext";
-import { CheckOutContext } from "../contexts/CheckOutContext";
+import { AuthContext } from "../../contexts/AuthContext";
+import { CheckInContext } from "../../contexts/CheckInContext";
+import { CheckOutContext } from "../../contexts/CheckOutContext";
+import { isBefore } from "date-fns";
 
 const Where = (props) => {
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
   const { searchItem, setSearchItem } = useContext(SearchContext);
   const { petSearch, setPetSearch } = useContext(PetContext);
-  const { checkOutDate, setCheckOutDate } = useContext(CheckInContext);
-  const { checkInDate, setCheckInDate } = useContext(CheckOutContext);
+  const { checkOutDate, setCheckOutDate } = useContext(CheckOutContext);
+  const { checkInDate, setCheckInDate } = useContext(CheckInContext);
   const [guestNum, setGuestNum] = useState(0);
   const [petAllowed, setPetAllowed] = useState();
   const [firesAllowed, setFiresAllowed] = useState();
@@ -262,12 +263,15 @@ const Where = (props) => {
               </div>
             </div>
           </div>
+
           <div className="inputContainer sideFlex" id="datesDiv">
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
                 label="Check-In"
                 value={checkInDate}
-                onChange={(newDate) => setCheckInDate(newDate)}
+                onChange={(newDate) => {
+                  setCheckInDate(newDate);
+                }}
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
@@ -280,6 +284,7 @@ const Where = (props) => {
               />
             </LocalizationProvider>
           </div>
+
           <div className="inputContainer" id="guestsDiv">
             <label>GUESTS</label>
             <input

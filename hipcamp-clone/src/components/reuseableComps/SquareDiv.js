@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { SiteContext } from "../contexts/SiteContext";
-import "../styles/SquareDiv.css";
+import { SiteContext } from "../../contexts/SiteContext";
+import "../../styles/SquareDiv.css";
 
 const SquareDiv = (props) => {
   const FullList = props.list;

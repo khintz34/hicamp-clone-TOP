@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/CircleDiv.css";
+import "../../styles/CircleDiv.css";
 
 const CircleDiv = (props) => {
   return (

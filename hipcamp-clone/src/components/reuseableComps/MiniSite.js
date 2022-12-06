@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import "../styles/MiniSite.css";
-import { CurrentSiteContext } from "../contexts/CurrentSiteContext";
+import "../../styles/MiniSite.css";
+import { CurrentSiteContext } from "../../contexts/CurrentSiteContext";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 const MiniSite = (props) => {

@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import "../styles/SiteList.css";
+import "../../styles/SiteList.css";
 import Header from "./Header";
-import { db } from "../utils/firebase";
+import { db } from "../../utils/firebase";
 import { ref, set, push, onValue } from "firebase/database";
-import MiniSite from "./MiniSite";
-import { SiteContext } from "../contexts/SiteContext";
+import MiniSite from "../reuseableComps/MiniSite";
+import { SiteContext } from "../../contexts/SiteContext";
 import { Link } from "react-router-dom";
-import { CurrentSiteContext } from "../contexts/CurrentSiteContext";
-import { SearchContext } from "../contexts/SearchContext";
-import { PetContext } from "../contexts/PetContext";
+import { CurrentSiteContext } from "../../contexts/CurrentSiteContext";
+import { SearchContext } from "../../contexts/SearchContext";
+import { PetContext } from "../../contexts/PetContext";
 
 const SiteList = (props) => {
   const [siteArray, setSiteArray] = useState([]);

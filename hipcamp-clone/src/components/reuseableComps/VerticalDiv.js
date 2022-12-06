@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { SiteContext } from "../contexts/SiteContext";
-import "../styles/VerticalDiv.css";
+import { SiteContext } from "../../contexts/SiteContext";
+import "../../styles/VerticalDiv.css";
 
 const VerticalDiv = (props) => {
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);

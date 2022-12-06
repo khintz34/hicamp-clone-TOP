@@ -1,7 +1,7 @@
 import React from "react";
-import "../styles/Footer.css";
-import logo from "../images/logo.png";
-import LinkList from "./LinkList";
+import "../../styles/Footer.css";
+import logo from "../../images/logo.png";
+import LinkList from "../reuseableComps/LinkList";
 
 const Footer = (props) => {
   return (

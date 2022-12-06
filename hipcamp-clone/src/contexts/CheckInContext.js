@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const CheckInContext = createContext();
+export const CheckInContext = createContext([]);

@@ -1,19 +1,19 @@
 import React, { useEffect, useState, useContext } from "react";
-import "../styles/InputLand.css";
+import "../../styles/InputLand.css";
 import Header from "./Header";
-import OwnerImg from "../images/owners.jpeg";
+import OwnerImg from "../../images/owners.jpeg";
 import { push, ref, set } from "firebase/database";
-import { db } from "../utils/firebase.js";
-import LeftAlignInput from "./leftAlignInput";
-import YesNoRadio from "./YesNoRadio";
-import RadioDivHold from "./RadioDivHold";
-import Checkbox from "./Checkbox";
-import Select from "./Select";
-import SelectPark from "./SelectPark";
+import { db } from "../../utils/firebase.js";
+import LeftAlignInput from "../reuseableComps/leftAlignInput";
+import YesNoRadio from "../reuseableComps/YesNoRadio";
+import RadioDivHold from "../reuseableComps/RadioDivHold";
+import Checkbox from "../reuseableComps/Checkbox";
+import Select from "../reuseableComps/Select";
+import SelectPark from "../reuseableComps/SelectPark";
 import { Link } from "react-router-dom";
 import { ref as ref2, uploadBytes } from "firebase/storage";
-import { storage } from "../utils/firebase.js";
-import { AuthContext } from "../contexts/AuthContext";
+import { storage } from "../../utils/firebase.js";
+import { AuthContext } from "../../contexts/AuthContext";
 
 //todo clean up into more components
 

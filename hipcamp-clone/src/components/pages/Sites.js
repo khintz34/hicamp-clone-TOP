@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import "../styles/Sites.css";
+import "../../styles/Sites.css";
 import Header from "./Header";
-import { CurrentSiteContext } from "../contexts/CurrentSiteContext";
+import { CurrentSiteContext } from "../../contexts/CurrentSiteContext";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { Link } from "react-router-dom";
 
@@ -71,7 +71,10 @@ const Sites = (props) => {
                 {currentSite.type.map((value, key) => {
                   if (key !== currentSite.type.length - 1) {
                     return (
-                      <div style={{ marginLeft: "3px" }} key={value.id}>
+                      <div
+                        style={{ marginLeft: "3px" }}
+                        key={`${value.id}-site`}
+                      >
                         {value}
                         {","}
                       </div>
