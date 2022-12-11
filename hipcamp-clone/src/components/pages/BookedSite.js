@@ -125,14 +125,20 @@ const BookedSite = (props) => {
           {currentSite.activities.map((value, key) => {
             if (key !== currentSite.activities.length - 1) {
               return (
-                <div key={`${value}-bookedPara`} className="bookedPara">
+                <div
+                  key={`${value}-bookedPara-${currentSite.name}`}
+                  className="bookedPara"
+                >
                   {value}
                   {", "}
                 </div>
               );
             } else {
               return (
-                <div key={`${value}-bookedPara`} className="bookedPara">
+                <div
+                  key={`${value}-bookedPara-${currentSite.name}`}
+                  className="bookedPara"
+                >
                   and {value}
                 </div>
               );

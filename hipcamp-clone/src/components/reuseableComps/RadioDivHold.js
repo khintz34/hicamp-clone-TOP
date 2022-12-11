@@ -12,7 +12,7 @@ const RadioDivHold = (props) => {
         console.log(value);
         return (
           <YesNoRadio
-            key={value.id}
+            key={`RDH=${value.id}`}
             id={value.id}
             value={value.value}
             name={value.name}

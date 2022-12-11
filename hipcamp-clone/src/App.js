@@ -11,13 +11,16 @@ import Confirmation from "./components/pages/Confirmation";
 import About from "./components/pages/About";
 import BookedSite from "./components/pages/BookedSite";
 import { SearchContext } from "./contexts/SearchContext";
-import { PetContext } from "./contexts/PetContext";
+import { PetSearchContext } from "./contexts/PetSearchContext";
 import { AuthContext } from "./contexts/AuthContext";
 import { CheckInContext } from "./contexts/CheckInContext";
 import { CheckOutContext } from "./contexts/CheckOutContext";
 
-//todo SignIn to book a site
-//todo Link query parameters -> pass an id or some param for search terms
+//todo finish url params
+// todo css on sites lists
+// todo css confirmation
+//todo css booked
+//todo css inoutLand
 
 function App() {
   const [currentSiteList, setCurrentSiteList] = useState([]);
@@ -39,7 +42,7 @@ function App() {
               value={{ currentSite, setCurrentSite }}
             >
               <SearchContext.Provider value={{ searchItem, setSearchItem }}>
-                <PetContext.Provider value={{ petSearch, setPetSearch }}>
+                <PetSearchContext.Provider value={{ petSearch, setPetSearch }}>
                   <CheckOutContext.Provider
                     value={{ checkOutDate, setCheckOutDate }}
                   >
@@ -49,7 +52,10 @@ function App() {
                       <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/sites" element={<Sites />} />
-                        <Route path="/siteList" element={<SiteList />} />
+                        <Route
+                          path="/siteList/:locationParam/:guestParam/:petParam/:fireParam/:lakeParam/:lodgingParam/:whereParam"
+                          element={<SiteList />}
+                        />
                         <Route path="/owners" element={<InputLand />} />
                         <Route
                           path="/confirmation"
@@ -60,7 +66,7 @@ function App() {
                       </Routes>
                     </AuthContext.Provider>
                   </CheckOutContext.Provider>
-                </PetContext.Provider>
+                </PetSearchContext.Provider>
               </SearchContext.Provider>
             </CurrentSiteContext.Provider>
           </SiteContext.Provider>

@@ -4,28 +4,29 @@ import "../../styles/Where.css";
 import mtnCamp from "../../images/mtn-camping.jpeg";
 import { Link } from "react-router-dom";
 import { SearchContext } from "../../contexts/SearchContext";
-import { PetContext } from "../../contexts/PetContext";
+import { PetSearchContext } from "../../contexts/PetSearchContext";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { TextField } from "@mui/material";
-import { AuthContext } from "../../contexts/AuthContext";
 import { CheckInContext } from "../../contexts/CheckInContext";
 import { CheckOutContext } from "../../contexts/CheckOutContext";
-import { isBefore } from "date-fns";
+import { emojiWhereList } from "../../assets/EmojiLists";
+
+//todo if click search need to set location param to something else so doesnt abend
 
 const Where = (props) => {
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
   const { searchItem, setSearchItem } = useContext(SearchContext);
-  const { petSearch, setPetSearch } = useContext(PetContext);
+  const { petSearch, setPetSearch } = useContext(PetSearchContext);
   const { checkOutDate, setCheckOutDate } = useContext(CheckOutContext);
   const { checkInDate, setCheckInDate } = useContext(CheckInContext);
   const [guestNum, setGuestNum] = useState(0);
-  const [petAllowed, setPetAllowed] = useState();
-  const [firesAllowed, setFiresAllowed] = useState();
-  const [lakeNearby, setLakeNearby] = useState();
-  const [lodgingState, setLodgingState] = useState();
+  const [petAllowed, setPetAllowed] = useState("null");
+  const [firesAllowed, setFiresAllowed] = useState("null");
+  const [lakeNearby, setLakeNearby] = useState("null");
+  const [lodgingState, setLodgingState] = useState("null");
   const [location, setLocation] = useState("");
-  const [mainWhere, setMainWhere] = useState("");
+  const [mainWhere, setMainWhere] = useState("null");
 
   const FullList = props.list;
 
@@ -78,7 +79,11 @@ const Where = (props) => {
   }
 
   function allowFires() {
-    if (firesAllowed === false || firesAllowed === undefined) {
+    if (
+      firesAllowed === false ||
+      firesAllowed === undefined ||
+      firesAllowed === "null"
+    ) {
       setFiresAllowed(true);
     } else {
       setFiresAllowed(false);
@@ -100,7 +105,11 @@ const Where = (props) => {
   }
 
   function decideLake() {
-    if (lakeNearby === false || lakeNearby === undefined) {
+    if (
+      lakeNearby === false ||
+      lakeNearby === undefined ||
+      lakeNearby === "null"
+    ) {
       setLakeNearby(true);
     } else {
       setLakeNearby(false);
@@ -108,119 +117,6 @@ const Where = (props) => {
     setMainWhere("lakes");
     setLocation("Lakes Nearby");
     setSearchItem("Lake Nearby");
-  }
-
-  function createList() {
-    let newArray = [];
-
-    setSearchItem(location);
-    if (mainWhere === "location" && location !== "") {
-      let locationArray = location.match(/\w+/g);
-      FullList.map((value, key) => {
-        if (value.state.toLowerCase() === location) {
-          newArray.push(value);
-        } else if (value.park.toString().toLowerCase() === location) {
-          newArray.push(value);
-        } else if (value.city.toLowerCase() === location) {
-          newArray.push(value);
-        } else if (value.name.toLowerCase() === location) {
-          newArray.push(value);
-        } else {
-          let newLength = locationArray.length;
-          let parkWords = value.park.toString().toLowerCase().match(/\w+/g);
-          let cityWords = value.city.toString().toLowerCase().match(/\w+/g);
-          let nameWords = value.name.toString().toLowerCase().match(/\w+/g);
-          let matchArray = Array.from(Array(newLength).keys());
-          parkWords.map((word) => {
-            matchArray.shift();
-            matchArray.push(word);
-            if (
-              matchArray.every((val, index) => val === locationArray[index])
-            ) {
-              newArray.push(value);
-            }
-          });
-          cityWords.map((word) => {
-            matchArray.shift();
-            matchArray.push(word);
-            if (
-              matchArray.every((val, index) => val === locationArray[index])
-            ) {
-              newArray.push(value);
-            }
-          });
-          nameWords.map((word) => {
-            matchArray.shift();
-            matchArray.push(word);
-            if (
-              matchArray.every((val, index) => val === locationArray[index])
-            ) {
-              newArray.push(value);
-            }
-          });
-        }
-      });
-    } else if (mainWhere === "fires") {
-      FullList.map((value, key) => {
-        if (value.fires === firesAllowed) {
-          newArray.push(value);
-        }
-      });
-    } else if (mainWhere === "lakes") {
-      FullList.map((value, key) => {
-        if (value.lake === lakeNearby) {
-          newArray.push(value);
-        }
-      });
-    } else if (mainWhere === "lodging") {
-      FullList.map((value, key) => {
-        value.type.map((value2, key2) => {
-          if (value2 === "Lodging") {
-            newArray.push(value);
-          }
-        });
-      });
-    }
-
-    if (newArray.length > 0) {
-      let arrayTwo = [];
-      newArray.map((value, key) => {
-        if (value.guests >= guestNum) {
-          arrayTwo.push(value);
-        }
-      });
-      newArray = arrayTwo;
-    } else if (guestNum !== 0) {
-      console.log(guestNum);
-      FullList.map((value, key) => {
-        if (value.guests >= guestNum) {
-          newArray.push(value);
-        }
-      });
-    }
-
-    if (petAllowed !== undefined) {
-      setPetSearch(petAllowed);
-      if (newArray.length > 0) {
-        let arrayTwo = [];
-        newArray.map((value, key) => {
-          if (value.pets === petAllowed) {
-            arrayTwo.push(value);
-          }
-        });
-        newArray = arrayTwo;
-      } else {
-        setPetSearch(petAllowed);
-        FullList.map((value, key) => {
-          if (value.pets === petAllowed) {
-            newArray.push(value);
-          }
-        });
-      }
-    } else {
-      setPetSearch(petAllowed);
-    }
-    setCurrentSiteList(newArray);
   }
 
   return (
@@ -241,19 +137,19 @@ const Where = (props) => {
             />
             <div id="whereToPopUp" className={wherePopUp}>
               <div className="whereToList">
-                <div>X</div>
+                <div>{emojiWhereList.fire}</div>
                 <div className="bottomUnderline" onClick={allowFires}>
                   <div>Fires Allowed</div>
                 </div>
               </div>
               <div className="whereToList">
-                <div>X</div>
+                <div>{emojiWhereList.lake}</div>
                 <div className="bottomUnderline" onClick={decideLake}>
                   <div>Lake Nearby</div>
                 </div>
               </div>
               <div className="whereToList">
-                <div>X</div>
+                <div>{emojiWhereList.lodging}</div>
                 <div className="bottomUnderline" onClick={decideLoding}>
                   <div>Lodging</div>
                 </div>
@@ -331,10 +227,10 @@ const Where = (props) => {
               </div>
             </div>
           </div>
-          <Link to="/siteList">
-            <button id="circleSearchBtn" onClick={createList}>
-              Search
-            </button>
+          <Link
+            to={`/siteList/${location}/${guestNum}/${petAllowed}/${firesAllowed}/${lakeNearby}/${lodgingState}/${mainWhere}`}
+          >
+            <button id="circleSearchBtn">Search</button>
           </Link>
         </div>
       </div>

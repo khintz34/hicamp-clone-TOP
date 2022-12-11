@@ -37,13 +37,15 @@ const MiniSite = (props) => {
         {props.type.map((value, key) => {
           if (key !== props.type.length - 1) {
             return (
-              <div key={value}>
+              <div key={`mini${currentSite.name}-type-${value}`}>
                 {value}
                 {","}
               </div>
             );
           } else {
-            return <div key={value}>{value}</div>;
+            return (
+              <div key={`mini${currentSite.name}-type-${value}`}>{value}</div>
+            );
           }
         })}
       </div>

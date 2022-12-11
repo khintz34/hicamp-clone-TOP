@@ -36,8 +36,10 @@ import { SiteContext } from "../../contexts/SiteContext";
 import { db } from "../../utils/firebase";
 import { ref, onValue } from "firebase/database";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
-import { CheckInContext } from "../../contexts/CheckInContext";
+import { SearchContext } from "../../contexts/SearchContext";
+import { PetSearchContext } from "../../contexts/PetSearchContext";
+
+//todo set url params for special and types once created in siteList
 
 const Main = () => {
   const orangeColor = {
@@ -82,10 +84,10 @@ const Main = () => {
   const stretchImage = {
     width: "20vh",
   };
-  const { currentAuth, setCurrentAuth } = useContext(AuthContext);
 
   const [fullSiteList, setFullSiteList] = useState([]);
-  const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
+  const { searchItem, setSearchItem } = useContext(SearchContext);
+  const { petSearch, setPetSearch } = useContext(PetSearchContext);
 
   function getUserData() {
     const boardRef = ref(db, "SiteList/");
@@ -139,14 +141,16 @@ const Main = () => {
   }
 
   useEffect(() => {
-    getUserData();
+    // getUserData();
+    setSearchItem("");
+    setPetSearch("");
   }, []);
 
   return (
     <div id="mainDiv">
       <Where list={fullSiteList} />
       <div className="sideBySide">
-        <Link to={"/siteList"}>
+        <Link to={"/siteList/minnesota/0/null/null/null/null/location"}>
           <HalfDiv
             image={fallCozy}
             title="Cozy Fall Stays"
@@ -156,7 +160,7 @@ const Main = () => {
             list={fullSiteList}
           />
         </Link>
-        <Link to={"/siteList"}>
+        <Link to={"/siteList/montana/0/null/null/null/null/location"}>
           <HalfDiv
             image={outdoorStairs}
             title="Get outside in MT this weekend"
@@ -177,7 +181,8 @@ const Main = () => {
         />
       </div>
       <div id="verticalDivsContainer">
-        <Link to={"/siteList"}>
+        {/* Need to fix - add a special */}
+        <Link to={"/siteList/montana/0/null/null/null/null/location"}>
           <VerticalDiv
             image={tent}
             style={tentColor}
@@ -187,7 +192,7 @@ const Main = () => {
             special="hidden"
           />
         </Link>
-        <Link to={"/siteList"}>
+        <Link to={"/siteList/montana/0/null/null/null/null/location"}>
           <VerticalDiv
             image={butterfly}
             style={butterflyColor}
@@ -197,7 +202,7 @@ const Main = () => {
             special="monarchs"
           />
         </Link>
-        <Link to={"/siteList"}>
+        <Link to={"/siteList/montana/0/null/null/null/null/location"}>
           <VerticalDiv
             image={cabin}
             style={cabinColor}
@@ -212,7 +217,10 @@ const Main = () => {
         <h2>Discover top spots near you</h2>
       </div>
       <div className="squareDivsContainer">
-        <Link to="/SiteList" className="noUnderline">
+        <Link
+          to={"/siteList/anywhere/0/true/null/null/null/location"}
+          className="noUnderline"
+        >
           <SquareDiv
             image={stringLights}
             title="Pet friendly"
@@ -221,7 +229,10 @@ const Main = () => {
             item="pets"
           />
         </Link>
-        <Link to="/SiteList" className="noUnderline">
+        <Link
+          to={"/siteList/anywhere/0/null/null/true/null/location"}
+          className="noUnderline"
+        >
           <SquareDiv
             image={pool}
             title="Lake access"
@@ -230,7 +241,10 @@ const Main = () => {
             list={fullSiteList}
           />
         </Link>
-        <Link to="/SiteList" className="noUnderline">
+        <Link
+          to={"/siteList/anywhere/0/null/true/null/null/location"}
+          className="noUnderline"
+        >
           <SquareDiv
             image={redTent}
             title="Camp fires allowed"
@@ -295,7 +309,10 @@ const Main = () => {
         </div>
       </div>
       <div id="placesToGoMainDiv" className="squareDivsContainer">
-        <Link to="/SiteList" className="noUnderline">
+        <Link
+          to={"/siteList/bryce%20canyon/0/null/null/null/null/location"}
+          className="noUnderline"
+        >
           <SquareDivWTag
             image={bryceCanyon}
             title="Bryce Canyon"
@@ -304,7 +321,10 @@ const Main = () => {
             park="Bryce Canyon National Park"
           />
         </Link>
-        <Link to="/SiteList" className="noUnderline">
+        <Link
+          to={"/siteList/joshua%20tree/0/null/null/null/null/location"}
+          className="noUnderline"
+        >
           <SquareDivWTag
             image={joshuaTree}
             title="Joshua Tree"
@@ -313,7 +333,10 @@ const Main = () => {
             park="Joshua Tree National Park"
           />
         </Link>
-        <Link to="/SiteList" className="noUnderline">
+        <Link
+          to={"/siteList/shenandoah/0/null/null/null/null/location"}
+          className="noUnderline"
+        >
           <SquareDivWTag
             image={shenandoah}
             title="Shenandoah"
@@ -322,7 +345,10 @@ const Main = () => {
             park="Shenandoah National Park"
           />
         </Link>
-        <Link to="/SiteList" className="noUnderline">
+        <Link
+          to={"/siteList/great%20smoky/0/null/null/null/null/location"}
+          className="noUnderline"
+        >
           <SquareDivWTag
             image={smoky}
             title="Great Smoky Mountains"
@@ -331,7 +357,10 @@ const Main = () => {
             park="Great Smoky Mountains National Park"
           />
         </Link>
-        <Link to="/SiteList" className="noUnderline">
+        <Link
+          to={"/siteList/yellowstone/0/null/null/null/null/location"}
+          className="noUnderline"
+        >
           <SquareDivWTag
             image={yellowStone}
             title="Yellowstone"
@@ -340,7 +369,10 @@ const Main = () => {
             park="Yellowstone National Park"
           />
         </Link>
-        <Link to="/SiteList" className="noUnderline">
+        <Link
+          to={"/siteList/yosemite/0/null/null/null/null/location"}
+          className="noUnderline"
+        >
           <SquareDivWTag
             image={yosemite}
             title="Yosemite"

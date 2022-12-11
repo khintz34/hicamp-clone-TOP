@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SiteContext } from "../../contexts/SiteContext";
 import "../../styles/HalfDiv.css";
+import { useSearchParams } from "react-router-dom";
 
 const HalfDiv = (props) => {
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);

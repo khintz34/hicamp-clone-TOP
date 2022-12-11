@@ -8,39 +8,212 @@ import { SiteContext } from "../../contexts/SiteContext";
 import { Link } from "react-router-dom";
 import { CurrentSiteContext } from "../../contexts/CurrentSiteContext";
 import { SearchContext } from "../../contexts/SearchContext";
-import { PetContext } from "../../contexts/PetContext";
+import { PetSearchContext } from "../../contexts/PetSearchContext";
+import { useParams } from "react-router-dom";
 
-const SiteList = (props) => {
+//todo add a way to organize the specials in createList
+//todo need to add a critieria to handle camping type
+
+const SiteList = () => {
   const [siteArray, setSiteArray] = useState([]);
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
   const { currentSite, setCurrentSite } = useContext(CurrentSiteContext);
   const { searchItem, setSearchItem } = useContext(SearchContext);
-  const { petSearch, setPetSearch } = useContext(PetContext);
+  const { petSearch, setPetSearch } = useContext(PetSearchContext);
   const [maxVal, setMaxVal] = useState(0);
   const [minVal, setMinVal] = useState(0);
   const [currentVal, setCurrentVal] = useState(maxVal);
   const [maxAcres, setMaxAcres] = useState(0);
-  const [minAcres, setMinAcres] = useState(0);
+  const [minAcres, setMinAcres] = useState(20);
   const [currentAcreVal, setCurrentAcreVal] = useState(maxAcres);
   const [currentAcres, setCurrentAcres] = useState(maxAcres);
   const [currentSiteHolder, setCurrentSiteHolder] = useState([]);
   const [petSearchTranslate, setPetSearchTranslate] = useState("");
   const [maxMinEQ, setMaxMinEQ] = useState(false);
+  const [urlFlag, setUrlFlag] = useState(false);
+  const [createdFlag, setCreatedFlag] = useState(false);
+  const [fullList, setFullList] = useState([]);
+
+  const { locationParam } = useParams();
+  const { guestParam } = useParams();
+  const { petParam } = useParams();
+  const { fireParam } = useParams();
+  const { lakeParam } = useParams();
+  const { lodgingParam } = useParams();
+  const { whereParam } = useParams();
 
   useEffect(() => {
-    if (petSearch === true) {
+    const fetchData = async () => {
+      const data = await getUserData();
+      const callNextUp = await nextUp();
+    };
+
+    function nextUp() {
+      console.log("location:", locationParam);
+      console.log("guestNum: ", guestParam);
+      console.log("petParam: ", petParam);
+      console.log("fire: ", fireParam);
+      console.log("lake: ", lakeParam);
+      console.log("lodging: ", lodgingParam);
+      console.log("where: ", whereParam);
+    }
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (fullList.length !== 0) {
+      console.log("fullList: ", fullList);
+      setUrlFlag(true);
+    }
+  }, [fullList]);
+
+  useEffect(() => {
+    if (urlFlag) {
+      createList();
+      setCreatedFlag(true);
+    }
+  }, [urlFlag]);
+
+  useEffect(() => {
+    findMaxMin();
+    setCurrentSiteHolder(currentSiteList);
+    console.log("currentSiteList: ", currentSiteList);
+  }, [createdFlag]);
+
+  useEffect(() => {
+    if (petSearch === "true") {
       setPetSearchTranslate("Yes");
-    } else if (petSearch === false) {
+    } else if (petSearch === "false") {
       setPetSearchTranslate("No");
     } else {
       setPetSearchTranslate("");
     }
-  }, [petSearchTranslate]);
+  }, [petSearch]);
 
-  function getUserData() {
+  function createList() {
+    let newArray = [];
+    console.log("fullList: ", fullList);
+    setSearchItem(locationParam);
+    if (whereParam === "location" && locationParam !== "") {
+      let locationArray = locationParam.match(/\w+/g);
+      fullList.map((value, key) => {
+        if (value.state.toLowerCase() === locationParam) {
+          newArray.push(value);
+        } else if (value.park.toString().toLowerCase() === locationParam) {
+          newArray.push(value);
+        } else if (value.city.toLowerCase() === locationParam) {
+          newArray.push(value);
+        } else if (value.name.toLowerCase() === locationParam) {
+          newArray.push(value);
+        } else {
+          let newLength = locationArray.length;
+          let parkWords = value.park.toString().toLowerCase().match(/\w+/g);
+          let cityWords = value.city.toString().toLowerCase().match(/\w+/g);
+          let nameWords = value.name.toString().toLowerCase().match(/\w+/g);
+          let matchArray = Array.from(Array(newLength).keys());
+          parkWords.map((word) => {
+            matchArray.shift();
+            matchArray.push(word);
+            if (
+              matchArray.every((val, index) => val === locationArray[index])
+            ) {
+              newArray.push(value);
+            }
+          });
+          cityWords.map((word) => {
+            matchArray.shift();
+            matchArray.push(word);
+            if (
+              matchArray.every((val, index) => val === locationArray[index])
+            ) {
+              newArray.push(value);
+            }
+          });
+          nameWords.map((word) => {
+            matchArray.shift();
+            matchArray.push(word);
+            if (
+              matchArray.every((val, index) => val === locationArray[index])
+            ) {
+              newArray.push(value);
+            }
+          });
+          console.log("newArray", newArray);
+        }
+      });
+    } else if (whereParam === "fires") {
+      fullList.map((value, key) => {
+        if (value.fires.toString() === fireParam) {
+          newArray.push(value);
+        }
+      });
+    } else if (whereParam === "lakes") {
+      fullList.map((value, key) => {
+        if (value.lake.toString() === lakeParam) {
+          newArray.push(value);
+        }
+      });
+    } else if (whereParam === "lodging") {
+      fullList.map((value, key) => {
+        value.type.map((value2, key2) => {
+          console.log(value.acres, value);
+          if (value2 === "Lodging") {
+            newArray.push(value);
+          }
+        });
+      });
+    }
+
+    if (newArray.length > 0) {
+      let arrayTwo = [];
+      newArray.map((value, key) => {
+        let newNum = Number(value.guests);
+        if (newNum >= guestParam) {
+          arrayTwo.push(value);
+        }
+      });
+      newArray = arrayTwo;
+    } else if (guestParam !== 0) {
+      fullList.map((value, key) => {
+        let newNum = Number(value.guests);
+        if (newNum >= guestParam) {
+          newArray.push(value);
+        }
+      });
+    }
+
+    if (petParam !== "null") {
+      setPetSearch(petParam);
+      if (newArray.length > 0) {
+        let arrayTwo = [];
+        newArray.map((value, key) => {
+          console.log(value.pets, petParam);
+          if (value.pets.toString() === petParam.toString()) {
+            arrayTwo.push(value);
+            console.log("MATCH PETS");
+          }
+        });
+        newArray = arrayTwo;
+      } else {
+        setPetSearch(petParam);
+        fullList.map((value, key) => {
+          if (value.pets === petParam) {
+            newArray.push(value);
+          }
+        });
+      }
+    } else {
+      setPetSearch(petParam);
+    }
+    setCurrentSiteList(newArray);
+  }
+
+  async function getUserData() {
+    console.log("getting userData");
     const boardRef = ref(db, "SiteList/");
     let displayArray = [];
-    onValue(
+    await onValue(
       boardRef,
       (snapshot) => {
         snapshot.forEach((childSnapShot) => {
@@ -53,7 +226,19 @@ const SiteList = (props) => {
             city: childData.city,
             state: childData.state,
             acres: childData.acres,
+            special: childData.special,
+            available: childData.available,
+            activities: childData.activities,
+            features: childData.features,
+            park: childData.park,
+            pets: childData.pets,
+            fires: childData.fires,
+            lake: childData.lake,
             rating: childData.rating,
+            reviewNum: childData.reviewNum,
+            price: childData.price,
+            info: childData.info,
+            url: childData.url,
           };
           addData(obj);
         });
@@ -72,7 +257,7 @@ const SiteList = (props) => {
       displayArray.sort((a, b) => {
         return a.name - b.name;
       });
-      setCurrentSiteList(displayArray);
+      setFullList(displayArray);
     }
   }
 
@@ -94,7 +279,7 @@ const SiteList = (props) => {
     let numMax = 0;
     let numMin = 20;
     let acresMax = 0;
-    let acresMin = 0;
+    let acresMin = 20;
     currentSiteList.map((value, key) => {
       if (value.guests > numMax) {
         numMax = value.guests;
@@ -109,12 +294,15 @@ const SiteList = (props) => {
         acresMin = value.acres;
       }
     });
-    setMaxVal(numMax);
-    setMinVal(numMin);
-    setCurrentVal(numMax);
-    setMinAcres(acresMin);
-    setMaxAcres(acresMax);
-    setCurrentAcres(acresMax);
+    setMaxVal(Number(numMax));
+    setMinVal(Number(numMin));
+    setCurrentVal(Number(numMax));
+    setMinAcres(Number(acresMin));
+    setMaxAcres(Number(acresMax));
+    setCurrentAcres(Number(acresMax));
+
+    console.log("acresMin: ", acresMin);
+    console.log("acresMax: ", acresMax);
   }
 
   useEffect(() => {
@@ -149,30 +337,25 @@ const SiteList = (props) => {
 
   function handleAcresChange(e) {
     setCurrentAcres(e.target.value);
-    let newAcresNum = e.target.value;
+    let newAcresNum = Number(e.target.value);
     let newArray = [];
     const FullList = currentSiteHolder;
 
     FullList.map((value, key) => {
-      if (value.acres <= newAcresNum) {
+      if (Number(value.acres) <= newAcresNum) {
         newArray.push(value);
       }
     });
 
     let newerArray = [];
     newArray.map((value) => {
-      if (value.guests <= currentVal) {
+      if (Number(value.guests) <= currentVal) {
         newerArray.push(value);
       }
     });
 
     setCurrentSiteList(newerArray);
   }
-
-  useEffect(() => {
-    findMaxMin();
-    setCurrentSiteHolder(currentSiteList);
-  }, []);
 
   return (
     <div className="siteListContainer">
@@ -211,7 +394,7 @@ const SiteList = (props) => {
             type="range"
             id="acres"
             name="acres"
-            step="10"
+            step="1"
             min={minAcres}
             max={maxAcres}
             onChange={(e) => {
@@ -263,7 +446,11 @@ const SiteList = (props) => {
           ) : (
             currentSiteList.map((value, key) => {
               return (
-                <Link to={"/sites"} className="noUnderline" key={`link-${key}`}>
+                <Link
+                  to={"/sites"}
+                  className="noUnderline"
+                  key={`link-${value.name}`}
+                >
                   <MiniSite
                     name={value.name}
                     type={value.type}
@@ -275,7 +462,7 @@ const SiteList = (props) => {
                     reviewNum={value.reviewNum}
                     fullSite={value}
                     url={value.url}
-                    key={`key-${value.name}`}
+                    key={`key-miniSite-${value.name}`}
                   />
                 </Link>
               );

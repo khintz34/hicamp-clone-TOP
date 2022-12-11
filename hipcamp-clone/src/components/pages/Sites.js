@@ -4,13 +4,29 @@ import Header from "./Header";
 import { CurrentSiteContext } from "../../contexts/CurrentSiteContext";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { TextField } from "@mui/material";
+import { CheckInContext } from "../../contexts/CheckInContext";
+import { CheckOutContext } from "../../contexts/CheckOutContext";
+import {
+  EmojiTypeList,
+  emojiFeatList,
+  emojiActList,
+} from "../../assets/EmojiLists";
 
 const Sites = (props) => {
   const { currentSite, setCurrentSite } = useContext(CurrentSiteContext);
+  const { currentAuth, setCurrentAuth } = useContext(AuthContext);
   const [urlState, setURLState] = useState("");
   const storage = getStorage();
   const specRef = ref(storage, currentSite.url);
   const [petStatus, setPetStatus] = useState();
+  const [subClass, setSubClass] = useState("disableBtn");
+  const [disabledBtn, setDisabledBtn] = useState(true);
+  const { checkOutDate, setCheckOutDate } = useContext(CheckOutContext);
+  const { checkInDate, setCheckInDate } = useContext(CheckInContext);
 
   useEffect(() => {
     if (currentSite.pets) {
@@ -27,6 +43,16 @@ const Sites = (props) => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (currentAuth) {
+      setSubClass("ableBtn");
+      setDisabledBtn(false);
+    } else {
+      setSubClass("disableBtn");
+      setDisabledBtn(true);
+    }
+  }, [currentAuth]);
+
   return (
     <div className="sitesContainer">
       <Header />
@@ -41,8 +67,19 @@ const Sites = (props) => {
             <div>
               <div id="siteName">{currentSite.name}</div>
               <div id="bookBtnContainer">
+                {!currentAuth ? (
+                  <div className="signInToBook">Sign in to be able to book</div>
+                ) : (
+                  <div style={{ display: "none" }}></div>
+                )}
                 <Link to="/booking" className="noUnderline">
-                  <button id="bookBtn">Book Now</button>
+                  <button
+                    id="bookBtn"
+                    className={subClass}
+                    disabled={disabledBtn}
+                  >
+                    Book Now
+                  </button>
                 </Link>
               </div>
             </div>
@@ -73,15 +110,20 @@ const Sites = (props) => {
                     return (
                       <div
                         style={{ marginLeft: "3px" }}
-                        key={`${value.id}-site`}
+                        key={`${currentSite.name}-site-${value}`}
                       >
+                        {EmojiTypeList[value]}
                         {value}
                         {","}
                       </div>
                     );
                   } else {
                     return (
-                      <div style={{ marginLeft: "3px" }} key={value.id}>
+                      <div
+                        style={{ marginLeft: "3px" }}
+                        key={`${currentSite.name}-site-${value}`}
+                      >
+                        {EmojiTypeList[value]}
                         {value}
                       </div>
                     );
@@ -94,7 +136,11 @@ const Sites = (props) => {
               <h2>Activities</h2>
               {currentSite.activities.map((value, key) => {
                 return (
-                  <div style={{ marginLeft: "3px" }} key={`${value}-activity`}>
+                  <div
+                    style={{ marginLeft: "3px" }}
+                    key={`${value}-activity-${currentSite.name}`}
+                  >
+                    {emojiActList[value]}
                     {value}
                   </div>
                 );
@@ -104,16 +150,45 @@ const Sites = (props) => {
               <h2>Natural Features</h2>
               {currentSite.features.map((value, key) => {
                 return (
-                  <div style={{ marginLeft: "3px" }} key={`${value}-feature`}>
+                  <div
+                    style={{ marginLeft: "3px" }}
+                    key={`${value}-feature-${currentSite.name}`}
+                  >
+                    {emojiFeatList[value]}
                     {value}
                   </div>
                 );
               })}
             </div>
           </div>
-          <div id="availableSites" className="specDiv">
-            <h2>Available Dates</h2>
-            <div>Enter Calendar Here</div>
+          <div id="availableSites">
+            <div className="specDiv datePickHolder">
+              <h2>Select Dates</h2>
+
+              <div
+                className=" inputContainer sideFlex calContain"
+                id="datesDiv"
+              >
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    label="Check-In"
+                    value={checkInDate}
+                    onChange={(newDate) => {
+                      setCheckInDate(newDate);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    label="Check-Out"
+                    value={checkOutDate}
+                    onChange={(newDate) => setCheckOutDate(newDate)}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+              </div>
+            </div>
           </div>
         </div>
       </div>
