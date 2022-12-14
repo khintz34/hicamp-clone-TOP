@@ -39,6 +39,7 @@ export const emojiFeatList = {
   "Swimming Hole": "🏊‍♂️",
   Waterfall: "⛲️",
   Farm: "🐓",
+  Beach: "🏖",
 };
 
 export const emojiWhereList = {

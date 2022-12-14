@@ -1,6 +1,6 @@
 .squareImage {
-  width: 25vw;
-  height: 25vw;
+  width: 18.67vw;
+  height: 18.67vw;
   border-radius: 20px;
 }
 
@@ -17,7 +17,7 @@
 
 .squareDivBottom {
   height: 17vh;
-  width: 25vw;
+  width: 18.67vw;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -29,7 +29,7 @@
 }
 
 .squareButtonContainer {
-  width: 20vw;
+  width: 15vw;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -3,7 +3,8 @@
 }
 
 .eightyWidth {
-  width: 80%;
+  width: 62vw;
+  /* max-width: 1500px; */
   border-radius: 20px;
 }
 
@@ -15,12 +16,11 @@
 
 #searchDiv {
   background-color: var(--terms);
-  width: 75%;
+  width: 60vw;
   height: 16vh;
   border-radius: 50px;
   display: flex;
-  justify-content: center;
-  gap: 2vw;
+  justify-content: space-evenly;
   align-items: center;
   position: relative;
   top: 60px;
@@ -34,20 +34,20 @@
 }
 
 #whereToDiv {
-  width: 25vw;
+  width: 22vw;
   min-width: 250px;
 }
 
 #datesDiv {
-  width: 25vw;
+  width: 20vw;
 }
 
 #guestsDiv {
-  width: 10vw;
+  width: 5vw;
 }
 
 .inputField {
-  width: 100%;
+  width: 95%;
   height: 5.5vh;
   border-radius: 15px;
   border: 1px solid rgb(229, 234, 223);
@@ -171,7 +171,8 @@
 .sideFlex {
   display: flex;
   flex-direction: row;
-  width: 20vw;
+  justify-content: center;
+  /* width: 15vw; */
   position: relative;
   top: 10px;
 }

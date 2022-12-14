@@ -1,6 +1,6 @@
 #confirmHolder {
   width: 100vw;
-  height: 90vh;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,7 +9,7 @@
 #confirmMsg {
   width: 50%;
   line-height: 2;
-  border: 2px solid var(--green-color);
+  border: 5px solid var(--green-color);
   padding: 5vh;
   border-radius: 20px;
 }

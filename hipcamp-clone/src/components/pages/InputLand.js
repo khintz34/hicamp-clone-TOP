@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { ref as ref2, uploadBytes } from "firebase/storage";
 import { storage } from "../../utils/firebase.js";
 import { AuthContext } from "../../contexts/AuthContext";
+import Footer from "./Footer";
 
 //todo clean up into more components
 

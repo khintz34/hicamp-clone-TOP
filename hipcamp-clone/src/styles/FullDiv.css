@@ -8,12 +8,11 @@
 }
 
 .fullImage {
-  width: 80vw;
+  width: 62vw;
   border-radius: 20px;
 }
 
 .fullDivBottom {
-  /* height: 35vh; */
   height: 92%;
   width: 30vw;
   display: flex;
@@ -22,7 +21,7 @@
   align-items: center;
   position: absolute;
   right: 12vw;
-  bottom: 2vh;
+  bottom: 4%;
   z-index: 1000;
   border-radius: 15px;
   gap: 2vh;

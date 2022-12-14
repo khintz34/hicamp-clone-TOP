@@ -3,8 +3,8 @@
   flex-direction: column;
   background-color: var(--limeGreen);
   color: #28400c;
-  height: 70vh;
-  width: 27vw;
+  /* height: 70vh; */
+  width: 18.67vw;
   border-radius: 20px;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .safetyDivBottom {
-  height: 43vh;
+  /* height: 43vh; */
   display: flex;
   margin-left: 1vw;
   margin-right: 1vw;
@@ -27,20 +27,23 @@
 
 .safetyOL {
   font-size: 20px;
-  line-height: 1.7;
+  line-height: 1.2;
   text-align: left;
   width: 100%;
 }
 
 .safetyCommentDiv {
-  line-height: 1.7;
+  line-height: 1.2;
   font-size: 20px;
+  width: 100%;
 }
 
 .safetyBtnContainer {
   display: flex;
   justify-content: center;
   /* position: relative; */
+  margin-top: auto;
+  margin-bottom: 5px;
 }
 
 .safetyBtn {

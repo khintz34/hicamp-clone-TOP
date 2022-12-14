@@ -6,18 +6,13 @@ import { ref, set, push, onValue } from "firebase/database";
 import MiniSite from "../reuseableComps/MiniSite";
 import { SiteContext } from "../../contexts/SiteContext";
 import { Link } from "react-router-dom";
-import { CurrentSiteContext } from "../../contexts/CurrentSiteContext";
 import { SearchContext } from "../../contexts/SearchContext";
 import { PetSearchContext } from "../../contexts/PetSearchContext";
 import { useParams } from "react-router-dom";
 
-//todo add a way to organize the specials in createList
-//todo need to add a critieria to handle camping type
-
 const SiteList = () => {
   const [siteArray, setSiteArray] = useState([]);
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
-  const { currentSite, setCurrentSite } = useContext(CurrentSiteContext);
   const { searchItem, setSearchItem } = useContext(SearchContext);
   const { petSearch, setPetSearch } = useContext(PetSearchContext);
   const [maxVal, setMaxVal] = useState(0);
@@ -45,40 +40,20 @@ const SiteList = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getUserData();
-      const callNextUp = await nextUp();
     };
-
-    function nextUp() {
-      console.log("location:", locationParam);
-      console.log("guestNum: ", guestParam);
-      console.log("petParam: ", petParam);
-      console.log("fire: ", fireParam);
-      console.log("lake: ", lakeParam);
-      console.log("lodging: ", lodgingParam);
-      console.log("where: ", whereParam);
-    }
-
     fetchData();
   }, []);
 
   useEffect(() => {
     if (fullList.length !== 0) {
-      console.log("fullList: ", fullList);
-      setUrlFlag(true);
-    }
-  }, [fullList]);
-
-  useEffect(() => {
-    if (urlFlag) {
       createList();
       setCreatedFlag(true);
     }
-  }, [urlFlag]);
+  }, [urlFlag, fullList]);
 
   useEffect(() => {
     findMaxMin();
     setCurrentSiteHolder(currentSiteList);
-    console.log("currentSiteList: ", currentSiteList);
   }, [createdFlag]);
 
   useEffect(() => {
@@ -93,19 +68,23 @@ const SiteList = () => {
 
   function createList() {
     let newArray = [];
-    console.log("fullList: ", fullList);
+    let locateFlag = false;
     setSearchItem(locationParam);
     if (whereParam === "location" && locationParam !== "") {
       let locationArray = locationParam.match(/\w+/g);
       fullList.map((value, key) => {
         if (value.state.toLowerCase() === locationParam) {
           newArray.push(value);
+          locateFlag = true;
         } else if (value.park.toString().toLowerCase() === locationParam) {
           newArray.push(value);
+          locateFlag = true;
         } else if (value.city.toLowerCase() === locationParam) {
           newArray.push(value);
+          locateFlag = true;
         } else if (value.name.toLowerCase() === locationParam) {
           newArray.push(value);
+          locateFlag = true;
         } else {
           let newLength = locationArray.length;
           let parkWords = value.park.toString().toLowerCase().match(/\w+/g);
@@ -119,6 +98,7 @@ const SiteList = () => {
               matchArray.every((val, index) => val === locationArray[index])
             ) {
               newArray.push(value);
+              locateFlag = true;
             }
           });
           cityWords.map((word) => {
@@ -128,6 +108,7 @@ const SiteList = () => {
               matchArray.every((val, index) => val === locationArray[index])
             ) {
               newArray.push(value);
+              locateFlag = true;
             }
           });
           nameWords.map((word) => {
@@ -137,80 +118,92 @@ const SiteList = () => {
               matchArray.every((val, index) => val === locationArray[index])
             ) {
               newArray.push(value);
+              locateFlag = true;
             }
           });
-          console.log("newArray", newArray);
         }
       });
     } else if (whereParam === "fires") {
       fullList.map((value, key) => {
         if (value.fires.toString() === fireParam) {
           newArray.push(value);
+          locateFlag = true;
         }
       });
     } else if (whereParam === "lakes") {
       fullList.map((value, key) => {
         if (value.lake.toString() === lakeParam) {
           newArray.push(value);
+          locateFlag = true;
         }
       });
     } else if (whereParam === "lodging") {
       fullList.map((value, key) => {
         value.type.map((value2, key2) => {
-          console.log(value.acres, value);
-          if (value2 === "Lodging") {
+          if (value2 === locationParam) {
             newArray.push(value);
+            locateFlag = true;
           }
         });
       });
-    }
-
-    if (newArray.length > 0) {
-      let arrayTwo = [];
-      newArray.map((value, key) => {
-        let newNum = Number(value.guests);
-        if (newNum >= guestParam) {
-          arrayTwo.push(value);
-        }
-      });
-      newArray = arrayTwo;
-    } else if (guestParam !== 0) {
+    } else if (whereParam === "special") {
       fullList.map((value, key) => {
-        let newNum = Number(value.guests);
-        if (newNum >= guestParam) {
+        if (value.special === locationParam) {
           newArray.push(value);
+          locateFlag = true;
         }
       });
     }
 
-    if (petParam !== "null") {
-      setPetSearch(petParam);
+    if (
+      locateFlag === true ||
+      (locateFlag === false && locationParam === "anywhere")
+    ) {
       if (newArray.length > 0) {
         let arrayTwo = [];
         newArray.map((value, key) => {
-          console.log(value.pets, petParam);
-          if (value.pets.toString() === petParam.toString()) {
+          let newNum = Number(value.guests);
+          if (newNum >= Number(guestParam)) {
             arrayTwo.push(value);
-            console.log("MATCH PETS");
           }
         });
         newArray = arrayTwo;
-      } else {
-        setPetSearch(petParam);
+      } else if (guestParam !== 0) {
         fullList.map((value, key) => {
-          if (value.pets === petParam) {
+          let newNum = Number(value.guests);
+          if (newNum >= guestParam) {
             newArray.push(value);
           }
         });
       }
-    } else {
-      setPetSearch(petParam);
+
+      if (petParam !== "null") {
+        setPetSearch(petParam);
+
+        if (newArray.length > 0) {
+          let arrayTwo = [];
+          newArray.map((value, key) => {
+            if (value.pets.toString() === petParam.toString()) {
+              arrayTwo.push(value);
+            }
+          });
+          newArray = arrayTwo;
+        } else {
+          setPetSearch(petParam);
+          fullList.map((value, key) => {
+            if (value.pets.toString() === petParam.toString()) {
+              newArray.push(value);
+            }
+          });
+        }
+      } else {
+        setPetSearch(petParam);
+      }
     }
     setCurrentSiteList(newArray);
   }
 
   async function getUserData() {
-    console.log("getting userData");
     const boardRef = ref(db, "SiteList/");
     let displayArray = [];
     await onValue(
@@ -300,9 +293,6 @@ const SiteList = () => {
     setMinAcres(Number(acresMin));
     setMaxAcres(Number(acresMax));
     setCurrentAcres(Number(acresMax));
-
-    console.log("acresMin: ", acresMin);
-    console.log("acresMax: ", acresMax);
   }
 
   useEffect(() => {
@@ -311,7 +301,7 @@ const SiteList = () => {
     } else {
       setMaxMinEQ(false);
     }
-  });
+  }, [maxVal, minVal]);
 
   function handleGuestsChange(e) {
     setCurrentVal(e.target.value);
@@ -418,9 +408,9 @@ const SiteList = () => {
         ) : (
           <div style={{ display: "none" }}></div>
         )}
-        {maxMinEQ ? (
+        {Number(guestParam) !== 0 ? (
           <div>
-            <p>Number of Guests: {maxVal}</p>
+            <p>Number of Guests: {guestParam}</p>
           </div>
         ) : (
           <div style={{ display: "none" }}></div>
@@ -447,7 +437,7 @@ const SiteList = () => {
             currentSiteList.map((value, key) => {
               return (
                 <Link
-                  to={"/sites"}
+                  to={`/sites/${value.name}`}
                   className="noUnderline"
                   key={`link-${value.name}`}
                 >

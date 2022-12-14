@@ -32,14 +32,11 @@ import recreate from "../../images/recreateResp.png";
 import leaveNoTrace from "../../images/leaveNoTrace.png";
 import nationalWeather from "../../images/national_weather.png";
 import SafetyDiv from "../reuseableComps/SafetyDiv";
-import { SiteContext } from "../../contexts/SiteContext";
 import { db } from "../../utils/firebase";
 import { ref, onValue } from "firebase/database";
 import { Link } from "react-router-dom";
 import { SearchContext } from "../../contexts/SearchContext";
 import { PetSearchContext } from "../../contexts/PetSearchContext";
-
-//todo set url params for special and types once created in siteList
 
 const Main = () => {
   const orangeColor = {
@@ -89,59 +86,7 @@ const Main = () => {
   const { searchItem, setSearchItem } = useContext(SearchContext);
   const { petSearch, setPetSearch } = useContext(PetSearchContext);
 
-  function getUserData() {
-    const boardRef = ref(db, "SiteList/");
-    let displayArray = [];
-    onValue(
-      boardRef,
-      (snapshot) => {
-        snapshot.forEach((childSnapShot) => {
-          const childKey = childSnapShot.key;
-          const childData = childSnapShot.val();
-          let obj = {
-            name: childData.name,
-            guests: childData.guests,
-            type: childData.type,
-            city: childData.city,
-            state: childData.state,
-            acres: childData.acres,
-            special: childData.special,
-            available: childData.available,
-            activities: childData.activities,
-            features: childData.features,
-            park: childData.park,
-            pets: childData.pets,
-            fires: childData.fires,
-            lake: childData.lake,
-            rating: childData.rating,
-            reviewNum: childData.reviewNum,
-            price: childData.price,
-            info: childData.info,
-            url: childData.url,
-          };
-          addData(obj);
-        });
-      },
-      {
-        onlyOnce: false,
-      }
-    );
-
-    function addData(obj) {
-      displayArray.push(obj);
-      sortArray();
-    }
-
-    function sortArray() {
-      displayArray.sort((a, b) => {
-        return a.time - b.time;
-      });
-      setFullSiteList(displayArray);
-    }
-  }
-
   useEffect(() => {
-    // getUserData();
     setSearchItem("");
     setPetSearch("");
   }, []);
@@ -181,8 +126,7 @@ const Main = () => {
         />
       </div>
       <div id="verticalDivsContainer">
-        {/* Need to fix - add a special */}
-        <Link to={"/siteList/montana/0/null/null/null/null/location"}>
+        <Link to={"/siteList/hidden/0/null/null/null/null/special"}>
           <VerticalDiv
             image={tent}
             style={tentColor}
@@ -192,7 +136,7 @@ const Main = () => {
             special="hidden"
           />
         </Link>
-        <Link to={"/siteList/montana/0/null/null/null/null/location"}>
+        <Link to={"/siteList/monarchs/0/null/null/null/null/special"}>
           <VerticalDiv
             image={butterfly}
             style={butterflyColor}
@@ -202,7 +146,7 @@ const Main = () => {
             special="monarchs"
           />
         </Link>
-        <Link to={"/siteList/montana/0/null/null/null/null/location"}>
+        <Link to={"/siteList/cottage/0/null/null/null/null/special"}>
           <VerticalDiv
             image={cabin}
             style={cabinColor}
@@ -253,7 +197,10 @@ const Main = () => {
             list={fullSiteList}
           />
         </Link>
-        <Link to="/SiteList" className="noUnderline">
+        <Link
+          to={"/siteList/Tent/0/null/true/null/null/lodging"}
+          className="noUnderline"
+        >
           <SquareDiv
             image={car}
             title="Tent camping"
@@ -262,7 +209,10 @@ const Main = () => {
             list={fullSiteList}
           />
         </Link>
-        <Link to="/SiteList" className="noUnderline">
+        <Link
+          to={"/siteList/Lodging/0/null/true/null/null/lodging"}
+          className="noUnderline"
+        >
           <SquareDiv
             image={glamping}
             title="Lodging"
@@ -271,7 +221,10 @@ const Main = () => {
             list={fullSiteList}
           />
         </Link>
-        <Link to="/SiteList" className="noUnderline">
+        <Link
+          to={"/siteList/RV/0/null/true/null/null/lodging"}
+          className="noUnderline"
+        >
           <SquareDiv
             image={rv}
             title="RV sites"

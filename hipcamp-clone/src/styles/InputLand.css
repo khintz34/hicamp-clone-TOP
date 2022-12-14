@@ -10,7 +10,7 @@ form {
 .InputLandContainer {
   background-color: var(--main-background);
   padding-bottom: 20px;
-  height: 200vh;
+  height: 150vh;
 }
 
 #inputFormContainer {
@@ -22,7 +22,7 @@ form {
   border-radius: 20px;
   display: flex;
   justify-content: center;
-  border: 1px solid gray;
+  border: 5px solid gray;
 }
 
 .radioDivHold {
@@ -42,6 +42,8 @@ form {
 #infoTextArea {
   width: 40ch;
   height: 30ch;
+  border-radius: 20px;
+  border: 2px solid var(--green-color);
 }
 
 .radioVerticalHold {
@@ -69,10 +71,14 @@ form {
 
 .inputRight {
   width: 40ch;
+  border-radius: 20px;
+  border: 2px solid var(--green-color);
 }
 
 .numberInput {
   width: 7ch;
+  border-radius: 20px;
+  border: 2px solid var(--forest-color);
 }
 
 .multiContainer {
@@ -81,10 +87,22 @@ form {
   padding-bottom: 20px;
   border-radius: 20px;
   border: 1px solid black;
+  border-radius: 20px;
+  border: 2px solid var(--pool);
+}
+
+.radioClass {
+  border-radius: 20px;
+  border: 2px solid var(--forest-color);
 }
 
 .radioHoldP {
   margin-top: 5px;
+}
+
+.selectClass {
+  border-radius: 20px;
+  border: 2px solid var(--orange-color);
 }
 
 .submitBtnContainer {

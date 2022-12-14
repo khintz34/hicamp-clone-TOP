@@ -14,6 +14,7 @@ const SelectPark = (props) => {
           required
           value={props.state}
           onChange={(e) => props.changeParkStatus(e)}
+          className="selectClass"
         >
           <option value="true">Yes</option>
           <option value="false">No</option>

@@ -3,7 +3,7 @@
 }
 
 .vertImage {
-  width: 25vw;
+  width: 18.67vw;
   border-radius: 20px;
 }
 
@@ -19,7 +19,7 @@
 
 .vertDivBottom {
   height: 17vh;
-  width: 25vw;
+  width: 18.67vw;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -40,4 +40,5 @@
   align-items: center;
   gap: 3vh;
   text-align: center;
+  padding: 5px;
 }

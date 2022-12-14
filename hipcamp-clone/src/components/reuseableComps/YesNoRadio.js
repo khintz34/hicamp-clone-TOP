@@ -12,6 +12,7 @@ const YesNoRadio = (props) => {
           props.setValue(props.value);
         }}
         required
+        className="radioClass"
       />
       <label htmlFor={props.id}>{props.title}</label>
     </div>

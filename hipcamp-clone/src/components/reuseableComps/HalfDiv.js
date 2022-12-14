@@ -35,8 +35,7 @@ const HalfDiv = (props) => {
       <img src={props.image} alt="" className="halfImage" />
       <div className="halfDivBottom" style={props.style}>
         <div className="halfDivWriting">
-          <div style={{ fontSize: "large" }}>{props.title}</div>
-          <div style={{ fontSize: "22px" }}>{props.comment}</div>
+          <h2 className="titleH2">{props.title}</h2>
         </div>
         <div className="halfButtonContainer">
           <button className="halfBtn" style={props.font}>

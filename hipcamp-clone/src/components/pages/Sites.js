@@ -3,7 +3,7 @@ import "../../styles/Sites.css";
 import Header from "./Header";
 import { CurrentSiteContext } from "../../contexts/CurrentSiteContext";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -15,6 +15,8 @@ import {
   emojiFeatList,
   emojiActList,
 } from "../../assets/EmojiLists";
+import { db } from "../../utils/firebase";
+import { onValue, ref as databaseRef } from "firebase/database";
 
 const Sites = (props) => {
   const { currentSite, setCurrentSite } = useContext(CurrentSiteContext);
@@ -27,21 +29,28 @@ const Sites = (props) => {
   const [disabledBtn, setDisabledBtn] = useState(true);
   const { checkOutDate, setCheckOutDate } = useContext(CheckOutContext);
   const { checkInDate, setCheckInDate } = useContext(CheckInContext);
+  const { nameParam } = useParams();
+
+  const [siteFlag, setSiteFlag] = useState(false);
 
   useEffect(() => {
-    if (currentSite.pets) {
-      setPetStatus("Yes");
-    } else {
-      setPetStatus("No");
-    }
+    getUserData();
+  }, []);
 
+  useEffect(() => {
     const fetchData = async () => {
       const result = await getDownloadURL(specRef);
       setURLState(result);
     };
-
-    fetchData();
-  }, []);
+    if (siteFlag) {
+      fetchData();
+      if (currentSite.pets) {
+        setPetStatus("Yes");
+      } else {
+        setPetStatus("No");
+      }
+    }
+  }, [siteFlag]);
 
   useEffect(() => {
     if (currentAuth) {
@@ -53,144 +62,212 @@ const Sites = (props) => {
     }
   }, [currentAuth]);
 
+  async function getUserData() {
+    const boardRef = databaseRef(db, "SiteList/");
+    let displayArray = [];
+    await onValue(
+      boardRef,
+      (snapshot) => {
+        snapshot.forEach((childSnapShot) => {
+          const childKey = childSnapShot.key;
+          const childData = childSnapShot.val();
+          let obj = {
+            name: childData.name,
+            guests: childData.guests,
+            type: childData.type,
+            city: childData.city,
+            state: childData.state,
+            acres: childData.acres,
+            special: childData.special,
+            available: childData.available,
+            activities: childData.activities,
+            features: childData.features,
+            park: childData.park,
+            pets: childData.pets,
+            fires: childData.fires,
+            lake: childData.lake,
+            rating: childData.rating,
+            reviewNum: childData.reviewNum,
+            price: childData.price,
+            info: childData.info,
+            url: childData.url,
+          };
+          if (obj.name === nameParam) {
+            setCurrentSite(obj);
+            setSiteFlag(true);
+          }
+        });
+      },
+      {
+        onlyOnce: false,
+      }
+    );
+  }
+
   return (
     <div className="sitesContainer">
       <Header />
       <div id="sitesMainHolder">
-        <div id="sitesMain">
-          <div id="sitesHeader">
-            <div id="locations">
-              <div id="locationCountry">USA</div>
-              <div>&gt;</div>
-              <div id="locationState">{currentSite.state}</div>
+        {currentSite.length === 0 ? (
+          <div className="siteNotFound">
+            <h1>Site Not Found</h1>
+          </div>
+        ) : (
+          <div id="sitesMain">
+            <div id="sitesHeader">
+              <div id="locations">
+                <div id="locationCountry">USA</div>
+                <div>&gt;</div>
+                <div id="locationState">{currentSite.state}</div>
+              </div>
+              <div>
+                <div id="siteName">{currentSite.name}</div>
+                <div id="bookBtnContainer">
+                  {!currentAuth ? (
+                    <div className="signInToBook">
+                      Sign in to be able to book
+                    </div>
+                  ) : (
+                    <div style={{ display: "none" }}></div>
+                  )}
+                  <Link to="/booking" className="noUnderline">
+                    <button
+                      id="bookBtn"
+                      className={subClass}
+                      disabled={disabledBtn}
+                    >
+                      Book Now
+                    </button>
+                  </Link>
+                </div>
+              </div>
+              <div id="siteReviews">
+                <div id="siteRating">{currentSite.rating}% Rating</div>
+                <div>&gt;</div>
+                <div id="ratingNumber">{currentSite.reviewNum} Reviews</div>
+              </div>
             </div>
-            <div>
-              <div id="siteName">{currentSite.name}</div>
-              <div id="bookBtnContainer">
-                {!currentAuth ? (
-                  <div className="signInToBook">Sign in to be able to book</div>
+            <div id="siteInfoMain">
+              <div id="siteImageHolder" className="siteImageDiv">
+                <img src={urlState} alt="" className="siteImg" />
+              </div>
+              <div id="siteInfoHolder">
+                <h2>Site Info</h2>
+                <div id="siteInfo">{currentSite.info} </div>
+              </div>
+            </div>
+            <div id="additionalSpecs">
+              <div id="siteSpecs" className="specDivSmall">
+                <h2>Site Specs</h2>
+                <div>Capactity: {currentSite.guests}</div>
+                <div>Acres: {currentSite.acres}</div>
+                <div className="typeMap">
+                  Type:
+                  {currentSite.length === 0 ? (
+                    <div>loading</div>
+                  ) : (
+                    currentSite.type.map((value, key) => {
+                      if (key !== currentSite.type.length - 1) {
+                        return (
+                          <div
+                            style={{ marginLeft: "3px" }}
+                            key={`${currentSite.name}-site-${value}`}
+                          >
+                            {EmojiTypeList[value]}
+                            {value}
+                            {","}
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div
+                            style={{ marginLeft: "3px" }}
+                            key={`${currentSite.name}-site-${value}`}
+                          >
+                            {EmojiTypeList[value]}
+                            {value}
+                          </div>
+                        );
+                      }
+                    })
+                  )}
+                </div>
+                <div>Pets Allowed: {petStatus}</div>
+              </div>
+              <div id="activitySpecs" className="specDivSmall">
+                <h2>Activities</h2>
+                {currentSite.length === 0 ? (
+                  <div>loading</div>
                 ) : (
-                  <div style={{ display: "none" }}></div>
+                  currentSite.activities.map((value, key) => {
+                    return (
+                      <div
+                        style={{ marginLeft: "3px" }}
+                        key={`${value}-activity-${currentSite.name}`}
+                        className="sitesColumns"
+                      >
+                        <span style={{ marginRight: "10px" }}>
+                          {emojiActList[value]}
+                        </span>
+                        {value}
+                      </div>
+                    );
+                  })
                 )}
-                <Link to="/booking" className="noUnderline">
-                  <button
-                    id="bookBtn"
-                    className={subClass}
-                    disabled={disabledBtn}
-                  >
-                    Book Now
-                  </button>
-                </Link>
               </div>
-            </div>
-            <div id="siteReviews">
-              <div id="siteRating">{currentSite.rating}% Rating</div>
-              <div>&gt;</div>
-              <div id="ratingNumber">{currentSite.reviewNum} Reviews</div>
-            </div>
-          </div>
-          <div id="siteInfoMain">
-            <div id="siteImageHolder" className="siteImageDiv">
-              <img src={urlState} alt="" className="siteImg" />
-            </div>
-            <div id="siteInfoHolder">
-              <h2>Site Info</h2>
-              <div id="siteInfo">{currentSite.info} </div>
-            </div>
-          </div>
-          <div id="additionalSpecs">
-            <div id="siteSpecs" className="specDivSmall">
-              <h2>Site Specs</h2>
-              <div>Capactity: {currentSite.guests}</div>
-              <div>Acres: {currentSite.acres}</div>
-              <div className="typeMap">
-                Type:
-                {currentSite.type.map((value, key) => {
-                  if (key !== currentSite.type.length - 1) {
+              <div id="featureSpecs" className="specDivSmall">
+                <h2>Natural Features</h2>
+                {currentSite.length === 0 ? (
+                  <div>loading</div>
+                ) : (
+                  currentSite.features.map((value, key) => {
                     return (
                       <div
                         style={{ marginLeft: "3px" }}
-                        key={`${currentSite.name}-site-${value}`}
+                        key={`${value}-feature-${currentSite.name}`}
+                        className="sitesColumns"
                       >
-                        {EmojiTypeList[value]}
-                        {value}
-                        {","}
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div
-                        style={{ marginLeft: "3px" }}
-                        key={`${currentSite.name}-site-${value}`}
-                      >
-                        {EmojiTypeList[value]}
+                        <span style={{ marginRight: "10px" }}>
+                          {emojiFeatList[value]}
+                        </span>
                         {value}
                       </div>
                     );
-                  }
-                })}
+                  })
+                )}
               </div>
-              <div>Pets Allowed: {petStatus}</div>
             </div>
-            <div id="activitySpecs" className="specDivSmall">
-              <h2>Activities</h2>
-              {currentSite.activities.map((value, key) => {
-                return (
-                  <div
-                    style={{ marginLeft: "3px" }}
-                    key={`${value}-activity-${currentSite.name}`}
-                  >
-                    {emojiActList[value]}
-                    {value}
-                  </div>
-                );
-              })}
-            </div>
-            <div id="featureSpecs" className="specDivSmall">
-              <h2>Natural Features</h2>
-              {currentSite.features.map((value, key) => {
-                return (
-                  <div
-                    style={{ marginLeft: "3px" }}
-                    key={`${value}-feature-${currentSite.name}`}
-                  >
-                    {emojiFeatList[value]}
-                    {value}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <div id="availableSites">
-            <div className="specDiv datePickHolder">
-              <h2>Select Dates</h2>
+            <div id="availableSites">
+              <div className="specDiv datePickHolder">
+                <h2>Select Dates</h2>
 
-              <div
-                className=" inputContainer sideFlex calContain"
-                id="datesDiv"
-              >
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    label="Check-In"
-                    value={checkInDate}
-                    onChange={(newDate) => {
-                      setCheckInDate(newDate);
-                    }}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </LocalizationProvider>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    label="Check-Out"
-                    value={checkOutDate}
-                    onChange={(newDate) => setCheckOutDate(newDate)}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </LocalizationProvider>
+                <div
+                  className=" inputContainer sideFlex calContain"
+                  id="datesDiv"
+                >
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePicker
+                      label="Check-In"
+                      value={checkInDate}
+                      onChange={(newDate) => {
+                        setCheckInDate(newDate);
+                      }}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </LocalizationProvider>
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePicker
+                      label="Check-Out"
+                      value={checkOutDate}
+                      onChange={(newDate) => setCheckOutDate(newDate)}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </LocalizationProvider>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

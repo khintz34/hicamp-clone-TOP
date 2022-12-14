@@ -13,6 +13,7 @@ const Select = (props) => {
         required
         value={props.state}
         onChange={(e) => props.setState(e.target.value)}
+        className="selectClass"
       >
         <option value="none">None</option>
         <option value="monarchs">Project Monarch</option>

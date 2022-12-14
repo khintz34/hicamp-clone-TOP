@@ -16,12 +16,6 @@ import { AuthContext } from "./contexts/AuthContext";
 import { CheckInContext } from "./contexts/CheckInContext";
 import { CheckOutContext } from "./contexts/CheckOutContext";
 
-//todo finish url params
-// todo css on sites lists
-// todo css confirmation
-//todo css booked
-//todo css inoutLand
-
 function App() {
   const [currentSiteList, setCurrentSiteList] = useState([]);
   const [currentSite, setCurrentSite] = useState([]);
@@ -51,7 +45,7 @@ function App() {
                     >
                       <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/sites" element={<Sites />} />
+                        <Route path="/sites/:nameParam" element={<Sites />} />
                         <Route
                           path="/siteList/:locationParam/:guestParam/:petParam/:fireParam/:lakeParam/:lodgingParam/:whereParam"
                           element={<SiteList />}

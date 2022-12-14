@@ -12,8 +12,6 @@ import { CheckInContext } from "../../contexts/CheckInContext";
 import { CheckOutContext } from "../../contexts/CheckOutContext";
 import { emojiWhereList } from "../../assets/EmojiLists";
 
-//todo if click search need to set location param to something else so doesnt abend
-
 const Where = (props) => {
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
   const { searchItem, setSearchItem } = useContext(SearchContext);
@@ -100,8 +98,8 @@ const Where = (props) => {
       setLodgingState(false);
     }
     setMainWhere("lodging");
-    setLocation("Lodging Available");
-    setSearchItem("Lodging Available");
+    setLocation("Lodging");
+    setSearchItem("Lodging");
   }
 
   function decideLake() {
@@ -119,6 +117,11 @@ const Where = (props) => {
     setSearchItem("Lake Nearby");
   }
 
+  function locationCheck() {
+    if (location === "") {
+      setLocation("anywhere");
+    }
+  }
   return (
     <div id="whereDiv">
       <div id="searchContainer">
@@ -227,11 +230,23 @@ const Where = (props) => {
               </div>
             </div>
           </div>
-          <Link
-            to={`/siteList/${location}/${guestNum}/${petAllowed}/${firesAllowed}/${lakeNearby}/${lodgingState}/${mainWhere}`}
-          >
-            <button id="circleSearchBtn">Search</button>
-          </Link>
+          {location === "" ? (
+            <Link
+              to={`/siteList/anywhere/${guestNum}/${petAllowed}/${firesAllowed}/${lakeNearby}/${lodgingState}/${mainWhere}`}
+            >
+              <button id="circleSearchBtn" onClick={locationCheck}>
+                Search
+              </button>
+            </Link>
+          ) : (
+            <Link
+              to={`/siteList/${location}/${guestNum}/${petAllowed}/${firesAllowed}/${lakeNearby}/${lodgingState}/${mainWhere}`}
+            >
+              <button id="circleSearchBtn" onClick={locationCheck}>
+                Search
+              </button>
+            </Link>
+          )}
         </div>
       </div>
       <img src={mtnCamp} alt="" className="eightyWidth" />

@@ -142,7 +142,10 @@ const Header = () => {
       </div>
       <div id="header-btns">
         <div className="header-btn" onClick={handleCurrentList}>
-          <Link to="/siteList" className="noUnderline">
+          <Link
+            to={"/siteList/montana/0/null/null/null/null/location"}
+            className="noUnderline"
+          >
             Near Me
           </Link>
         </div>

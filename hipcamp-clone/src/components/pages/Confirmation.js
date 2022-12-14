@@ -3,6 +3,7 @@ import Header from "./Header";
 import "../../styles/Confirmation.css";
 import bike from "../../images/bike.jpeg";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import Footer from "./Footer";
 
 const Confirmation = (props) => {
   const storage = getStorage();
@@ -18,6 +19,7 @@ const Confirmation = (props) => {
           your beautiful property!{" "}
         </h1>
       </div>
+      <Footer />
     </div>
   );
 };

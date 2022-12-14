@@ -5,6 +5,7 @@ import { CurrentSiteContext } from "../../contexts/CurrentSiteContext";
 import { CheckInContext } from "../../contexts/CheckInContext";
 import { CheckOutContext } from "../../contexts/CheckOutContext";
 import { differenceInCalendarDays, isBefore } from "date-fns";
+import Footer from "./Footer";
 
 const BookedSite = (props) => {
   const { currentSite, setCurrentSite } = useContext(CurrentSiteContext);
@@ -38,7 +39,6 @@ const BookedSite = (props) => {
   };
 
   const reverseDates = () => {
-    console.log("reverse Dates");
     let inNew = checkInDate;
     let outNew = checkOutDate;
 
@@ -67,16 +67,12 @@ const BookedSite = (props) => {
     } else if (outCheck && inCheck) {
       setCheckInDate(new Date());
       setTomorrowDate(3);
-      console.log(1);
     } else if (!inCheck && !outCheck & !dateCheck) {
       reverseDates();
-      console.log(2);
     } else if (inCheck) {
       setCheckInDate(new Date());
-      console.log(3);
     } else if (outCheck) {
       setTomorrowDate(3);
-      console.log(4);
     }
   };
 
@@ -89,10 +85,6 @@ const BookedSite = (props) => {
   useEffect(() => {
     handlePetStatus();
     validateDates();
-    console.log("CheckIn:", checkInDate, inCheck, checkInFormat);
-    console.log("CheckOut:", checkOutDate, outCheck, checkOutFormat);
-    // console.log(new Date());
-    console.log(dayCheckFormat);
   }, []);
 
   return (
