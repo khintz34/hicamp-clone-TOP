@@ -1,7 +1,7 @@
 {
   "name": "hipcamp-clone",
   "version": "0.1.0",
-  "homepage": "https://khintz34.github.io/hipcamp-clone/",
+  "homepage": "https://khintz34.github.io/hipcamp-clone-TOP/",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^2.16.0",

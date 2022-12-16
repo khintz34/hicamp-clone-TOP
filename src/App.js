@@ -1,6 +1,6 @@
 import "../src/styles/App.css";
 import Home from "./components/pages/Home";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import Sites from "./components/pages/Sites";
 import SiteList from "./components/pages/SiteList";
 import { useState } from "react";
@@ -28,7 +28,7 @@ function App() {
   const [currentAuth, setCurrentAuth] = useState(false);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="App">
         <CheckInContext.Provider value={{ checkInDate, setCheckInDate }}>
           <SiteContext.Provider value={{ currentSiteList, setCurrentSiteList }}>
@@ -66,7 +66,7 @@ function App() {
           </SiteContext.Provider>
         </CheckInContext.Provider>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
