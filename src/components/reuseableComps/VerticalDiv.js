@@ -26,8 +26,8 @@ const VerticalDiv = (props) => {
       <img src={props.image} alt="" className="vertImage" />
       <div className="vertDivBottom" style={props.style}>
         <div className="vertDivWriting">
-          <div style={{ fontSize: "28px" }}>{props.title}</div>
-          <div style={{ fontSize: "20px" }}>{props.comment}</div>
+          <div style={{ fontSize: "2vw" }}>{props.title}</div>
+          <div style={{ fontSize: "1.5vw" }}>{props.comment}</div>
         </div>
       </div>
     </div>

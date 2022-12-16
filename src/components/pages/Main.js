@@ -108,7 +108,7 @@ const Main = () => {
         <Link to={"/siteList/montana/0/null/null/null/null/location"}>
           <HalfDiv
             image={outdoorStairs}
-            title="Get outside in MT this weekend"
+            title="Explore MT this weekend"
             comment="Pitch your tent, roll up in your can or find a glamping stay."
             style={greenColor}
             font={greenFont}
@@ -243,13 +243,13 @@ const Main = () => {
         <div id="circleDivsContainer">
           <CircleDiv
             image={circleBridge}
-            title="Unlock new access to unexpected places."
+            title="Find unexpected places."
             comment="Easily book secluded outdoor tent sites, RV sites, and glamping stays on private lands -- from blueberry farms to lakeside yurts."
             border={borderOne}
           />
           <CircleDiv
             image={circleBarrell}
-            title="Discover unique outdoor experiences."
+            title="Discover unique experiences."
             comment="Relax in an outdoor sauna, explore hidden swimming holes, do yoga with the goats, and eat wood-fired pizza under the stars."
             border={borderTwo}
           />

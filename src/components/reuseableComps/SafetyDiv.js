@@ -20,7 +20,7 @@ const SafetyDiv = (props) => {
       />
       <div className="safetyDivBottom">
         <div className="safetyDivWriting">
-          <div style={{ fontSize: "28px", fontWeight: "bold" }}>
+          <div style={{ fontSize: "2vw", fontWeight: "bold" }}>
             {props.title}
           </div>
           <ol style={props.type} className="safetyOL">

@@ -30,7 +30,7 @@ const FullDiv = (props) => {
       <img src={props.image} alt="" className="fullImage" />
       <div className="fullDivBottom" style={props.style}>
         <div className="fullDivWriting">
-          <div style={{ fontSize: "1.8em" }}>{props.title}</div>
+          <div style={{ fontSize: "2vw" }}>{props.title}</div>
           <div style={{ fontSize: "1em", display: windowWidth }}>
             {props.comment}
           </div>

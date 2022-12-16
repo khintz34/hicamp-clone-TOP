@@ -4,7 +4,6 @@
 
 .eightyWidth {
   width: 62vw;
-  /* max-width: 1500px; */
   border-radius: 20px;
 }
 
@@ -131,6 +130,9 @@
   height: 3vh;
   width: 3vh;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #circleSearchBtn {

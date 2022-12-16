@@ -38,7 +38,7 @@
   margin-top: 10vh;
   background-color: white;
   width: 62vw;
-  height: 80vh;
+  padding-top: 2vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,13 +56,14 @@
 }
 
 .largeText {
-  font-size: 50px;
+  font-size: 2.5vw;
   font-weight: bolder;
   color: rgb(91, 91, 91);
 }
 
 .lTHolder {
   width: 60vw;
+  /* margin-top: 3vh; */
 }
 
 #placesToGoMainDiv {

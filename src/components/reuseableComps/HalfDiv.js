@@ -35,7 +35,7 @@ const HalfDiv = (props) => {
       <img src={props.image} alt="" className="halfImage" />
       <div className="halfDivBottom" style={props.style}>
         <div className="halfDivWriting">
-          <h2 className="titleH2">{props.title}</h2>
+          <h3 className="titleH2">{props.title}</h3>
         </div>
         <div className="halfButtonContainer">
           <button className="halfBtn" style={props.font}>

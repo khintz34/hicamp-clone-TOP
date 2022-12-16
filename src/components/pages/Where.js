@@ -235,7 +235,7 @@ const Where = (props) => {
               to={`/siteList/anywhere/${guestNum}/${petAllowed}/${firesAllowed}/${lakeNearby}/${lodgingState}/${mainWhere}`}
             >
               <button id="circleSearchBtn" onClick={locationCheck}>
-                Search
+                Go!
               </button>
             </Link>
           ) : (
@@ -243,7 +243,7 @@ const Where = (props) => {
               to={`/siteList/${location}/${guestNum}/${petAllowed}/${firesAllowed}/${lakeNearby}/${lodgingState}/${mainWhere}`}
             >
               <button id="circleSearchBtn" onClick={locationCheck}>
-                Search
+                Go!
               </button>
             </Link>
           )}
