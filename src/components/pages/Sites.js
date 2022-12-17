@@ -158,10 +158,12 @@ const Sites = (props) => {
             </div>
             <div id="additionalSpecs">
               <div id="siteSpecs" className="specDivSmall">
-                <h2>Site Specs</h2>
-                <div>Capactity: {currentSite.guests}</div>
-                <div>Acres: {currentSite.acres}</div>
-                <div className="typeMap">
+                <div className="specTitle">Site Specs</div>
+                <div className="sitesColumns">
+                  Capactity: {currentSite.guests}
+                </div>
+                <div className="sitesColumns">Acres: {currentSite.acres}</div>
+                <div className="typeMap sitesColumns">
                   Type:
                   {currentSite.length === 0 ? (
                     <div>loading</div>
@@ -172,6 +174,7 @@ const Sites = (props) => {
                           <div
                             style={{ marginLeft: "3px" }}
                             key={`${currentSite.name}-site-${value}`}
+                            className="sitesColumns"
                           >
                             {EmojiTypeList[value]}
                             {value}
@@ -192,10 +195,10 @@ const Sites = (props) => {
                     })
                   )}
                 </div>
-                <div>Pets Allowed: {petStatus}</div>
+                <div className="sitesColumns">Pets Allowed: {petStatus}</div>
               </div>
               <div id="activitySpecs" className="specDivSmall">
-                <h2>Activities</h2>
+                <div className="specTitle">Activities</div>
                 {currentSite.length === 0 ? (
                   <div>loading</div>
                 ) : (
@@ -216,7 +219,7 @@ const Sites = (props) => {
                 )}
               </div>
               <div id="featureSpecs" className="specDivSmall">
-                <h2>Natural Features</h2>
+                <div className="specTitle">Natural Features</div>
                 {currentSite.length === 0 ? (
                   <div>loading</div>
                 ) : (
