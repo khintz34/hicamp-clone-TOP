@@ -28,8 +28,6 @@ const Sites = (props) => {
   const [petStatus, setPetStatus] = useState();
   const [subClass, setSubClass] = useState("disableBtn");
   const [disabledBtn, setDisabledBtn] = useState(true);
-  // const { checkOutDate, setCheckOutDate } = useContext(CheckOutContext);
-  // const { checkInDate, setCheckInDate } = useContext(CheckInContext);
   const { nameParam } = useParams();
   const checkInDate = useDateStore((state) => state.checkInDate);
   const checkOutDate = useDateStore((state) => state.checkOutDate);

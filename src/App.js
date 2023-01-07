@@ -1,18 +1,18 @@
 import "../src/styles/App.css";
-import Home from "./components/pages/Home";
-import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
-import Sites from "./components/pages/Sites";
-import SiteList from "./components/pages/SiteList";
+import Home from "./components/homePages/Home";
+import { Routes, Route, HashRouter } from "react-router-dom";
+import Sites from "./components/homePages/Sites";
+import SiteList from "./components/homePages/SiteList";
 import { useState } from "react";
 import { SiteContext } from "./contexts/SiteContext.js";
 import { CurrentSiteContext } from "./contexts/CurrentSiteContext.js";
-import InputLand from "./components/pages/InputLand";
-import Confirmation from "./components/pages/Confirmation";
-import About from "./components/pages/About";
-import BookedSite from "./components/pages/BookedSite";
+import InputLand from "./components/homePages/InputLand";
+import Confirmation from "./components/homePages/Confirmation";
+import About from "./components/homePages/About";
+import BookedSite from "./components/homePages/BookedSite";
 import { AuthContext } from "./contexts/AuthContext";
 
-//todo fix aboutDiv verticals
+//todo optimize for mobiles
 
 function App() {
   const [currentSiteList, setCurrentSiteList] = useState([]);

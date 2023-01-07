@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/Main.css";
 import Where from "../mainComps/Where";
 import FullDiv from "../mainComps/FullDiv";

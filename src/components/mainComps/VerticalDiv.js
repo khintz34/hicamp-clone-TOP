@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { SiteContext } from "../../contexts/SiteContext";
+import React from "react";
 import "../../styles/VerticalDiv.css";
 import tent from "../../images/tent.jpeg";
 import butterfly from "../../images/butterfly.jpeg";
@@ -7,9 +6,6 @@ import cabin from "../../images/cabin.jpeg";
 import { Link } from "react-router-dom";
 
 const VerticalDiv = (props) => {
-  const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
-  const FullList = props.list;
-
   const tentColor = {
     backgroundColor: "var(--tent)",
   };

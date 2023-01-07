@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/About.css";
 
-const AboutDivs = (props) => {
+const AboutDetails = (props) => {
   return (
     <div className="aboutDivComponent">
       <div className="aboutHeaderProp">{props.header}</div>
@@ -11,4 +11,4 @@ const AboutDivs = (props) => {
   );
 };
 
-export default AboutDivs;
+export default AboutDetails;

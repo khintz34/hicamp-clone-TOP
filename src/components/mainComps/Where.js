@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import "../../styles/Where.css";
 import mtnCamp from "../../images/mtn-camping.jpeg";
 import { Link } from "react-router-dom";
