@@ -10,61 +10,34 @@ import InputLand from "./components/pages/InputLand";
 import Confirmation from "./components/pages/Confirmation";
 import About from "./components/pages/About";
 import BookedSite from "./components/pages/BookedSite";
-import { SearchContext } from "./contexts/SearchContext";
-import { PetSearchContext } from "./contexts/PetSearchContext";
 import { AuthContext } from "./contexts/AuthContext";
-import { CheckInContext } from "./contexts/CheckInContext";
-import { CheckOutContext } from "./contexts/CheckOutContext";
 
 function App() {
   const [currentSiteList, setCurrentSiteList] = useState([]);
   const [currentSite, setCurrentSite] = useState([]);
-  const [searchItem, setSearchItem] = useState("");
-  const [petSearch, setPetSearch] = useState("");
-  let firstDate = new Date();
-  let secondDate = firstDate.setDate(firstDate.getDate() + 5);
-  const [checkInDate, setCheckInDate] = useState(new Date());
-  const [checkOutDate, setCheckOutDate] = useState(new Date());
   const [currentAuth, setCurrentAuth] = useState(false);
 
   return (
     <HashRouter>
       <div className="App">
-        <CheckInContext.Provider value={{ checkInDate, setCheckInDate }}>
-          <SiteContext.Provider value={{ currentSiteList, setCurrentSiteList }}>
-            <CurrentSiteContext.Provider
-              value={{ currentSite, setCurrentSite }}
-            >
-              <SearchContext.Provider value={{ searchItem, setSearchItem }}>
-                <PetSearchContext.Provider value={{ petSearch, setPetSearch }}>
-                  <CheckOutContext.Provider
-                    value={{ checkOutDate, setCheckOutDate }}
-                  >
-                    <AuthContext.Provider
-                      value={{ currentAuth, setCurrentAuth }}
-                    >
-                      <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/sites/:nameParam" element={<Sites />} />
-                        <Route
-                          path="/siteList/:locationParam/:guestParam/:petParam/:fireParam/:lakeParam/:lodgingParam/:whereParam"
-                          element={<SiteList />}
-                        />
-                        <Route path="/owners" element={<InputLand />} />
-                        <Route
-                          path="/confirmation"
-                          element={<Confirmation />}
-                        />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/booking" element={<BookedSite />} />
-                      </Routes>
-                    </AuthContext.Provider>
-                  </CheckOutContext.Provider>
-                </PetSearchContext.Provider>
-              </SearchContext.Provider>
-            </CurrentSiteContext.Provider>
-          </SiteContext.Provider>
-        </CheckInContext.Provider>
+        <SiteContext.Provider value={{ currentSiteList, setCurrentSiteList }}>
+          <CurrentSiteContext.Provider value={{ currentSite, setCurrentSite }}>
+            <AuthContext.Provider value={{ currentAuth, setCurrentAuth }}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/sites/:nameParam" element={<Sites />} />
+                <Route
+                  path="/siteList/:locationParam/:guestParam/:petParam/:fireParam/:lakeParam/:lodgingParam/:whereParam"
+                  element={<SiteList />}
+                />
+                <Route path="/owners" element={<InputLand />} />
+                <Route path="/confirmation" element={<Confirmation />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/booking" element={<BookedSite />} />
+              </Routes>
+            </AuthContext.Provider>
+          </CurrentSiteContext.Provider>
+        </SiteContext.Provider>
       </div>
     </HashRouter>
   );

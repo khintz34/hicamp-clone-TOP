@@ -1,23 +1,17 @@
-import React, { useState, useContext, useEffect } from "react";
-import { SiteContext } from "../../contexts/SiteContext";
+import React, { useState, useContext } from "react";
 import "../../styles/Where.css";
 import mtnCamp from "../../images/mtn-camping.jpeg";
 import { Link } from "react-router-dom";
-import { SearchContext } from "../../contexts/SearchContext";
-import { PetSearchContext } from "../../contexts/PetSearchContext";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { TextField } from "@mui/material";
-import { CheckInContext } from "../../contexts/CheckInContext";
-import { CheckOutContext } from "../../contexts/CheckOutContext";
 import { emojiWhereList } from "../../assets/EmojiLists";
+import { useDateStore } from "../../stores/dateStore";
+import { useSearchStore } from "../../stores/searchStore";
 
 const Where = (props) => {
-  const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
-  const { searchItem, setSearchItem } = useContext(SearchContext);
-  const { petSearch, setPetSearch } = useContext(PetSearchContext);
-  const { checkOutDate, setCheckOutDate } = useContext(CheckOutContext);
-  const { checkInDate, setCheckInDate } = useContext(CheckInContext);
+  const changeSearch = useSearchStore((state) => state.changeSearch);
+  const searchItem = useSearchStore((state) => state.search);
   const [guestNum, setGuestNum] = useState(0);
   const [petAllowed, setPetAllowed] = useState("null");
   const [firesAllowed, setFiresAllowed] = useState("null");
@@ -26,7 +20,10 @@ const Where = (props) => {
   const [location, setLocation] = useState("");
   const [mainWhere, setMainWhere] = useState("null");
 
-  const FullList = props.list;
+  const checkInDate = useDateStore((state) => state.checkInDate);
+  const checkOutDate = useDateStore((state) => state.checkOutDate);
+  const changeInDate = useDateStore((state) => state.changeInDate);
+  const changeOutDate = useDateStore((state) => state.changeOutDate);
 
   const removeHiddenClass = "";
   const hiddenClass = "hide";
@@ -88,7 +85,7 @@ const Where = (props) => {
     }
     setMainWhere("fires");
     setLocation("Fires Allowed");
-    setSearchItem("Fires Allowed");
+    changeSearch("Fires Allowed");
   }
 
   function decideLoding() {
@@ -99,7 +96,7 @@ const Where = (props) => {
     }
     setMainWhere("lodging");
     setLocation("Lodging");
-    setSearchItem("Lodging");
+    changeSearch("Lodging");
   }
 
   function decideLake() {
@@ -114,7 +111,7 @@ const Where = (props) => {
     }
     setMainWhere("lakes");
     setLocation("Lakes Nearby");
-    setSearchItem("Lake Nearby");
+    changeSearch("Lake Nearby");
   }
 
   function locationCheck() {
@@ -169,7 +166,7 @@ const Where = (props) => {
                 label="Check-In"
                 value={checkInDate}
                 onChange={(newDate) => {
-                  setCheckInDate(newDate);
+                  changeInDate(newDate);
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />
@@ -178,7 +175,7 @@ const Where = (props) => {
               <DatePicker
                 label="Check-Out"
                 value={checkOutDate}
-                onChange={(newDate) => setCheckOutDate(newDate)}
+                onChange={(newDate) => changeOutDate(newDate)}
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>

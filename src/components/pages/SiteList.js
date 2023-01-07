@@ -2,25 +2,25 @@ import React, { useContext, useEffect, useState } from "react";
 import "../../styles/SiteList.css";
 import Header from "./Header";
 import { db } from "../../utils/firebase";
-import { ref, set, push, onValue } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 import MiniSite from "../reuseableComps/MiniSite";
 import { SiteContext } from "../../contexts/SiteContext";
 import { Link } from "react-router-dom";
-import { SearchContext } from "../../contexts/SearchContext";
-import { PetSearchContext } from "../../contexts/PetSearchContext";
 import { useParams } from "react-router-dom";
+import { usePetStore } from "../../stores/petStore";
+import { useSearchStore } from "../../stores/searchStore";
 
 const SiteList = () => {
-  const [siteArray, setSiteArray] = useState([]);
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
-  const { searchItem, setSearchItem } = useContext(SearchContext);
-  const { petSearch, setPetSearch } = useContext(PetSearchContext);
+  const changePetSearch = usePetStore((state) => state.changePetSearch);
+  const changeSearch = useSearchStore((state) => state.changeSearch);
+  const searchItem = useSearchStore((state) => state.search);
+  const petSearch = usePetStore((state) => state.petSearch);
   const [maxVal, setMaxVal] = useState(0);
   const [minVal, setMinVal] = useState(0);
   const [currentVal, setCurrentVal] = useState(maxVal);
   const [maxAcres, setMaxAcres] = useState(0);
   const [minAcres, setMinAcres] = useState(20);
-  const [currentAcreVal, setCurrentAcreVal] = useState(maxAcres);
   const [currentAcres, setCurrentAcres] = useState(maxAcres);
   const [currentSiteHolder, setCurrentSiteHolder] = useState([]);
   const [petSearchTranslate, setPetSearchTranslate] = useState("");
@@ -69,7 +69,7 @@ const SiteList = () => {
   function createList() {
     let newArray = [];
     let locateFlag = false;
-    setSearchItem(locationParam);
+    changeSearch(locationParam);
     if (whereParam === "location" && locationParam !== "") {
       let locationArray = locationParam.match(/\w+/g);
       fullList.map((value, key) => {
@@ -178,7 +178,8 @@ const SiteList = () => {
       }
 
       if (petParam !== "null") {
-        setPetSearch(petParam);
+        // setPetSearch(petParam);
+        changePetSearch(petParam);
 
         if (newArray.length > 0) {
           let arrayTwo = [];
@@ -189,7 +190,8 @@ const SiteList = () => {
           });
           newArray = arrayTwo;
         } else {
-          setPetSearch(petParam);
+          // setPetSearch(petParam);
+          changePetSearch(petParam);
           fullList.map((value, key) => {
             if (value.pets.toString() === petParam.toString()) {
               newArray.push(value);
@@ -197,7 +199,8 @@ const SiteList = () => {
           });
         }
       } else {
-        setPetSearch(petParam);
+        // setPetSearch(petParam);
+        changePetSearch(petParam);
       }
     }
     setCurrentSiteList(newArray);

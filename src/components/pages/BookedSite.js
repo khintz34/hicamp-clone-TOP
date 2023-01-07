@@ -6,12 +6,15 @@ import { CheckInContext } from "../../contexts/CheckInContext";
 import { CheckOutContext } from "../../contexts/CheckOutContext";
 import { differenceInCalendarDays, isBefore } from "date-fns";
 import Footer from "./Footer";
+import { useDateStore } from "../../stores/dateStore";
 
 const BookedSite = (props) => {
+  const checkInDate = useDateStore((state) => state.checkInDate);
+  const checkOutDate = useDateStore((state) => state.checkOutDate);
+  const changeInDate = useDateStore((state) => state.changeInDate);
+  const changeOutDate = useDateStore((state) => state.changeOutDate);
   const { currentSite, setCurrentSite } = useContext(CurrentSiteContext);
   const [pets, setPets] = useState("");
-  const { checkOutDate, setCheckOutDate } = useContext(CheckOutContext);
-  const { checkInDate, setCheckInDate } = useContext(CheckInContext);
   const [checkInFormat, setCheckInFormat] = useState(
     checkInDate.toString().slice(0, 15)
     // ""
@@ -42,8 +45,8 @@ const BookedSite = (props) => {
     let inNew = checkInDate;
     let outNew = checkOutDate;
 
-    setCheckInDate(outNew);
-    setCheckInDate(inNew);
+    changeInDate(outNew);
+    changeInDate(inNew);
     setCheckInFormat(checkOutDate.toString().slice(0, 15));
     setCheckOutFormat(checkInDate.toString().slice(0, 15));
     setDays(differenceInCalendarDays(checkInDate, checkOutDate));
@@ -58,19 +61,19 @@ const BookedSite = (props) => {
     }
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + num);
-    setCheckOutDate(tomorrow);
+    changeOutDate(tomorrow);
   };
 
   const validateDates = () => {
     if (dayCheckFormat === checkInFormat && dayCheckFormat === checkOutFormat) {
       setTomorrowDate(1);
     } else if (outCheck && inCheck) {
-      setCheckInDate(new Date());
+      changeInDate(new Date());
       setTomorrowDate(3);
     } else if (!inCheck && !outCheck & !dateCheck) {
       reverseDates();
     } else if (inCheck) {
-      setCheckInDate(new Date());
+      changeInDate(new Date());
     } else if (outCheck) {
       setTomorrowDate(3);
     }

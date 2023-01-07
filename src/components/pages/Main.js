@@ -32,11 +32,9 @@ import recreate from "../../images/recreateResp.png";
 import leaveNoTrace from "../../images/leaveNoTrace.png";
 import nationalWeather from "../../images/national_weather.png";
 import SafetyDiv from "../reuseableComps/SafetyDiv";
-import { db } from "../../utils/firebase";
-import { ref, onValue } from "firebase/database";
 import { Link } from "react-router-dom";
-import { SearchContext } from "../../contexts/SearchContext";
-import { PetSearchContext } from "../../contexts/PetSearchContext";
+import { usePetStore } from "../../stores/petStore";
+import { useSearchStore } from "../../stores/searchStore";
 
 const Main = () => {
   const orangeColor = {
@@ -83,12 +81,12 @@ const Main = () => {
   };
 
   const [fullSiteList, setFullSiteList] = useState([]);
-  const { searchItem, setSearchItem } = useContext(SearchContext);
-  const { petSearch, setPetSearch } = useContext(PetSearchContext);
+  const changePetSearch = usePetStore((state) => state.changePetSearch);
+  const changeSearch = useSearchStore((state) => state.changeSearch);
 
   useEffect(() => {
-    setSearchItem("");
-    setPetSearch("");
+    changeSearch("");
+    changePetSearch("");
   }, []);
 
   return (

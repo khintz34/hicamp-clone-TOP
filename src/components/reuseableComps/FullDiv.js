@@ -10,7 +10,6 @@ const FullDiv = (props) => {
 
   useEffect(() => {
     function handleResize() {
-      console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
       decideWidth();
     }
 
