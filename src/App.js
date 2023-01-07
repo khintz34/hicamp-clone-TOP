@@ -12,6 +12,8 @@ import About from "./components/pages/About";
 import BookedSite from "./components/pages/BookedSite";
 import { AuthContext } from "./contexts/AuthContext";
 
+//todo fix aboutDiv verticals
+
 function App() {
   const [currentSiteList, setCurrentSiteList] = useState([]);
   const [currentSite, setCurrentSite] = useState([]);

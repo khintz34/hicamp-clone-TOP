@@ -11,7 +11,6 @@ import { useSearchStore } from "../../stores/searchStore";
 
 const Where = (props) => {
   const changeSearch = useSearchStore((state) => state.changeSearch);
-  const searchItem = useSearchStore((state) => state.search);
   const [guestNum, setGuestNum] = useState(0);
   const [petAllowed, setPetAllowed] = useState("null");
   const [firesAllowed, setFiresAllowed] = useState("null");

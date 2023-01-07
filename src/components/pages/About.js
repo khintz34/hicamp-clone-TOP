@@ -2,7 +2,7 @@ import React from "react";
 import "../../styles/About.css";
 import Header from "./Header";
 import Tagline from "../reuseableComps/Tagline";
-import VerticalDiv from "../reuseableComps/VerticalDiv";
+import VerticalDiv from "../mainComps/VerticalDiv";
 import image1 from "../../images/canada-tent.jpeg";
 import image2 from "../../images/canada-sheep.jpeg";
 import image3 from "../../images/canada-au.jpeg";
