@@ -12,12 +12,17 @@ import {
   signOut,
 } from "firebase/auth";
 import { AuthContext } from "../../contexts/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { useNavbarStore } from "../../stores/navbarStore";
 
 const Header = () => {
   const [fullSiteList, setFullSiteList] = useState([]);
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
   const { currentAuth, setCurrentAuth } = useContext(AuthContext);
   const [signInLingo, setSignInLingo] = useState("Sign In");
+  const navbarStatus = useNavbarStore((state) => state.navbarStatus);
+  const changeStatus = useNavbarStore((state) => state.changeStatus);
 
   useEffect(() => {
     if (!currentAuth) {
@@ -26,7 +31,17 @@ const Header = () => {
     } else {
       setSignInLingo("Sign Out");
     }
-  });
+  }, []);
+
+  useEffect(() => {
+    if (!currentAuth) {
+      setSignInLingo("Sign In");
+      console.log("signing out");
+    } else {
+      setSignInLingo("Sign Out");
+      console.log("signing in");
+    }
+  }, [currentAuth]);
 
   const signUserIn = () => {
     const provider = new GoogleAuthProvider();
@@ -43,6 +58,8 @@ const Header = () => {
           // console.log(user);
           setSignInLingo("Sign Out");
           // ...
+          closeMenu();
+          console.log("signing in func");
         })
         .catch((error) => {});
     } else {
@@ -50,6 +67,7 @@ const Header = () => {
         function () {
           setCurrentAuth(false);
           setSignInLingo("Sign In");
+          console.log("signing out func");
         },
         function (error) {
           console.error("Sign Out Error", error);
@@ -124,6 +142,18 @@ const Header = () => {
     setCurrentSiteList(newArray);
   };
 
+  const handleToggle = () => {
+    if (navbarStatus === true) {
+      changeStatus(false);
+    } else {
+      changeStatus(true);
+    }
+  };
+
+  const closeMenu = () => {
+    changeStatus(false);
+  };
+
   return (
     <div id="headerDiv">
       <div id="logo-div">
@@ -132,27 +162,70 @@ const Header = () => {
         </Link>
       </div>
       <div id="header-btns">
-        <div className="header-btn" onClick={handleCurrentList}>
-          <Link
-            to={"/siteList/montana/0/null/null/null/null/location"}
-            className="noUnderline"
-          >
-            Near Me
-          </Link>
+        <div id="rightHeaderLarge">
+          <div className="header-btn" onClick={handleCurrentList}>
+            <Link
+              to={"/siteList/montana/0/null/null/null/null/location"}
+              className="noUnderline"
+            >
+              Near Me
+            </Link>
+          </div>
+          <div className="header-btn">
+            <Link className="noUnderline" to="/about">
+              About
+            </Link>
+          </div>
+          <div className="header-btn">
+            <Link className="noUnderline" to="/owners">
+              Start hosting{" "}
+            </Link>
+          </div>
+          <button id="signUp-btn" onClick={signUserIn}>
+            {signInLingo}
+          </button>
         </div>
-        <div className="header-btn">
-          <Link className="noUnderline" to="/about">
-            About
-          </Link>
-        </div>
-        <div className="header-btn">
-          <Link className="noUnderline" to="/owners">
-            Start hosting{" "}
-          </Link>
-        </div>
-        <button id="signUp-btn" onClick={signUserIn}>
-          {signInLingo}
-        </button>
+
+        <nav id="rightHeaderDropdown" className="navBar">
+          {navbarStatus === false ? (
+            <div onClick={handleToggle} id="rightHeaderSmall">
+              <FontAwesomeIcon icon={faBars} className="iconWidth openBtn" />
+            </div>
+          ) : (
+            <div onClick={handleToggle} className="xBtnContainer">
+              <div className="iconWidth openBtn xBtn">X</div>
+            </div>
+          )}
+        </nav>
+      </div>
+      <div id="sideNav" className="sideNav">
+        <ul
+          className={`menuNav ${
+            navbarStatus === true ? " showMenu" : " hideNav"
+          }`}
+        >
+          <button id="signUp-btn2" onClick={signUserIn}>
+            {signInLingo}
+          </button>
+          <li className="header-btn menuItem" onClick={closeMenu}>
+            <Link
+              to={"/siteList/montana/0/null/null/null/null/location"}
+              className=" whiteFont"
+            >
+              Near Me
+            </Link>
+          </li>
+          <li className="header-btn menuItem" onClick={closeMenu}>
+            <Link className="whiteFont " to="/about">
+              About
+            </Link>
+          </li>
+          <li className="header-btn menuItem" onClick={closeMenu}>
+            <Link className=" whiteFont" to="/owners">
+              Start hosting{" "}
+            </Link>
+          </li>
+        </ul>
       </div>
     </div>
   );

@@ -15,10 +15,16 @@
 .App {
   text-align: center;
   background-color: var(--main-background);
+  contain: paint;
 }
 
 .centerCenterFlex {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.home {
+  overflow: hidden;
+  width: 100vw;
 }

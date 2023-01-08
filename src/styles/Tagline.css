@@ -17,3 +17,19 @@
   font-size: 30px;
   font-weight: 600;
 }
+
+@media (max-width: 1000px) {
+  #taglineDiv {
+    height: 40vh;
+    justify-content: flex-start;
+    padding: 8vh 2vw 0vh 2vw;
+    gap: 5vh;
+  }
+}
+
+@media (max-width: 600px) {
+  #taglineDiv {
+    height: 80vh;
+    padding: 8vh 1vh;
+  }
+}

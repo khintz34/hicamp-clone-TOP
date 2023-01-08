@@ -178,3 +178,73 @@
   position: relative;
   top: 10px;
 }
+
+@media (max-width: 1000px) {
+  #whereDiv {
+    height: 100vh;
+  }
+
+  #searchDiv {
+    flex-direction: column;
+  }
+}
+
+/* ! mobile css starts here */
+
+#whereDivMobile {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  width: 100vw;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: 1px solid red;
+  margin-left: -10vw;
+}
+
+#searchDivMobile {
+  /* background-color: blue; */
+}
+
+.wMobileHeader {
+  color: var(--forest-color);
+  font-weight: bolder;
+  width: 100vw;
+  font-size: 3vh;
+  text-align: left;
+}
+
+.inputFieldMobile {
+  width: 35ch;
+  height: 5.5vh;
+  border-radius: 15px;
+  border: 1px solid rgb(229, 234, 223);
+  font-size: large;
+  padding-left: 1vw;
+}
+
+.inputFieldMobile:focus {
+  outline: none !important;
+  border: 2px solid var(--forest-color);
+}
+
+#whereToPopUpMobile {
+  width: 26vw;
+  position: absolute;
+  top: 85%;
+  background-color: white;
+  border-radius: 15px;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.inputContainerMobile {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1vh;
+}
+
+#datesDivMobile {
+  padding-top: 5vh;
+}
