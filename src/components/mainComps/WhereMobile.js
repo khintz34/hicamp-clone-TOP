@@ -8,6 +8,11 @@ import { TextField } from "@mui/material";
 import { emojiWhereList } from "../../assets/EmojiLists";
 import { useDateStore } from "../../stores/dateStore";
 import { useSearchStore } from "../../stores/searchStore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBars,
+  faArrowAltCircleDown,
+} from "@fortawesome/free-solid-svg-icons";
 
 const WhereMobile = (props) => {
   const changeSearch = useSearchStore((state) => state.changeSearch);
@@ -122,12 +127,12 @@ const WhereMobile = (props) => {
     <div id="whereDivMobile">
       <div id="searchContainer">
         <div id="searchDivMobile">
-          <div className="inputContainer" id="whereToDiv">
+          <div className="inputContainerMobile">
             <label className="wMobileHeader">WHERE ARE YOU HEADED?</label>
             <input
               type="text"
               className="inputFieldMobile"
-              placeholder="Try Yosemite National Park or Minnesota"
+              placeholder="Yosemite National Park?? Minnesota??"
               onClick={showWhereTo}
               value={location}
               onChange={(e) => {
@@ -135,11 +140,14 @@ const WhereMobile = (props) => {
               }}
             />
           </div>
-
+          <h2 className="wMobileHeader">WHEN IS YOUR TRIP?</h2>
           <div className="inputContainerMobile" id="datesDivMobile">
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <LocalizationProvider
+              dateAdapter={AdapterDateFns}
+              className="datePickMobile"
+            >
               <DatePicker
-                label="Check-In"
+                label="Check-In Date"
                 value={checkInDate}
                 onChange={(newDate) => {
                   changeInDate(newDate);
@@ -147,46 +155,47 @@ const WhereMobile = (props) => {
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <LocalizationProvider
+              dateAdapter={AdapterDateFns}
+              className="datePickMobile"
+            >
               <DatePicker
-                label="Check-Out"
+                label="Check-Out Date"
                 value={checkOutDate}
                 onChange={(newDate) => changeOutDate(newDate)}
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
           </div>
+          <div className="inputContainerMobile" id="guestsDiv">
+            <label className="wMobileHeader">HOW MANY IN YOUR PARTY?</label>
 
-          <div className="inputContainer" id="guestsDiv">
-            <label>GUESTS</label>
-            <input
-              type="text"
-              className="inputField"
-              onClick={showGuests}
-              placeholder="Add Guests"
-              value={guestNum}
-              onChange={(e) => {
-                setGuestNum(e.target.value);
-              }}
-            />
-            <div id="guestsPopUp" className={guestPopUp}>
-              <div className="guestList">
-                <div className="stack">
-                  <div>Guests</div>
-                </div>
-                <div className="addSub">
-                  <button className="circleBtn" onClick={subGuests}>
+            <div id="guestsPopUpMobile">
+              <div className="guestListMobile">
+                <div className="addSubMobile">
+                  <button className="circleBtnMobile" onClick={subGuests}>
                     -
                   </button>
-                  <div>{guestNum}</div>
-                  <button className="circleBtn" onClick={addGuests}>
+                  <input
+                    type="num"
+                    className="inputField guestInput"
+                    placeholder="Add Guests"
+                    value={guestNum}
+                    onChange={(e) => {
+                      setGuestNum(e.target.value);
+                    }}
+                  />
+                  <button className="circleBtnMobile" onClick={addGuests}>
                     +
                   </button>
                 </div>
               </div>
-              <div className="guestList" style={{ border: "none" }}>
+              <div
+                className="guestListMobile petMobile"
+                style={{ border: "none" }}
+              >
                 <div className="stack">
-                  <div>Any pets?</div>
+                  <div className="mobileFont">Any pets?</div>
                 </div>
                 <div className="addSub">
                   <button className={petNo} onClick={allowNoPet}>
@@ -198,25 +207,22 @@ const WhereMobile = (props) => {
                   </button>
                 </div>
               </div>
-              <div className="exitPopUp" onClick={hideGuests}>
-                X
-              </div>
             </div>
           </div>
           {location === "" ? (
             <Link
               to={`/siteList/anywhere/${guestNum}/${petAllowed}/${firesAllowed}/${lakeNearby}/${lodgingState}/${mainWhere}`}
             >
-              <button id="circleSearchBtn" onClick={locationCheck}>
-                Go!
+              <button id="circleSearchBtnMobile" onClick={locationCheck}>
+                SEARCH AVAILABLE SITES
               </button>
             </Link>
           ) : (
             <Link
               to={`/siteList/${location}/${guestNum}/${petAllowed}/${firesAllowed}/${lakeNearby}/${lodgingState}/${mainWhere}`}
             >
-              <button id="circleSearchBtn" onClick={locationCheck}>
-                Go!
+              <button id="circleSearchBtnMobile" onClick={locationCheck}>
+                SEARCH AVAILABLE SITES
               </button>
             </Link>
           )}

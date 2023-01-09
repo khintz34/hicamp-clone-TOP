@@ -25,11 +25,21 @@
     padding: 8vh 2vw 0vh 2vw;
     gap: 5vh;
   }
+
+  .mainTag {
+    font-size: 80px;
+    font-weight: 800;
+  }
 }
 
 @media (max-width: 600px) {
   #taglineDiv {
-    height: 80vh;
+    height: 55vh;
     padding: 8vh 1vh;
+  }
+
+  .mainTag {
+    font-size: 8vh;
+    font-weight: 800;
   }
 }

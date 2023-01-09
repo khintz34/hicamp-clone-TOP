@@ -196,14 +196,21 @@
   flex-direction: column;
   height: 90vh;
   width: 100vw;
-  justify-content: flex-start;
-  align-items: flex-start;
-  border: 1px solid red;
-  margin-left: -10vw;
+  max-width: 100vw;
+  justify-content: center;
+  align-items: center;
+  margin-left: -12vw;
+  padding-left: 2vw;
 }
 
 #searchDivMobile {
-  /* background-color: blue; */
+  width: 95%;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--butterfly);
 }
 
 .wMobileHeader {
@@ -211,7 +218,7 @@
   font-weight: bolder;
   width: 100vw;
   font-size: 3vh;
-  text-align: left;
+  padding-top: 2vh;
 }
 
 .inputFieldMobile {
@@ -219,7 +226,7 @@
   height: 5.5vh;
   border-radius: 15px;
   border: 1px solid rgb(229, 234, 223);
-  font-size: large;
+  font-size: 1.8vh;
   padding-left: 1vw;
 }
 
@@ -230,8 +237,6 @@
 
 #whereToPopUpMobile {
   width: 26vw;
-  position: absolute;
-  top: 85%;
   background-color: white;
   border-radius: 15px;
   cursor: pointer;
@@ -241,10 +246,114 @@
 .inputContainerMobile {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
   gap: 1vh;
+  margin-bottom: 2vh;
 }
 
 #datesDivMobile {
-  padding-top: 5vh;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  display: flex;
+  gap: 2.5vh;
+  font-size: 3vh;
+}
+
+.guestInput {
+  width: 8ch;
+}
+
+#guestsPopUpMobile {
+  width: 60vw;
+  background-color: white;
+  border-radius: 15px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.guestListMobile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 8vh;
+  border-bottom: 1px solid lightgray;
+  min-width: 200px;
+  display: flex;
+}
+
+.circleBtnMobile {
+  height: 3vh;
+  width: 3vh;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addSubMobile {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.datePickMobile {
+  margin-bottom: 1vh;
+}
+
+#circleSearchBtnMobile {
+  padding: 2vh;
+  border-radius: 25px;
+  border: none;
+  background-color: var(--orange-color);
+  color: white;
+  margin-top: 5vh;
+  font-size: 2.5vh;
+  margin-bottom: 2vh;
+}
+
+#circleSearchBtnMobile:hover {
+  border: 2px solid var(--green-color);
+  background-color: white;
+  color: var(--green-color);
+}
+
+.arrow {
+  width: 90%;
+  font-size: 10vh;
+  color: var(--orange-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15vh;
+  display: none;
+}
+
+.petMobile {
+  justify-content: center;
+}
+
+.mobileFont {
+  font-size: 2vh;
+}
+
+@media (max-width: 1000px) and (min-width: 600px) {
+  .inputFieldMobile {
+    width: 50ch;
+  }
+  #datesDivMobile {
+    flex-direction: row;
+  }
+
+  .guestInput {
+    width: 20ch;
+  }
+
+  #searchDivMobile {
+    padding: 3vh 0vh;
+  }
 }
