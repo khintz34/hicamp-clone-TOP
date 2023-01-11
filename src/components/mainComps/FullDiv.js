@@ -30,6 +30,12 @@ const FullDiv = (props) => {
     color: "var(--orange-color)",
   };
 
+  let size = window.innerWidth;
+
+  window.onresize = () => {
+    size = window.innerWidth;
+  };
+
   return (
     <div className="fullDivContainer">
       <img src={hillside} alt="" className="fullImage" />
@@ -38,10 +44,13 @@ const FullDiv = (props) => {
         style={{ backgroundColor: orange.backgroundColor }}
       >
         <div className="fullDivWriting">
-          <div style={{ fontSize: "2vw" }}>
+          <div className="fullWritingMain">
             Own Land? Earn money from Hipcamp
           </div>
-          <div style={{ fontSize: "1em", display: windowWidth }}>
+          <div
+            style={{ fontSize: "1em", display: windowWidth }}
+            className="fullWritingPara"
+          >
             Host our community of good-natured campers, glampers, and RV
             travelers on your land or at your cabin.
           </div>

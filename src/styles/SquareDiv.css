@@ -77,3 +77,93 @@
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
+
+/* ! Mobile Below */
+
+/* Ipad Layout */
+
+@media (max-width: 1000px) and (min-width: 601px) {
+  .squareDivsContainer {
+    margin-top: 3vh;
+    width: 80vw;
+    margin-left: 0px;
+  }
+
+  .squareImage {
+    width: 25vw;
+    height: 25vw;
+  }
+
+  .squareDivBottom {
+    height: 20vw;
+    width: 25vw;
+    align-items: flex-end;
+    bottom: 1vh;
+  }
+
+  .squareButtonContainer {
+    width: 25vw;
+  }
+
+  .squareBtn {
+    height: 4vh;
+    width: 20vw;
+    font-size: 2vh;
+  }
+
+  .squareDivTitle {
+    font-size: 3.2vw;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .squareDivComment {
+    font-size: 2.5vw;
+  }
+}
+
+/* Phone Layout */
+
+@media (max-width: 600px) {
+  .squareDivsContainer {
+    margin-top: 3vh;
+    width: 80vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 0px;
+  }
+
+  .squareImage {
+    width: 37vw;
+    height: 37vw;
+    border-radius: 20px;
+  }
+
+  .squareDivBottom {
+    height: 20vw;
+    width: 37vw;
+    align-items: flex-end;
+    bottom: 1vh;
+    justify-content: flex-start;
+  }
+
+  .squareButtonContainer {
+    width: 37vw;
+  }
+
+  .squareBtn {
+    height: 4vh;
+    width: 37vw;
+    font-size: 2vh;
+  }
+
+  .squareDivTitle {
+    font-size: 3.2vw;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .squareDivComment {
+    font-size: 2.5vw;
+  }
+}

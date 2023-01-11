@@ -66,3 +66,63 @@
   color: white;
   font-size: 1.8vw;
 }
+
+@media (max-width: 1000px) {
+  .sideBySide {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vh;
+    gap: 4vh;
+  }
+
+  .halfDivContainer {
+    display: flex;
+    flex-direction: row;
+    width: 30vh;
+    height: 30vh;
+    /* position: static; */
+  }
+
+  .halfImage {
+    width: 30vh;
+  }
+
+  .halfDivBottom {
+    height: 8vh;
+    width: 30vh;
+  }
+
+  .halfDivBottom:hover {
+    width: 30vh;
+  }
+
+  .halfBtn {
+    height: 6vh;
+    width: 30vw;
+    margin-right: 2vw;
+    font-size: 2vh;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+  }
+
+  .halfButtonContainer {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2vw;
+  }
+
+  .titleH2 {
+    text-decoration: none;
+    color: white;
+    font-size: 2vh;
+    margin: 0px;
+  }
+
+  .halfDivWriting {
+    height: 8vh;
+  }
+}

@@ -42,3 +42,126 @@
   text-align: center;
   padding: 5px;
 }
+
+.vertTitle {
+  font-size: 2vw;
+}
+
+.vertComment {
+  font-size: 1.5vw;
+}
+
+/* ! ipad ! */
+
+@media (max-width: 1000px) and (min-width: 600px) {
+  #verticalDivsContainer {
+    height: 45vh;
+    margin: 10vh 0;
+    align-items: flex-end;
+  }
+
+  .vertImage {
+    width: 22vw;
+    border-radius: 20px;
+    z-index: 1;
+  }
+
+  .vertDivContainer {
+    height: 60vw;
+    position: static;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0px;
+  }
+
+  .vertDivBottom {
+    height: 25vh;
+    width: 22vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: static;
+    border-radius: 0 0 15px 15px;
+    margin-top: -2vh;
+    z-index: 0;
+  }
+
+  .vertDivWriting {
+    color: white;
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3vh;
+    text-align: center;
+    padding: 5px;
+  }
+
+  .vertTitle {
+    font-size: 4vw;
+  }
+
+  .vertComment {
+    font-size: 2.5vw;
+  }
+}
+
+/* ! phone ! */
+
+@media (max-width: 600px) {
+  #verticalDivsContainer {
+    /* height: 50vh; */
+    margin-top: 2vh;
+    flex-direction: column;
+  }
+
+  .vertImage {
+    width: 30vw;
+    border-radius: 20px;
+    z-index: 1;
+    height: 30vw;
+  }
+
+  .vertDivContainer {
+    height: auto;
+    position: static;
+    display: flex;
+    flex-direction: row;
+    margin-top: 5vh;
+  }
+
+  .vertDivBottom {
+    height: 30vw;
+    width: 50vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: static;
+    border-radius: 0 15px 15px 0px;
+    z-index: 0;
+    margin-left: -5vw;
+  }
+
+  .vertDivWriting {
+    color: white;
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3vh;
+    text-align: center;
+    padding: 5px;
+  }
+
+  .vertTitle {
+    font-size: 4vw;
+  }
+
+  .vertComment {
+    font-size: 2.5vw;
+  }
+}

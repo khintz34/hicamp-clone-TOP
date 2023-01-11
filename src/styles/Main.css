@@ -21,8 +21,11 @@
 
 #discoverDiv {
   display: flex;
-  margin-left: 10vw;
   margin-top: 6vh;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5vh;
+  font-size: 4vh;
 }
 
 .squareDivsContainer {
@@ -88,4 +91,10 @@
 .noUnderline {
   text-decoration: none;
   color: black;
+}
+
+@media (max-width: 600px) {
+  #discoverDiv {
+    font-size: 2vh;
+  }
 }

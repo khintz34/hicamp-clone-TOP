@@ -46,7 +46,7 @@ const SquareDiv = (props) => {
     {
       to: "/siteList/anywhere/0/null/true/null/null/location",
       image: redTent,
-      title: "Camp fires allowed",
+      title: "Camp fires",
       style: orangeColor,
       item: "fires",
     },

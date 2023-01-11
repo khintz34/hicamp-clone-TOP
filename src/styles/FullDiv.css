@@ -60,3 +60,30 @@
 .fullBtn:hover {
   cursor: pointer;
 }
+
+.fullWritingMain {
+  font-size: 2vw;
+}
+
+@media (max-width: 1000px) {
+  .fullImage {
+    width: 0px;
+  }
+
+  .fullDivBottom {
+    width: 90vw;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    gap: 2vh;
+    position: static;
+    z-index: 0;
+  }
+
+  .fullWritingMain {
+    font-size: 3vh;
+  }
+}

@@ -31,3 +31,81 @@
   font-size: 1.3vw;
   margin-bottom: 4vh;
 }
+
+/* ! Mobile Below */
+
+/* Ipad Layout */
+
+@media (max-width: 1000px) and (min-width: 601px) {
+  #mainCircleDiv {
+    width: 80vw;
+    height: 70vh;
+    margin-left: 0px;
+    padding-top: 0vh;
+  }
+
+  .lTHolder {
+    width: 80vw;
+  }
+
+  .largeText {
+    font-size: 3vh;
+  }
+
+  .circleDivContainer {
+    width: 25vw;
+  }
+
+  .circleImage {
+    height: 23vw;
+    width: 23vw;
+  }
+
+  .circleDivTitle {
+    font-size: 2.5vh;
+  }
+
+  .circleDivComment {
+    font-size: 2.3vw;
+  }
+}
+
+/* phone Layout */
+
+@media (max-width: 600px) {
+  #mainCircleDiv {
+    width: 80vw;
+    height: 50vh;
+    margin-left: 0px;
+    padding-top: 0vh;
+  }
+
+  .lTHolder {
+    width: 80vw;
+  }
+
+  .largeText {
+    font-size: 3vh;
+  }
+
+  #circleDivsContainer {
+    gap: 4vw;
+  }
+
+  .circleDivContainer {
+    width: 23vw;
+  }
+
+  .circleImage {
+    height: 23vw;
+    width: 23vw;
+  }
+
+  .circleDivTitle {
+    font-size: 2.2vh;
+  }
+
+  .circleDivComment {
+    display: none;
+  }
+}

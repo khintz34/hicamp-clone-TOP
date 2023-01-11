@@ -47,13 +47,13 @@ const VerticalDiv = (props) => {
     <div id="verticalDivsContainer">
       {verticalDivArray.map((value) => {
         return (
-          <Link to={value.to}>
+          <Link to={value.to} className="noUnderline">
             <div className="vertDivContainer">
               <img src={value.image} alt="" className="vertImage" />
               <div className="vertDivBottom" style={value.style}>
                 <div className="vertDivWriting">
-                  <div style={{ fontSize: "2vw" }}>{value.title}</div>
-                  <div style={{ fontSize: "1.5vw" }}>{value.comment}</div>
+                  <div className="vertTitle">{value.title}</div>
+                  <div className="vertComment">{value.comment}</div>
                 </div>
               </div>
             </div>
