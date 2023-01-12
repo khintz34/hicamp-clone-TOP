@@ -11,9 +11,6 @@ const SafetyDiv = () => {
   const noStyle = {
     listStyleType: "none",
   };
-  const stretchImage = {
-    width: "20vh",
-  };
   const safetyDivArray = [
     {
       image: recreate,
@@ -37,7 +34,7 @@ const SafetyDiv = () => {
       li5: "Minimize fire impacts",
       li6: "Respect wildlife",
       li7: "Be considerate of others",
-      stretch: stretchImage,
+      stretch: "stretchImage",
       url: "https://lnt.org/why/7-principles/",
     },
     {
@@ -65,17 +62,16 @@ const SafetyDiv = () => {
                 openURL(value.url);
               }}
             >
-              <img
-                src={value.image}
-                alt=""
-                className="safetyImage"
-                style={value.stretch}
-              />
+              <div className="safetyImgHolder ">
+                <img
+                  src={value.image}
+                  alt=""
+                  className={`safetyImage ${value.stretch}`}
+                />
+              </div>
               <div className="safetyDivBottom">
                 <div className="safetyDivWriting">
-                  <div style={{ fontSize: "2vw", fontWeight: "bold" }}>
-                    {value.title}
-                  </div>
+                  <div className="safetyTitle">{value.title}</div>
                   <ol style={value.type} className="safetyOL">
                     <li style={value.show}>{value.li1}</li>
                     <li style={value.show}>{value.li2}</li>

@@ -4,7 +4,7 @@
   background-color: var(--limeGreen);
   color: #28400c;
   /* height: 70vh; */
-  width: 18.67vw;
+  width: 18.75vw;
   border-radius: 20px;
 }
 
@@ -27,6 +27,7 @@
 
 .safetyDivWriting {
   width: 100%;
+  margin-bottom: 1vh;
 }
 
 .safetyOL {
@@ -34,6 +35,11 @@
   line-height: 1.2;
   text-align: left;
   width: 100%;
+}
+
+.safetyTitle {
+  font-size: 2vw;
+  font-weight: bold;
 }
 
 .safetyCommentDiv {
@@ -45,7 +51,6 @@
 .safetyBtnContainer {
   display: flex;
   justify-content: center;
-  /* position: relative; */
   margin-top: auto;
   margin-bottom: 5px;
 }
@@ -64,4 +69,59 @@
   background-color: #28400c;
   color: white;
   cursor: pointer;
+}
+
+.stretchImage {
+  width: 20vh;
+}
+
+@media (max-width: 1000px) {
+  .safetyImage {
+    width: 20vw;
+    height: 20vw;
+    margin-left: 0vw;
+    margin-top: 1vh;
+    padding: 1vh;
+  }
+
+  .stretchImage {
+    height: auto;
+    width: 20vw;
+  }
+
+  .safetyDivContainer {
+    width: 30vw;
+  }
+
+  .safetyImgHolder {
+    height: 25vw;
+    display: flex;
+    align-items: center;
+  }
+
+  .safetyTitle {
+    font-size: 3vw;
+    height: 5vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .safetyDivBottom {
+    width: 95%;
+    margin-top: 1vh;
+  }
+
+  .safetyOL {
+    font-size: 1vh;
+    padding-left: 3vw;
+    overflow: scroll;
+    width: 90%;
+  }
+
+  .safetyCommentDiv {
+    font-size: 1vh;
+    width: 95%;
+  }
 }

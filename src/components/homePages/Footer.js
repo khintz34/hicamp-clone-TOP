@@ -21,16 +21,14 @@ const Footer = (props) => {
         <LinkList
           title="Hosting"
           link1="Becoming a Host"
-          link2="is my land a fit?"
+          link2="Is my land a fit?"
           link3="Insurance"
           link4="Standards"
           link5="Hosting FAQ"
         />
 
         <div id="footerParas">
-          <div
-            style={{ color: "#28400c", fontWeight: "bold", fontSize: "20px" }}
-          >
+          <div className="footerParasTitle">
             Hipcamp is the most comprehensive resource for unique outdoor stays.
           </div>
           <div
@@ -46,7 +44,9 @@ const Footer = (props) => {
         </div>
       </div>
       <div id="footerFooter">
-        <div>© 2022 Hipcamp, Inc. All rights reserved</div>
+        <div className="footerCopyright">
+          © 2022 Hipcamp, Inc. All rights reserved
+        </div>
         <div className="smallLink">Terms of Service</div>
         <div className="smallLink">Privacy Policy</div>
         <div className="smallLink">Sitemap</div>
