@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { usePetStore } from "../../stores/petStore";
 import { useSearchStore } from "../../stores/searchStore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
 const SiteList = () => {
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
@@ -28,6 +30,7 @@ const SiteList = () => {
   const [urlFlag, setUrlFlag] = useState(false);
   const [createdFlag, setCreatedFlag] = useState(false);
   const [fullList, setFullList] = useState([]);
+  const [showFilter, setShowFilter] = useState(false);
 
   const { locationParam } = useParams();
   const { guestParam } = useParams();
@@ -178,7 +181,6 @@ const SiteList = () => {
       }
 
       if (petParam !== "null") {
-        // setPetSearch(petParam);
         changePetSearch(petParam);
 
         if (newArray.length > 0) {
@@ -190,7 +192,6 @@ const SiteList = () => {
           });
           newArray = arrayTwo;
         } else {
-          // setPetSearch(petParam);
           changePetSearch(petParam);
           fullList.map((value, key) => {
             if (value.pets.toString() === petParam.toString()) {
@@ -199,7 +200,6 @@ const SiteList = () => {
           });
         }
       } else {
-        // setPetSearch(petParam);
         changePetSearch(petParam);
       }
     }
@@ -350,75 +350,98 @@ const SiteList = () => {
     setCurrentSiteList(newerArray);
   }
 
+  let size = window.innerWidth;
+
+  window.onresize = () => {
+    size = window.innerWidth;
+  };
+
+  const changeFilter = () => {
+    setShowFilter(!showFilter);
+    console.log(showFilter);
+  };
+
   return (
     <div className="siteListContainer">
       <Header />
-      <div id="siteListHeader">
-        <button className="siteBtn" onClick={() => showType("Tent")}>
-          Tents
-        </button>
-        <button className="siteBtn" onClick={() => showType("Lodging")}>
-          Lodging
-        </button>
-        <button className="siteBtn" onClick={() => showType("RV")}>
-          RVs
-        </button>
-        {maxMinEQ ? (
-          <div style={{ display: "none" }}>equal</div>
-        ) : (
+      {size > 600 ? (
+        <div id="siteListHeader">
+          <button className="siteBtn" onClick={() => showType("Tent")}>
+            Tents
+          </button>
+          <button className="siteBtn" onClick={() => showType("Lodging")}>
+            Lodging
+          </button>
+          <button className="siteBtn" onClick={() => showType("RV")}>
+            RVs
+          </button>
+          {maxMinEQ ? (
+            <div style={{ display: "none" }}>equal</div>
+          ) : (
+            <div>
+              <input
+                type="range"
+                id="guestSlider"
+                name="guests"
+                min={minVal}
+                max={maxVal}
+                step="1"
+                onChange={(e) => {
+                  handleGuestsChange(e);
+                }}
+                value={currentVal}
+              />
+              <label htmlFor="guestSlider">Max Guests ({currentVal})</label>
+            </div>
+          )}
           <div>
             <input
               type="range"
-              id="guestSlider"
-              name="guests"
-              min={minVal}
-              max={maxVal}
+              id="acres"
+              name="acres"
               step="1"
+              min={minAcres}
+              max={maxAcres}
               onChange={(e) => {
-                handleGuestsChange(e);
+                handleAcresChange(e);
               }}
-              value={currentVal}
+              value={currentAcres}
             />
-            <label htmlFor="guestSlider">Max Guests ({currentVal})</label>
+            <label htmlFor="acres">Max Acres ({currentAcres})</label>
           </div>
-        )}
-        <div>
-          <input
-            type="range"
-            id="acres"
-            name="acres"
-            step="1"
-            min={minAcres}
-            max={maxAcres}
-            onChange={(e) => {
-              handleAcresChange(e);
-            }}
-            value={currentAcres}
-          />
-          <label htmlFor="acres">Max Acres ({currentAcres})</label>
+          {searchItem !== "" ? (
+            <div>
+              <p>Search: {searchItem}</p>
+            </div>
+          ) : (
+            <div style={{ display: "none" }}></div>
+          )}
+          {petSearchTranslate !== "" ? (
+            <div>
+              <p>Pets Allowed: {petSearchTranslate}</p>
+            </div>
+          ) : (
+            <div style={{ display: "none" }}></div>
+          )}
+          {Number(guestParam) !== 0 ? (
+            <div>
+              <p>Number of Guests: {guestParam}</p>
+            </div>
+          ) : (
+            <div style={{ display: "none" }}></div>
+          )}
         </div>
-        {searchItem !== "" ? (
-          <div>
-            <p>Search: {searchItem}</p>
-          </div>
-        ) : (
-          <div style={{ display: "none" }}></div>
-        )}
-        {petSearchTranslate !== "" ? (
-          <div>
-            <p>Pets Allowed: {petSearchTranslate}</p>
-          </div>
-        ) : (
-          <div style={{ display: "none" }}></div>
-        )}
-        {Number(guestParam) !== 0 ? (
-          <div>
-            <p>Number of Guests: {guestParam}</p>
-          </div>
-        ) : (
-          <div style={{ display: "none" }}></div>
-        )}
-      </div>
+      ) : (
+        <div id="siteListHeaderSmall">
+          <button className="siteListHeaderButton" onClick={changeFilter}>
+            <FontAwesomeIcon icon={faFilter} />
+          </button>
+        </div>
+      )}
+      <div
+        id="smallHeaderDropDown"
+        className={showFilter ? "showHeader" : "hideHeader"}
+      ></div>
       <div id="siteListMainContainer">
         <div id="siteListMain">
           {currentSiteList.length === 0 ? (

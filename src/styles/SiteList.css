@@ -54,3 +54,57 @@
   color: var(--green-color);
   font-size: larger;
 }
+
+@media (max-width: 600px) {
+  #siteListMain {
+    grid-template-columns: 1fr;
+  }
+
+  #siteListHeaderSmall {
+    background-color: rgb(182, 184, 186);
+    height: 8vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2vw;
+    gap: 2vw;
+  }
+
+  .siteListHeaderButton {
+    width: 33vw;
+    height: 4vh;
+    border-radius: 50px;
+    border: 2px solid var(--green-color);
+  }
+
+  .siteListHeaderButton:hover {
+    background-color: var(--green-color);
+    border-color: black;
+    color: white;
+  }
+
+  #smallHeaderDropDown {
+    position: absolute;
+    z-index: 1000;
+    top: 18vh;
+    left: 0;
+    width: 100vw;
+    background-color: black;
+    transition: 1s;
+  }
+
+  .showHeader {
+    height: 100vh;
+  }
+
+  .hideHeader {
+    height: 0vh;
+  }
+}
+
+@media (max-width: 1000px) and (min-width: 601px) {
+  #siteListMain {
+    grid-template-columns: 1fr 1fr;
+  }
+}

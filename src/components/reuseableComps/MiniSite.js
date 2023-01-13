@@ -25,37 +25,36 @@ const MiniSite = (props) => {
       onClick={() => setCurrentSite(props.fullSite)}
     >
       <div className="miniImgContainer">
-        <img src={urlState} alt="" />
+        <img src={urlState} alt="" className="miniImage" />
       </div>
-      <div id="siteReviews">
-        <div id="siteRating">{props.rating}% Rating</div>
-        <div>·</div>
-        <div id="ratingNumber">{props.reviewNum} Reviews</div>
-      </div>
-      <div id="siteNameMini">{props.name}</div>
-      <div id="siteType">
-        {props.type.map((value, key) => {
-          if (key !== props.type.length - 1) {
-            return (
-              <div key={`mini${currentSite.name}-type-${value}`}>
-                {value}
-                {","}
-              </div>
-            );
-          } else {
-            return (
-              <div key={`mini${currentSite.name}-type-${value}`}>{value}</div>
-            );
-          }
-        })}
-      </div>
-      <div className="miniDeetsSide">
-        <div id="siteAcres">{props.acres} Acres · </div>
-        <div id="siteDeets" className="miniDeetsSide">
-          {props.city}, {props.state}
+      <div className="miniSiteBottom">
+        <div id="siteReviews">
+          <div id="siteRating">{props.rating}% Rating</div>
+          <div>·</div>
+          <div id="ratingNumber">{props.reviewNum} Reviews</div>
         </div>
+        <div id="siteNameMini">{props.name}</div>
+        <div id="siteType">
+          {props.type.map((value, key) => {
+            if (key !== props.type.length - 1) {
+              return (
+                <div key={`mini${currentSite.name}-type-${value}`}>
+                  {value}
+                  {","}
+                </div>
+              );
+            } else {
+              return (
+                <div key={`mini${currentSite.name}-type-${value}`}>{value}</div>
+              );
+            }
+          })}
+        </div>
+        <div className="miniDeetsSide">
+          <div>{`${props.acres} Acres ·  ${props.city}, ${props.state}`}</div>
+        </div>
+        <div>${props.price}/night</div>
       </div>
-      <div>${props.price}/night</div>
     </div>
   );
 };
