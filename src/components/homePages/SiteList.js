@@ -12,6 +12,8 @@ import { useSearchStore } from "../../stores/searchStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
+//todo fix positioning on siteList dropdown
+
 const SiteList = () => {
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
   const changePetSearch = usePetStore((state) => state.changePetSearch);
@@ -438,10 +440,83 @@ const SiteList = () => {
           </button>
         </div>
       )}
-      <div
-        id="smallHeaderDropDown"
-        className={showFilter ? "showHeader" : "hideHeader"}
-      ></div>
+
+      <div id="siteListMenuContainer">
+        <div
+          className={`siteListMenu ${showFilter ? "showHeader" : "hideHeader"}`}
+        >
+          <div className="siteListMenuButtons">
+            <button className="siteBtn" onClick={() => showType("Tent")}>
+              Tents
+            </button>
+            <button className="siteBtn" onClick={() => showType("Lodging")}>
+              Lodging
+            </button>
+            <button className="siteBtn" onClick={() => showType("RV")}>
+              RVs
+            </button>
+          </div>
+          {maxMinEQ ? (
+            <div style={{ display: "none" }}></div>
+          ) : (
+            <div className="inputSlider">
+              <input
+                type="range"
+                id="guestSlider"
+                name="guests"
+                min={minVal}
+                max={maxVal}
+                step="1"
+                onChange={(e) => {
+                  handleGuestsChange(e);
+                }}
+                value={currentVal}
+              />
+              <label htmlFor="guestSlider" className="sliderTitle">
+                Max Guests ({currentVal})
+              </label>
+            </div>
+          )}
+          <div className="inputSlider">
+            <input
+              type="range"
+              id="acres"
+              name="acres"
+              step="1"
+              min={minAcres}
+              max={maxAcres}
+              onChange={(e) => {
+                handleAcresChange(e);
+              }}
+              value={currentAcres}
+            />
+            <label htmlFor="acres" className="sliderTitle">
+              Max Acres ({currentAcres})
+            </label>
+          </div>
+          {searchItem !== "" ? (
+            <div className="searchSmall">
+              <p>Search: {searchItem}</p>
+            </div>
+          ) : (
+            <div style={{ display: "none" }}></div>
+          )}
+          {petSearchTranslate !== "" ? (
+            <div className="searchSmall">
+              <p>Pets Allowed: {petSearchTranslate}</p>
+            </div>
+          ) : (
+            <div style={{ display: "none" }}></div>
+          )}
+          {Number(guestParam) !== 0 ? (
+            <div>
+              <p className="searchSmall">Number of Guests: {guestParam}</p>
+            </div>
+          ) : (
+            <div style={{ display: "none" }}></div>
+          )}
+        </div>
+      </div>
       <div id="siteListMainContainer">
         <div id="siteListMain">
           {currentSiteList.length === 0 ? (

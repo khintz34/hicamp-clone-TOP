@@ -69,6 +69,9 @@
     align-items: center;
     padding-left: 2vw;
     gap: 2vw;
+    z-index: 1000;
+    position: sticky;
+    top: 10vh;
   }
 
   .siteListHeaderButton {
@@ -76,6 +79,7 @@
     height: 4vh;
     border-radius: 50px;
     border: 2px solid var(--green-color);
+    z-index: 10;
   }
 
   .siteListHeaderButton:hover {
@@ -90,16 +94,100 @@
     top: 18vh;
     left: 0;
     width: 100vw;
-    background-color: black;
+    background-color: rgb(182, 184, 186);
     transition: 1s;
+    z-index: 10;
+  }
+
+  .hideDrop {
+    display: none;
+  }
+
+  .siteListMenu {
+    background-color: rgb(182, 184, 186);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 2vw;
+    margin-top: 10vh;
+    overflow: hidden;
+    transition: 1s;
+    overflow-y: scroll;
+    position: absolute;
+    top: 18vh;
+    z-index: 9;
+    margin: 0;
+    display: block;
+    opacity: 1;
+    height: 90vh;
+  }
+
+  .siteListMenuButtons {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    justify-content: space-evenly;
+    margin-bottom: 5vh;
+    padding-top: 5vh;
+  }
+
+  .siteBtn {
+    width: 25vw;
+    max-width: 27vh;
+    border-radius: 25px;
+    background-color: var(--forest-color);
+    color: white;
+    font-size: 2.5vh;
+    padding: 1vh;
+    height: auto;
+  }
+
+  .sliderTitle {
+    font-size: 2.5vh;
+  }
+
+  .inputSlider {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    gap: 5vw;
+    justify-content: flex-start;
+    padding-left: 5vw;
+    margin-bottom: 5vh;
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    background-color: var(--forest-color);
+    border-radius: 25px;
+    height: 3vh;
+    width: 45vw;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: white;
+    opacity: 1;
+    width: 4vh;
+    height: 4vh;
+    border-radius: 50%;
+  }
+
+  .searchSmall {
+    font-size: 2.5vh;
+    width: 100vw;
+    text-align: left;
+    padding-left: 5vw;
   }
 
   .showHeader {
-    height: 100vh;
+    height: 90vh;
   }
 
   .hideHeader {
-    height: 0vh;
+    height: 0%;
+    padding-top: 0vh;
   }
 }
 
