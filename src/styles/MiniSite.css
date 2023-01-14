@@ -60,7 +60,7 @@
 
 @media (max-width: 1000px) and (min-width: 601px) {
   .miniSiteContainer {
-    width: 40vw;
+    width: 45vw;
     height: 45vh;
     font-size: 2vh;
   }
@@ -76,7 +76,7 @@
   }
 
   .miniImage {
-    width: 40vw;
+    width: 45vw;
     height: 25vh;
     border-radius: 20px 20px 0px 0px;
   }

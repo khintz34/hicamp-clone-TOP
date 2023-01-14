@@ -155,7 +155,7 @@ const Sites = (props) => {
                 <img src={urlState} alt="" className="siteImg" />
               </div>
               <div id="siteInfoHolder">
-                <h2>Site Info</h2>
+                <h2 className="infoTitle">Site Info</h2>
                 <div id="siteInfo">{currentSite.info} </div>
               </div>
             </div>

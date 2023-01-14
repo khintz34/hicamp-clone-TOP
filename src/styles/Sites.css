@@ -197,3 +197,88 @@
   font-size: 3vh;
   font-weight: bolder;
 }
+
+/* ! Ipad Settings  */
+
+@media (max-width: 1000px) {
+  #bookBtnContainer {
+    top: 12vh;
+  }
+
+  #siteInfoMain {
+    flex-direction: column;
+    border: 1px solid var(--green-color);
+  }
+
+  #siteName {
+    font-size: 4vw;
+  }
+
+  .siteImageDiv {
+    height: auto;
+    width: 60vw;
+    padding: 1vh;
+    border-radius: 25px;
+  }
+
+  .siteImg {
+    border-radius: 25px;
+  }
+
+  #siteInfoHolder {
+    width: 80vw;
+    padding-bottom: 3vw;
+  }
+
+  .infoTitle {
+    font-size: 3vh;
+  }
+
+  #additionalSpecs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .specDivSmall {
+    width: 60vw;
+    height: auto;
+  }
+
+  .sitesColumns {
+    font-size: 2.2vh;
+  }
+
+  .datePickHolder {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding-bottom: 3vh;
+    margin-bottom: 2vh;
+  }
+
+  #datesDiv {
+    width: 60vw;
+  }
+
+  .calContain {
+    margin-top: 1vh;
+  }
+}
+
+/* ! Phone Settings  */
+
+@media (max-width: 600px) {
+  #bookBtn {
+    width: 25vw;
+    font-size: 2vh;
+  }
+
+  #siteName {
+    font-size: 4vh;
+  }
+}

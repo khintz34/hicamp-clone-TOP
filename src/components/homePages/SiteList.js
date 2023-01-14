@@ -12,7 +12,7 @@ import { useSearchStore } from "../../stores/searchStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
-//todo fix positioning on siteList dropdown
+//todo fix positioning on siteList dropdown - moves before transition
 
 const SiteList = () => {
   const { currentSiteList, setCurrentSiteList } = useContext(SiteContext);
@@ -368,19 +368,22 @@ const SiteList = () => {
       <Header />
       {size > 600 ? (
         <div id="siteListHeader">
-          <button className="siteBtn" onClick={() => showType("Tent")}>
-            Tents
-          </button>
-          <button className="siteBtn" onClick={() => showType("Lodging")}>
-            Lodging
-          </button>
-          <button className="siteBtn" onClick={() => showType("RV")}>
-            RVs
-          </button>
+          <div className="siteListMenuButtons">
+            <button className="siteBtn" onClick={() => showType("Tent")}>
+              Tents
+            </button>
+            <button className="siteBtn" onClick={() => showType("Lodging")}>
+              Lodging
+            </button>
+            <button className="siteBtn" onClick={() => showType("RV")}>
+              RVs
+            </button>
+          </div>
+
           {maxMinEQ ? (
             <div style={{ display: "none" }}>equal</div>
           ) : (
-            <div>
+            <div className="sliderDiv">
               <input
                 type="range"
                 id="guestSlider"
@@ -396,7 +399,7 @@ const SiteList = () => {
               <label htmlFor="guestSlider">Max Guests ({currentVal})</label>
             </div>
           )}
-          <div>
+          <div className="sliderDiv">
             <input
               type="range"
               id="acres"
@@ -411,23 +414,24 @@ const SiteList = () => {
             />
             <label htmlFor="acres">Max Acres ({currentAcres})</label>
           </div>
+
           {searchItem !== "" ? (
             <div>
-              <p>Search: {searchItem}</p>
+              <p className="searchSmall">Search: {searchItem}</p>
             </div>
           ) : (
             <div style={{ display: "none" }}></div>
           )}
           {petSearchTranslate !== "" ? (
             <div>
-              <p>Pets Allowed: {petSearchTranslate}</p>
+              <p className="searchSmall">Pets Allowed: {petSearchTranslate}</p>
             </div>
           ) : (
             <div style={{ display: "none" }}></div>
           )}
           {Number(guestParam) !== 0 ? (
             <div>
-              <p>Number of Guests: {guestParam}</p>
+              <p className="searchSmall">Guests: {guestParam}</p>
             </div>
           ) : (
             <div style={{ display: "none" }}></div>
@@ -445,76 +449,78 @@ const SiteList = () => {
         <div
           className={`siteListMenu ${showFilter ? "showHeader" : "hideHeader"}`}
         >
-          <div className="siteListMenuButtons">
-            <button className="siteBtn" onClick={() => showType("Tent")}>
-              Tents
-            </button>
-            <button className="siteBtn" onClick={() => showType("Lodging")}>
-              Lodging
-            </button>
-            <button className="siteBtn" onClick={() => showType("RV")}>
-              RVs
-            </button>
-          </div>
-          {maxMinEQ ? (
-            <div style={{ display: "none" }}></div>
-          ) : (
+          <div className="siteListMenuMain">
+            <div className="siteListMenuButtons">
+              <button className="siteBtn" onClick={() => showType("Tent")}>
+                Tents
+              </button>
+              <button className="siteBtn" onClick={() => showType("Lodging")}>
+                Lodging
+              </button>
+              <button className="siteBtn" onClick={() => showType("RV")}>
+                RVs
+              </button>
+            </div>
+            {maxMinEQ ? (
+              <div style={{ display: "none" }}></div>
+            ) : (
+              <div className="inputSlider">
+                <input
+                  type="range"
+                  id="guestSlider"
+                  name="guests"
+                  min={minVal}
+                  max={maxVal}
+                  step="1"
+                  onChange={(e) => {
+                    handleGuestsChange(e);
+                  }}
+                  value={currentVal}
+                />
+                <label htmlFor="guestSlider" className="sliderTitle">
+                  Max Guests ({currentVal})
+                </label>
+              </div>
+            )}
             <div className="inputSlider">
               <input
                 type="range"
-                id="guestSlider"
-                name="guests"
-                min={minVal}
-                max={maxVal}
+                id="acres"
+                name="acres"
                 step="1"
+                min={minAcres}
+                max={maxAcres}
                 onChange={(e) => {
-                  handleGuestsChange(e);
+                  handleAcresChange(e);
                 }}
-                value={currentVal}
+                value={currentAcres}
               />
-              <label htmlFor="guestSlider" className="sliderTitle">
-                Max Guests ({currentVal})
+              <label htmlFor="acres" className="sliderTitle">
+                Max Acres ({currentAcres})
               </label>
             </div>
-          )}
-          <div className="inputSlider">
-            <input
-              type="range"
-              id="acres"
-              name="acres"
-              step="1"
-              min={minAcres}
-              max={maxAcres}
-              onChange={(e) => {
-                handleAcresChange(e);
-              }}
-              value={currentAcres}
-            />
-            <label htmlFor="acres" className="sliderTitle">
-              Max Acres ({currentAcres})
-            </label>
+            {searchItem !== "" ? (
+              <div className="searchSmall">
+                <p>Search: {searchItem}</p>
+              </div>
+            ) : (
+              <div style={{ display: "none" }}></div>
+            )}
+            {petSearchTranslate !== "" ? (
+              <div className="searchSmall">
+                <p>Pets Allowed: {petSearchTranslate}</p>
+              </div>
+            ) : (
+              <div style={{ display: "none" }}></div>
+            )}
+            {Number(guestParam) !== 0 ? (
+              <div>
+                <p className="searchSmall">Number of Guests: {guestParam}</p>
+              </div>
+            ) : (
+              <div style={{ display: "none" }}></div>
+            )}
           </div>
-          {searchItem !== "" ? (
-            <div className="searchSmall">
-              <p>Search: {searchItem}</p>
-            </div>
-          ) : (
-            <div style={{ display: "none" }}></div>
-          )}
-          {petSearchTranslate !== "" ? (
-            <div className="searchSmall">
-              <p>Pets Allowed: {petSearchTranslate}</p>
-            </div>
-          ) : (
-            <div style={{ display: "none" }}></div>
-          )}
-          {Number(guestParam) !== 0 ? (
-            <div>
-              <p className="searchSmall">Number of Guests: {guestParam}</p>
-            </div>
-          ) : (
-            <div style={{ display: "none" }}></div>
-          )}
         </div>
       </div>
       <div id="siteListMainContainer">
