@@ -18,11 +18,11 @@ const AboutVerticals = () => {
   ];
 
   return (
-    <div id="verticalDivsContainer">
+    <div id="aboutVerticalDivsContainer">
       {verticalDivArray.map((value) => {
         return (
-          <div className="vertDivContainer">
-            <img src={value.image} alt="" className="vertImage" />
+          <div className="aboutVertDivContainer">
+            <img src={value.image} alt="" className="aboutVertImage" />
           </div>
         );
       })}
