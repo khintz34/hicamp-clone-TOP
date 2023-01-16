@@ -80,6 +80,7 @@
     border-radius: 50px;
     border: 2px solid var(--green-color);
     z-index: 10;
+    color: black;
   }
 
   .siteListHeaderButton:hover {
