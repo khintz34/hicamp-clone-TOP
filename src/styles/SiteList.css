@@ -14,6 +14,10 @@
   gap: 2vw;
 }
 
+#siteListMenuContainer {
+  display: none;
+}
+
 .siteBtn {
   height: 5vh;
   min-width: 5vw;
