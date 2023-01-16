@@ -56,9 +56,13 @@ const SquareDivWTag = (props) => {
   ];
   return (
     <div id="placesToGoMainDiv" className="squareDivsContainer">
-      {holdingArray.map((value) => {
+      {holdingArray.map((value, key) => {
         return (
-          <Link to={value.to} className="noUnderline">
+          <Link
+            to={value.to}
+            className="noUnderline"
+            key={`SqDivwTag-${value.comment}-${key}`}
+          >
             <div className="squareDivWTagContainer">
               <img
                 src={value.image}

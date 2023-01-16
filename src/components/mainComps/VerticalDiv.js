@@ -47,7 +47,11 @@ const VerticalDiv = (props) => {
     <div id="verticalDivsContainer">
       {verticalDivArray.map((value) => {
         return (
-          <Link to={value.to} className="noUnderline">
+          <Link
+            to={value.to}
+            className="noUnderline"
+            key={`vertDiv-${value.special}`}
+          >
             <div className="vertDivContainer">
               <img src={value.image} alt="" className="vertImage" />
               <div className="vertDivBottom" style={value.style}>

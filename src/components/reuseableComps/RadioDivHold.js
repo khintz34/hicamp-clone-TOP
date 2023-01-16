@@ -9,7 +9,6 @@ const RadioDivHold = (props) => {
     <div className="radioDivHold leftAlign">
       <p className="labelLeft">{props.title} </p>
       {newArray.map((value, key) => {
-        console.log(value);
         return (
           <YesNoRadio
             key={`RDH=${value.id}`}

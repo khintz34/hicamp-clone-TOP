@@ -22,6 +22,7 @@ const CircleDiv = (props) => {
       comment:
         "Easily book secluded outdoor tent sites, RV sites, and glamping stays on private lands -- from blueberry farms to lakeside yurts.",
       border: borderOne,
+      key: "bridge",
     },
     {
       image: circleBarrell,
@@ -29,6 +30,7 @@ const CircleDiv = (props) => {
       comment:
         "Relax in an outdoor sauna, explore hidden swimming holes, do yoga with the goats, and eat wood-fired pizza under the stars.",
       border: borderTwo,
+      key: "barrell",
     },
     {
       image: circleLlama,
@@ -36,6 +38,7 @@ const CircleDiv = (props) => {
       comment:
         "By booking with Hipcamp, you're funding the protection of open spaces and supporting the people who support the land.",
       border: borderThree,
+      key: "llama",
     },
   ];
 
@@ -47,9 +50,12 @@ const CircleDiv = (props) => {
         </div>
       </div>
       <div id="circleDivsContainer">
-        {circleDivArray.map((value) => {
+        {circleDivArray.map((value, key) => {
           return (
-            <div className="circleDivContainer">
+            <div
+              className="circleDivContainer"
+              key={`circleDiv-${value.key}-${key}}`}
+            >
               <img
                 src={value.image}
                 alt=""

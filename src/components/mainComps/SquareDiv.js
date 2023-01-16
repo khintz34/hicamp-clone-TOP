@@ -75,9 +75,13 @@ const SquareDiv = (props) => {
 
   return (
     <div className="squareDivsContainer">
-      {squareDivArray.map((value) => {
+      {squareDivArray.map((value, key) => {
         return (
-          <Link to={value.to} className="noUnderline">
+          <Link
+            to={value.to}
+            className="noUnderline"
+            key={`squareDiv-${value.item}-${key}`}
+          >
             <div className="squareDivContainer">
               <img src={value.image} alt="" className="squareImage" />
               <div className="squareDivBottom">

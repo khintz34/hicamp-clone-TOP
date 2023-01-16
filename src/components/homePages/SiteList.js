@@ -360,7 +360,6 @@ const SiteList = () => {
 
   const changeFilter = () => {
     setShowFilter(!showFilter);
-    console.log(showFilter);
   };
 
   return (

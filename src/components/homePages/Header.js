@@ -36,10 +36,8 @@ const Header = () => {
   useEffect(() => {
     if (!currentAuth) {
       setSignInLingo("Sign In");
-      console.log("signing out");
     } else {
       setSignInLingo("Sign Out");
-      console.log("signing in");
     }
   }, [currentAuth]);
 
@@ -55,11 +53,9 @@ const Header = () => {
           // The signed-in user info.
           const user = result.user;
           setCurrentAuth(true);
-          // console.log(user);
           setSignInLingo("Sign Out");
           // ...
           closeMenu();
-          console.log("signing in func");
         })
         .catch((error) => {});
     } else {
@@ -67,7 +63,6 @@ const Header = () => {
         function () {
           setCurrentAuth(false);
           setSignInLingo("Sign In");
-          console.log("signing out func");
         },
         function (error) {
           console.error("Sign Out Error", error);

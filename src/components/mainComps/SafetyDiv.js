@@ -23,6 +23,7 @@ const SafetyDiv = () => {
       li6: "Leave no trace",
       li7: "Build an inclusive outdoors",
       url: "https://www.recreateresponsibly.org/",
+      key: "recreate",
     },
     {
       image: leaveNoTrace,
@@ -36,6 +37,7 @@ const SafetyDiv = () => {
       li7: "Be considerate of others",
       stretch: "stretchImage",
       url: "https://lnt.org/why/7-principles/",
+      key: "trace",
     },
     {
       image: nationalWeather,
@@ -45,6 +47,7 @@ const SafetyDiv = () => {
       show: showNone,
       type: noStyle,
       url: "https://www.weather.gov/",
+      key: "weather",
     },
   ];
 
@@ -54,9 +57,10 @@ const SafetyDiv = () => {
   return (
     <div id="safetyDivHolder">
       <div id="safetyDivMain">
-        {safetyDivArray.map((value) => {
+        {safetyDivArray.map((value, key) => {
           return (
             <div
+              key={`SafetyDiv-${key}-${value.key}`}
               className="safetyDivContainer"
               onClick={() => {
                 openURL(value.url);

@@ -64,6 +64,10 @@
     grid-template-columns: 1fr;
   }
 
+  #siteListMenuContainer {
+    display: flex;
+  }
+
   #siteListHeaderSmall {
     background-color: rgb(182, 184, 186);
     height: 8vh;
