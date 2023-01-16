@@ -207,24 +207,25 @@ const Header = () => {
           <button id="signUp-btn2" onClick={signUserIn}>
             {signInLingo}
           </button>
-          <li className="header-btn menuItem" onClick={closeMenu}>
-            <Link
-              to={"/siteList/montana/0/null/null/null/null/location"}
-              className=" whiteFont"
-            >
+          <Link
+            to={"/siteList/montana/0/null/null/null/null/location"}
+            className=" whiteFont"
+          >
+            <li className="header-btn menuItem" onClick={closeMenu}>
               Near Me
-            </Link>
-          </li>
-          <li className="header-btn menuItem" onClick={closeMenu}>
-            <Link className="whiteFont " to="/about">
+            </li>
+          </Link>
+
+          <Link className="whiteFont " to="/about">
+            <li className="header-btn menuItem" onClick={closeMenu}>
               About
-            </Link>
-          </li>
-          <li className="header-btn menuItem" onClick={closeMenu}>
-            <Link className=" whiteFont" to="/owners">
+            </li>
+          </Link>
+          <Link className=" whiteFont" to="/owners">
+            <li className="header-btn menuItem" onClick={closeMenu}>
               Start hosting{" "}
-            </Link>
-          </li>
+            </li>
+          </Link>
         </ul>
       </div>
     </div>

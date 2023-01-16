@@ -138,18 +138,23 @@ form {
 
 /* ! Phone Settings  */
 @media (max-width: 600px) {
+  .InputLandContainer {
+    height: 200vh;
+    padding-bottom: 10vh;
+  }
+
   #inputFormContainer {
     width: 100vw;
     max-width: 100vw;
-    left: 0vw;
-    padding: 2vw;
-    top: 10vh;
     border-radius: 0px;
     border-left: none;
+    border-right: none;
+    height: auto;
+    position: static;
   }
 
   .leftAlign {
-    width: 90%;
+    max-width: 90vw;
   }
 
   .multiContainer {
@@ -162,5 +167,13 @@ form {
 
   label {
     text-align: left;
+  }
+
+  #ILandImg {
+    display: none;
+  }
+
+  .labelLeft {
+    width: 40vw;
   }
 }
