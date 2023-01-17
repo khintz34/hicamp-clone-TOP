@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/hipcamp-clone-TOP/static/css/main.5ba937da.css",
-    "main.js": "/hipcamp-clone-TOP/static/js/main.12f060c4.js",
+    "main.css": "/hipcamp-clone-TOP/static/css/main.acc209c5.css",
+    "main.js": "/hipcamp-clone-TOP/static/js/main.4ee267c2.js",
     "static/js/787.87017abb.chunk.js": "/hipcamp-clone-TOP/static/js/787.87017abb.chunk.js",
     "static/media/outdoor-stairs.jpeg": "/hipcamp-clone-TOP/static/media/outdoor-stairs.b86910b4a2469a50fefd.jpeg",
     "static/media/fall-cozy.jpeg": "/hipcamp-clone-TOP/static/media/fall-cozy.2df2aebeff96399f2426.jpeg",
@@ -33,12 +33,12 @@
     "static/media/recreateResp.png": "/hipcamp-clone-TOP/static/media/recreateResp.49eddab8739b440085a0.png",
     "static/media/leaveNoTrace.png": "/hipcamp-clone-TOP/static/media/leaveNoTrace.5f1bca93b848f1df97c7.png",
     "index.html": "/hipcamp-clone-TOP/index.html",
-    "main.5ba937da.css.map": "/hipcamp-clone-TOP/static/css/main.5ba937da.css.map",
-    "main.12f060c4.js.map": "/hipcamp-clone-TOP/static/js/main.12f060c4.js.map",
+    "main.acc209c5.css.map": "/hipcamp-clone-TOP/static/css/main.acc209c5.css.map",
+    "main.4ee267c2.js.map": "/hipcamp-clone-TOP/static/js/main.4ee267c2.js.map",
     "787.87017abb.chunk.js.map": "/hipcamp-clone-TOP/static/js/787.87017abb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5ba937da.css",
-    "static/js/main.12f060c4.js"
+    "static/css/main.acc209c5.css",
+    "static/js/main.4ee267c2.js"
   ]
 }
