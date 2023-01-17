@@ -76,6 +76,10 @@ const InputLand = (props) => {
   const [subClass, setSubClass] = useState("disableBtn");
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     createArrays();
   }, [
     climbingRadio,

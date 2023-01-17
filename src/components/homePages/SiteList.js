@@ -47,6 +47,7 @@ const SiteList = () => {
       const data = await getUserData();
     };
     fetchData();
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {

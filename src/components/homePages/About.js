@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../styles/About.css";
 import Header from "./Header";
 import Tagline from "../reuseableComps/Tagline";
@@ -7,6 +7,9 @@ import Footer from "./Footer";
 import AboutVerticals from "../aboutComps/AboutVerticals";
 
 const About = (props) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="aboutDivContainer">
       <Header />

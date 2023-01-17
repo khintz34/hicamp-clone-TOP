@@ -36,6 +36,7 @@ const Sites = (props) => {
 
   useEffect(() => {
     getUserData();
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -131,7 +132,7 @@ const Sites = (props) => {
                   ) : (
                     <div style={{ display: "none" }}></div>
                   )}
-                  <Link to="/booking" className="noUnderline">
+                  <Link to="/booking" className="noUnderline siteBookBtn">
                     <button
                       id="bookBtn"
                       className={subClass}

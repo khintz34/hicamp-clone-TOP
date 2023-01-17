@@ -7,7 +7,7 @@
   margin-left: 10vw;
   margin-top: 10vh;
   margin-bottom: 7vh;
-  border: 5px solid var(--green-color);
+  border: 5px solid var(--forest-color);
   height: 60vh;
   width: 80vw;
   border-radius: 10px;
@@ -20,16 +20,13 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 h1,
 h2 {
   margin-bottom: 0px;
 }
-
-/* h2 {
-  text-decoration: underline;
-} */
 
 h3 {
   color: var(--green-color);
@@ -46,4 +43,15 @@ h3 {
 
 .bookedSpan2 {
   color: var(--orange-color);
+}
+
+@media (max-width: 600px) {
+  #bookedSiteMain {
+    padding-bottom: 2vh;
+    height: auto;
+    width: 90vw;
+    max-width: 90vw;
+    border-radius: 10px;
+    margin-left: 5vw;
+  }
 }

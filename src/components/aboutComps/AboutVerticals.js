@@ -8,12 +8,15 @@ const AboutVerticals = () => {
   const verticalDivArray = [
     {
       image: image1,
+      key: "image1",
     },
     {
       image: image2,
+      key: "image2",
     },
     {
       image: image3,
+      key: "image3",
     },
   ];
 
@@ -21,7 +24,7 @@ const AboutVerticals = () => {
     <div id="aboutVerticalDivsContainer">
       {verticalDivArray.map((value) => {
         return (
-          <div className="aboutVertDivContainer">
+          <div className="aboutVertDivContainer" key={`aboutVert-${value.key}`}>
             <img src={value.image} alt="" className="aboutVertImage" />
           </div>
         );
