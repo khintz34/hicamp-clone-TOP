@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/hipcamp-clone-TOP/static/css/main.acc209c5.css",
+    "main.css": "/hipcamp-clone-TOP/static/css/main.0d4c643d.css",
     "main.js": "/hipcamp-clone-TOP/static/js/main.4ee267c2.js",
     "static/js/787.87017abb.chunk.js": "/hipcamp-clone-TOP/static/js/787.87017abb.chunk.js",
     "static/media/outdoor-stairs.jpeg": "/hipcamp-clone-TOP/static/media/outdoor-stairs.b86910b4a2469a50fefd.jpeg",
@@ -33,12 +33,12 @@
     "static/media/recreateResp.png": "/hipcamp-clone-TOP/static/media/recreateResp.49eddab8739b440085a0.png",
     "static/media/leaveNoTrace.png": "/hipcamp-clone-TOP/static/media/leaveNoTrace.5f1bca93b848f1df97c7.png",
     "index.html": "/hipcamp-clone-TOP/index.html",
-    "main.acc209c5.css.map": "/hipcamp-clone-TOP/static/css/main.acc209c5.css.map",
+    "main.0d4c643d.css.map": "/hipcamp-clone-TOP/static/css/main.0d4c643d.css.map",
     "main.4ee267c2.js.map": "/hipcamp-clone-TOP/static/js/main.4ee267c2.js.map",
     "787.87017abb.chunk.js.map": "/hipcamp-clone-TOP/static/js/787.87017abb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.acc209c5.css",
+    "static/css/main.0d4c643d.css",
     "static/js/main.4ee267c2.js"
   ]
 }
